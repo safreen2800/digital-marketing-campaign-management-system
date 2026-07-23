@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Panel</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="sidebar">
+
+<h2>🚀 DigiMark</h2>
+
+
+<a href="dashboard.html">
+🏠 Dashboard
+</a>
+
+
+<a href="view-campaign.html">
+📢 Campaigns
+</a>
+
+
+<a href="reports.html">
+📊 Reports
+</a>
+
+
+<a href="profile.html">
+👤 Profile
+</a>
+
+
+<a href="admin.html">
+⚙️ Admin
+</a>
+
+
+<a href="logout.html">
+🚪 Logout
+</a>
+
+
+</div>
+
+
+
+<div class="main">
+
+
+<h1>Admin Panel</h1>
+
+
+<div class="dashboard-cards">
+
+
+<div class="card">
+
+<h3>Total Users</h3>
+
+<p id="totalUsers">
+0
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>Total Campaigns</h3>
+
+<p id="totalCampaigns">
+0
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>Total Budget</h3>
+
+<p id="totalBudget">
+₹0
+</p>
+
+</div>
+
+
+
+</div>
+
+
+
+
+<div class="table-box">
+
+
+<h2>Admin Control</h2>
+
+
+<table>
+
+
+<tr>
+
+<th>Feature</th>
+
+<th>Status</th>
+
+</tr>
+
+
+
+<tr>
+
+<td>User Management</td>
+
+<td>Active ✅</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>Campaign Management</td>
+
+<td>Active ✅</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>Payment Monitoring</td>
+
+<td>Active ✅</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>Analytics Monitoring</td>
+
+<td>Active ✅</td>
+
+</tr>
+
+
+</table>
+
+
+</div>
+
+
+
+</div>
+
+
+
+<script>
+
+
+fetch("/dashboard")
+
+.then(response => response.json())
+
+.then(data => {
+
+
+document.getElementById("totalCampaigns").innerHTML =
+data.totalCampaigns;
+
+
+document.getElementById("totalBudget").innerHTML =
+"₹" + data.totalBudget;
+
+
+});
+
+
+
+fetch("/users")
+
+.then(response => response.json())
+
+.then(data => {
+
+
+document.getElementById("totalUsers").innerHTML =
+data.length;
+
+
+})
+
+.catch(error=>{
+
+console.log(error);
+
+});
+
+
+</script>
+
+
+</body>
+
+</html>

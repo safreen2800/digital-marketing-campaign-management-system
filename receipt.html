@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Receipt</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="login-box">
+
+    <h2>Payment Receipt</h2>
+
+    <p><strong>Campaign ID:</strong> <span id="campaignId"></span></p>
+    <p><strong>Amount:</strong> ₹<span id="amount"></span></p>
+    <p><strong>Payment Method:</strong> <span id="paymentMethod"></span></p>
+    <p><strong>Status:</strong> Paid ✅</p>
+    <p><strong>Payment Date:</strong> <span id="paymentDate"></span></p>
+    <p><strong>Transaction ID:</strong> <span id="transactionId"></span></p>
+
+    <br>
+
+    <a href="dashboard.html">
+        <button>Back to Dashboard</button>
+    </a>
+    <hr>
+
+<p style="text-align:center; color:green;">
+    Thank you for your payment! 😊
+</p>
+
+</div>
+
+
+<script>
+const params = new URLSearchParams(window.location.search);
+
+document.getElementById("campaignId").innerText = params.get("campaignId");
+document.getElementById("amount").innerText = params.get("amount");
+document.getElementById("paymentMethod").innerText = params.get("method");
+document.getElementById("paymentDate").innerText = new Date().toLocaleDateString();
+document.getElementById("transactionId").innerText =
+"TXN" + Date.now();
+</script>
+
+</body>
+</html>

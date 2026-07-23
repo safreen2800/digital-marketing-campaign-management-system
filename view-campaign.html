@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Campaign</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h2>View Campaigns</h2>
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search by Campaign Name or Platform..."
+        >
+
+        <br><br>
+
+        <select id="platformFilter">
+            <option value="All">All Platforms</option>
+            <option value="Instagram">Instagram</option>
+            <option value="Facebook">Facebook</option>
+            <option value="Google Ads">Google Ads</option>
+        </select>
+
+    </div>
+
+    <br>
+    <div class="search-box">
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search by Campaign Name or Platform..."
+>
+
+<br><br>
+
+<select id="platformFilter">
+
+<option value="All">All Platforms</option>
+
+<option value="Instagram">Instagram</option>
+
+<option value="Facebook">Facebook</option>
+
+<option value="Google Ads">Google Ads</option>
+
+</select>
+
+</div>
+   
+
+    <table border="1">
+
+        <thead>
+
+            <tr>
+                <th>ID</th>
+                <th>Campaign Name</th>
+                <th>Platform</th>
+                <th>Budget</th>
+                <th>Status</th>
+                <th>Ad Preview</th>
+                <th>Progress</th>
+                <th>Impressions</th>
+                <th>Clicks</th>
+                <th>Views</th>
+                <th>Reach</th>
+                <th>Action</th>
+                <th>Payment</th>
+            </tr>
+
+        </thead>
+
+        <tbody id="campaignTable">
+            <!-- JavaScript will insert rows here -->
+        </tbody>
+
+    </table>
+
+    <header>
+        <h1>Campaign List</h1>
+    </header>
+
+    <div class="dashboard">
+
+        <h2>Available Campaigns</h2>
+
+        <br>
+
+        <a href="campaign.html">➕ Add New Campaign</a>
+
+        <br><br>
+
+        <a href="dashboard.html">⬅ Back to Dashboard</a>
+
+    </div>
+
+    <script src="view-campaign.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+
+<div class="sidebar">
+
+    <h2>DigiMarket</h2>
+
+    <a href="dashboard.html">🏠 Dashboard</a>
+    <a href="campaign.html">📢 Create Campaign</a>
+    <a href="view-campaign.html">📋 View Campaign</a>
+    <a href="budget.html">💰 Budget</a>
+    <a href="reports.html">📊 Reports</a>
+    <a href="payment-history.html">💳 Payments</a>
+    <a href="profile.html">👤 Profile</a>
+    <a href="logout.html">🚪 Logout</a>
+
+</div>
+
+<div class="main-content">
+
+    <div class="topbar">
+
+        <h2>DigiMarket Dashboard</h2>
+
+        <a href="admin.html">
+    👤 Admin
+</a>
+
+    </div>
+
+
+
+<div class="dashboard-box">
+
+    <h1>📢 Welcome to DigiMarket Dashboard</h1>
+
+    <p>Digital Marketing Campaign Management System</p>
+    <div class="cards">
+
+    <div class="card">
+    <div class="card-icon">📢</div>
+    <h3>Total Campaigns</h3>
+    <p id="totalCampaigns">0</p>
+</div>
+
+<div class="card">
+    <div class="card-icon">💰</div>
+    <h3>Total Budget</h3>
+    <p id="totalBudget">0</p>
+</div>
+
+<div class="card">
+    <div class="card-icon">🚀</div>
+    <h3>Active Campaigns</h3>
+    <p id="activeCampaigns">0</p>
+</div>
+
+<div class="card">
+    <div class="card-icon">✅</div>
+    <h3>Completed Campaigns</h3>
+    <p id="completedCampaigns">0</p>
+</div>
+
+    
+<div class="card">
+    <h3>Amount Paid</h3>
+    <h2 id="amountPaid">₹0</h2>
+</div>
+<div class="card">
+    <div class="card-icon">📊</div>
+    <h3>Total Impressions</h3>
+    <p id="totalImpressions">0</p>
+</div>
+
+<div class="card">
+    <div class="card-icon">🖱️</div>
+    <h3>Total Clicks</h3>
+    <p id="totalClicks">0</p>
+</div>
+
+<div class="card">
+    <div class="card-icon">▶️</div>
+    <h3>Total Views</h3>
+    <p id="totalViews">0</p>
+</div>
+
+<div class="card">
+    <div class="card-icon">👥</div>
+    <h3>Total Reach</h3>
+    <p id="totalReach">0</p>
+</div>
+
+<div class="card">
+    <h3>Remaining Budget</h3>
+    <h2 id="remainingBudget">₹0</h2>
+</div>
+
+</div>
+
+    <hr>
+    <div class="chart-container">
+
+    <h2>Campaign Analytics</h2>
+
+    <canvas id="dashboardChart"></canvas>
+
+</div>
+    <div class="chart-container">
+
+    <h2>Performance Analytics</h2>
+
+    <canvas id="performanceChart"></canvas>
+
+</div>
+
+<div class="menu">
+
+    <a href="campaign.html">
+        <button>Create Campaign</button>
+    </a>
+
+    <a href="budget.html">
+        <button>Budget</button>
+    </a>
+
+    <a href="reports.html">
+        <button>Reports</button>
+    </a>
+
+    <a href="view-campaign.html">
+        <button>View Campaign</button>
+    </a>
+
+    <a href="payment-history.html">
+        <button>Payment History</button>
+    </a>
+
+    <a href="profile.html">
+        <button>My Profile</button>
+    </a>
+
+    <a href="logout.html">
+        <button>Logout</button>
+    </a>
+
+</div>
+
+    
+
+       
+
+</div>
+<script>
+fetch("/dashboard")
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Failed to fetch dashboard data");
+        }
+        return response.json();
+    })
+    .then(data => {
+
+        console.log(data); // Debug
+
+        document.getElementById("totalCampaigns").innerText = data.totalCampaigns;
+        document.getElementById("totalBudget").innerText = "₹" + data.totalBudget;
+        document.getElementById("activeCampaigns").innerText = data.activeCampaigns;
+        document.getElementById("completedCampaigns").innerText = data.completedCampaigns;
+        document.getElementById("amountPaid").innerText = "₹" + data.amountPaid;
+        document.getElementById("remainingBudget").innerText = "₹" + data.remainingBudget;
+        document.getElementById("totalImpressions").innerText = data.totalImpressions;
+document.getElementById("totalClicks").innerText = data.totalClicks;
+document.getElementById("totalViews").innerText = data.totalViews;
+document.getElementById("totalReach").innerText = data.totalReach;
+
+    })
+    .catch(error => {
+        console.error(error);
+        alert("Failed to load dashboard data.");
+    });
+</script>
+<footer>
+
+    <p>
+        © 2026 DigiMarket | Digital Marketing Campaign Management System
+    </p>
+
+</footer>
+<script>
+
+fetch("/dashboard")
+.then(response => response.json())
+.then(data => {
+
+    const ctx = document.getElementById("dashboardChart");
+
+    new Chart(ctx, {
+
+        type: "doughnut",
+
+        data: {
+
+            labels: [
+                "Total Campaigns",
+                "Active Campaigns",
+                "Completed Campaigns",
+                "Amount Paid"
+            ],
+
+            datasets: [
+{
+    label: "Campaign Analytics",
+
+    data: [
+        data.totalCampaigns,
+        data.activeCampaigns,
+        data.completedCampaigns,
+        data.amountPaid
+    ],
+
+    borderWidth: 2,
+
+    backgroundColor: [
+        "rgba(54, 162, 235, 0.7)",
+        "rgba(75, 192, 192, 0.7)",
+        "rgba(255, 99, 132, 0.7)",
+        "rgba(255, 206, 86, 0.7)"
+    ]
+}
+]
+
+        },
+
+       options: {
+
+    responsive: true,
+
+    plugins: {
+
+        legend: {
+
+            position: "bottom"
+
+        },
+
+        title: {
+
+            display: true,
+
+            text: "Campaign Overview",
+
+            font: {
+
+                size: 18
+
+            }
+
+        }
+
+    },
+
+    animation: {
+
+        animateRotate: true,
+
+        duration: 1500
+
+    }
+
+}
+
+    });
+
+});
+
+</script>
+<script>
+
+fetch("/dashboard")
+.then(response => response.json())
+.then(data => {
+
+    const performance = document.getElementById("performanceChart");
+
+    new Chart(performance, {
+
+        type: "bar",
+
+        data: {
+
+            labels: [
+                "Impressions",
+                "Clicks",
+                "Views",
+                "Reach"
+            ],
+
+            datasets: [
+                {
+                    label: "Campaign Performance",
+
+                    data: [
+                        data.totalImpressions,
+                        data.totalClicks,
+                        data.totalViews,
+                        data.totalReach
+                    ],
+
+                    borderWidth: 2,
+                    backgroundColor: [
+    "rgba(54, 162, 235, 0.7)",
+    "rgba(255, 99, 132, 0.7)",
+    "rgba(255, 206, 86, 0.7)",
+    "rgba(75, 192, 192, 0.7)"
+],
+                }
+            ]
+
+        },
+
+       options: {
+
+    responsive: true,
+
+    plugins: {
+
+        legend: {
+            display: true,
+            position: "top"
+        },
+
+        title: {
+
+            display: true,
+
+            text: "Campaign Performance Analytics",
+
+            font: {
+                size: 18
+            }
+
+        }
+
+    },
+
+    animation: {
+
+        duration: 1500
+
+    },
+
+    scales: {
+
+        y: {
+
+            beginAtZero: true
+        }
+    }
+
+
+               }
+
+    });
+
+});
+
+</script>
+</body>
+
+</html>

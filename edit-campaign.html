@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Campaign</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+<h2>Edit Campaign</h2>
+
+<form id="editForm">
+
+<input type="hidden" id="id">
+
+<input type="text" id="campaign" placeholder="Campaign Name" required>
+
+<br><br>
+
+<select id="platform" required>
+    <option value="Facebook">Facebook</option>
+    <option value="Instagram">Instagram</option>
+    <option value="YouTube">YouTube</option>
+    <option value="LinkedIn">LinkedIn</option>
+</select>
+
+<br><br>
+
+<input type="number" id="budget" placeholder="Budget" required>
+
+<br><br>
+
+<input type="date" id="startDate" required>
+
+<br><br>
+
+<input type="date" id="endDate" required>
+
+<br><br>
+
+<textarea id="description" placeholder="Description"></textarea>
+
+<br><br>
+
+<button type="submit">Update Campaign</button>
+
+</form>
+
+</div>
+
+<script src="edit-campaign.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="login-box">
+
+    <h2>Campaign Payment</h2>
+
+    <form id="paymentForm">
+
+        <label>Campaign ID</label><br>
+<input type="number" id="campaignId" readonly required>
+        <label>Amount (₹)</label><br>
+        <input type="number" id="amount" placeholder="Enter Amount" required>
+        <br><br>
+
+        <label>Payment Method</label><br>
+        <select id="paymentMethod" required>
+            <option value="">Select Payment Method</option>
+            <option value="UPI">UPI</option>
+            <option value="Credit Card">Credit Card</option>
+            <option value="Debit Card">Debit Card</option>
+            <option value="Net Banking">Net Banking</option>
+        </select>
+        <br><br>
+
+        <button type="submit">Pay Now</button>
+
+    </form>
+
+</div>
+<script>
+    // URL-la irundhu Campaign ID edukkum
+const params = new URLSearchParams(window.location.search);
+const campaignId = params.get("campaignId");
+
+if (campaignId) {
+    document.getElementById("campaignId").value = campaignId;
+}
+
+document.getElementById("paymentForm").addEventListener("submit", function(event){
+
+    event.preventDefault();
+
+    const campaignId = document.getElementById("campaignId").value;
+    const amount = document.getElementById("amount").value;
+    const paymentMethod = document.getElementById("paymentMethod").value;
+
+    fetch("/payment", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            campaignId: campaignId,
+            amount: amount,
+            paymentMethod: paymentMethod
+        })
+    })
+
+    .then(response => response.text())
+
+    .then(data => {
+
+        alert(data);
+
+       if(data === "Payment Successful!"){
+
+    window.location.href =
+        `receipt.html?campaignId=${campaignId}&amount=${amount}&method=${paymentMethod}`;
+
+}
+
+    })
+
+    .catch(error => {
+        console.log(error);
+        alert("Payment Failed!");
+    });
+
+});
+
+</script>
+
+</body>
+</html>

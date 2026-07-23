@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Create Campaign</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+    <h1>Campaign Management</h1>
+</header>
+
+
+<div class="dashboard">
+
+<h2>Add New Campaign</h2>
+
+
+<form action="/campaign"
+      method="POST"
+      enctype="multipart/form-data"
+      onsubmit="return validateCampaign()">
+
+
+<input type="text" 
+id="campaign" 
+name="campaign" 
+placeholder="Campaign Name" 
+required>
+
+
+
+
+
+<select id="platform" name="platform" required>
+
+<option value="">Select Platform</option>
+
+<option>Facebook</option>
+
+<option>Instagram</option>
+
+<option>YouTube</option>
+
+<option>LinkedIn</option>
+
+</select>
+
+
+<br><br>
+
+
+<input type="number" 
+id="budget" 
+name="budget" 
+placeholder="Budget" 
+required>
+
+
+<br><br>
+
+
+<label>Target Audience</label><br>
+
+<select id="targetAudience" name="targetAudience" required>
+
+<option value="">Select Target Audience</option>
+
+<option value="1000">1,000 People</option>
+
+<option value="5000">5,000 People</option>
+
+<option value="10000">10,000 People</option>
+
+<option value="25000">25,000 People</option>
+
+<option value="50000">50,000 People</option>
+
+<option value="100000">100,000 People</option>
+
+</select>
+<br><br>
+
+<label>Campaign Status</label><br>
+
+<select id="status" name="status" required>
+
+    <option value="">Select Status</option>
+
+    <option value="Active">🟢 Active</option>
+
+    <option value="Pending">🟡 Pending</option>
+
+    <option value="Completed">🔵 Completed</option>
+
+    <option value="Cancelled">🔴 Cancelled</option>
+
+</select>
+
+
+
+<br><br>
+<label>Campaign Progress (%)</label><br>
+
+<input
+type="number"
+id="progress"
+name="progress"
+min="0"
+max="100"
+placeholder="Enter Progress (0-100)"
+required>
+
+<br><br>
+
+
+<label>Start Date</label><br>
+
+<input type="date" 
+id="startDate" 
+name="startDate" 
+required>
+
+
+<br><br>
+
+
+<label>End Date</label><br>
+
+<input type="date" 
+id="endDate" 
+name="endDate" 
+required>
+
+
+<br><br>
+
+
+<textarea 
+id="description" 
+name="description"
+placeholder="Campaign Description">
+</textarea>
+
+
+<br><br>
+
+
+<label>Upload Advertisement</label><br>
+
+<input
+type="file"
+id="adFile"
+name="adFile"
+accept="image/*,video/*">
+
+<br><br>
+
+<div id="preview"></div>
+
+<br>
+
+
+<button type="submit">
+Add Campaign
+</button>
+
+
+</form>
+
+
+<br>
+
+
+<a href="dashboard.html">
+⬅ Back to Dashboard
+</a>
+
+
+</div>
+
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>

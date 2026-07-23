@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>Budget Management</h1>
+</header>
+
+<div class="dashboard">
+
+    <h2>Budget Details</h2>
+
+    <div class="cards">
+
+        <div class="card">
+    <h3>Total Budget</h3>
+    <p id="totalBudget">₹0</p>
+</div>
+
+<div class="card">
+    <h3>Used Budget</h3>
+    <p id="usedBudget">₹0</p>
+</div>
+
+<div class="card">
+    <h3>Remaining Budget</h3>
+    <p id="remainingBudget">₹0</p>
+</div>
+    </div>
+
+    <h2>Add New Expense</h2>
+
+    <form onsubmit="addExpense(event)">
+
+
+        <input type="text"  id="expenseName" name="expenseName" placeholder="Expense Name" required>
+
+        <br><br>
+
+        <input type="number"  id="expenseAmount" name="expenseAmount" placeholder="Expense Amount" required>
+
+        <br><br>
+
+        <button type="submit">Add Expense</button>
+
+    </form>
+
+    <br>
+    <h2>Expense List</h2>
+
+<table id="expenseTable" border="1">
+    <tr>
+    <th>ID</th>
+    <th>Expense Name</th>
+    <th>Amount</th>
+    <th>Action</th>
+</tr>
+</table>
+
+<br>
+
+    <a href="dashboard.html">⬅ Back to Dashboard</a>
+
+</div>
+<div class="budget-box">
+
+    <h2>Budget Overview</h2>
+
+
+    <div class="budget-card">
+        <h3>Average Campaign Budget</h3>
+        <p id="avgBudget">₹0</p>
+    </div>
+
+</div>
+
+
+
+<script>
+
+fetch("/budget-data")
+
+.then(response => response.json())
+
+.then(data => {
+
+    document.getElementById("avgBudget").innerHTML =
+    "₹" + Math.round(data.avgBudget);
+
+})
+
+.catch(error => console.log(error));
+
+</script>
+<script>
+
+function addExpense(event){
+
+    event.preventDefault();
+        alert("Function Working");
+
+
+    let expenseName = document.getElementById("expenseName").value;
+    let expenseAmount = document.getElementById("expenseAmount").value;
+
+
+    fetch("/expense", {
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body: JSON.stringify({
+
+            expenseName: expenseName,
+            expenseAmount: expenseAmount
+
+        })
+
+    })
+
+
+    .then(response => response.text())
+
+    .then(data => {
+
+        alert(data);
+
+        document.getElementById("expenseName").value="";
+        document.getElementById("expenseAmount").value="";
+        location.reload();
+
+    })
+
+
+    .catch(error => {
+
+        console.log(error);
+
+    });
+
+}
+</script>
+
+
+
+
+<script>
+
+window.onload = function () {
+
+    fetch("/remaining-budget")
+    .then(response => response.json())
+    .then(data => {
+
+        
+
+        document.getElementById("totalBudget").textContent =
+            "₹" + data.totalBudget;
+
+        document.getElementById("usedBudget").textContent =
+            "₹" + data.totalExpense;
+
+        document.getElementById("remainingBudget").textContent =
+            "₹" + data.remainingBudget;
+
+    })
+    .catch(error => {
+        alert(error);
+        console.log(error);
+    });
+
+};
+
+</script>
+
+
+
+
+
+<!-- <script src="script.js"></script> -->
+ <script>
+fetch("/expenses")
+.then(response => response.json())
+.then(data => {
+console.log(data);
+    let table = document.getElementById("expenseTable");
+
+    data.forEach(expense => {
+
+       let row = table.insertRow();
+
+row.insertCell(0).innerHTML = expense.id;
+row.insertCell(1).innerHTML = expense.expense_name;
+row.insertCell(2).innerHTML = "₹" + expense.amount;
+row.insertCell(3).innerHTML =
+    `<button onclick="deleteExpense(${expense.id})">Delete</button>`;
+
+    });
+
+})
+.catch(error => console.log(error));
+</script>
+<script>
+function deleteExpense(id) {
+
+    if (confirm("Are you sure you want to delete this expense?")) {
+
+        fetch("/expense/" + id, {
+            method: "DELETE"
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert(data);
+            location.reload();
+        })
+        .catch(error => console.log(error));
+
+    }
+
+}
+</script>
+</body>
+</html>

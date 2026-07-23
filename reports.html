@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reports</title>
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+    
+<header>
+<h1>Campaign Reports</h1>
+</header>
+ <div class="dashboard-box">
+
+    <h2>Campaign Report</h2>
+
+    <canvas id="campaignChart"></canvas>
+
+</div>
+
+
+<div class="dashboard">
+
+<h2>Campaign Report</h2>
+
+
+<table id="reportTable">
+
+<tr>
+<th>Campaign</th>
+<th>Platform</th>
+<th>Budget</th>
+<th>Status</th>
+</tr>
+
+<tr>
+<td>Summer Sale</td>
+<td>Instagram</td>
+<td>₹20,000</td>
+<td class="active">Active</td>
+</tr>
+
+<tr>
+<td>Festival Offer</td>
+<td>Facebook</td>
+<td>₹15,000</td>
+<td class="completed">Completed</td>
+</tr>
+
+<tr>
+<td>New Product Launch</td>
+<td>YouTube</td>
+<td>₹30,000</td>
+<td class="active">Active</td>
+</tr>
+
+</table>
+
+<br>
+
+<a href="dashboard.html">⬅ Back to Dashboard</a>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+fetch("/report-data")
+.then(response => response.json())
+.then(data => {
+
+    const labels = data.map(item => item.platform);
+    const totals = data.map(item => item.total);
+
+    new Chart(document.getElementById("campaignChart"),{
+
+        type: "bar",
+
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "Campaign Count",
+                data: totals
+            }]
+        }
+
+    });
+
+})
+.catch(error => console.log(error));
+</script>
+
+</body>
+</html>
