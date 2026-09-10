@@ -2,31 +2,355 @@
 <html lang="en">
 
 <head>
-<title>Logout</title>
-<link rel="stylesheet" href="style.css">
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Logout | DigiMarket</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+
+        /* ================= BODY ================= */
+
+        body {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            color: white;
+
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    #253b80 0%,
+                    transparent 32%
+                ),
+                radial-gradient(
+                    circle at 90% 90%,
+                    #6a1b9a 0%,
+                    transparent 32%
+                ),
+                linear-gradient(
+                    135deg,
+                    #07152f,
+                    #101c3d,
+                    #170d32
+                );
+        }
+
+
+        /* ================= LOGOUT CARD ================= */
+
+        .logout-card {
+
+            width: 100%;
+
+            max-width: 480px;
+
+            padding: 40px 35px;
+
+            text-align: center;
+
+            border-radius: 25px;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            border:
+                1px solid rgba(255,255,255,0.15);
+
+            backdrop-filter: blur(22px);
+
+            box-shadow:
+                0 25px 60px rgba(0,0,0,0.35);
+
+            animation:
+                cardIn 0.8s ease;
+        }
+
+
+        @keyframes cardIn {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(30px)
+                    scale(0.95);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+
+            }
+
+        }
+
+
+        /* ================= ICON ================= */
+
+        .logout-icon {
+
+            width: 95px;
+
+            height: 95px;
+
+            margin: 0 auto 22px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            font-size: 45px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00c6ff,
+                    #7c4dff,
+                    #d500f9
+                );
+
+            box-shadow:
+                0 0 35px
+                rgba(0,198,255,0.3);
+
+            animation:
+                pulse 2s infinite;
+        }
+
+
+        @keyframes pulse {
+
+            0% {
+
+                box-shadow:
+                    0 0 0
+                    rgba(0,229,255,0.2);
+            }
+
+            50% {
+
+                box-shadow:
+                    0 0 30px
+                    rgba(0,229,255,0.35);
+            }
+
+            100% {
+
+                box-shadow:
+                    0 0 0
+                    rgba(0,229,255,0.2);
+            }
+
+        }
+
+
+        /* ================= TITLE ================= */
+
+        .logout-card h2 {
+
+            margin-bottom: 12px;
+
+            font-size: 28px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #00e5ff,
+                    #7c4dff,
+                    #d500f9
+                );
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+        }
+
+
+        .logout-card p {
+
+            color: #cbd5e1;
+
+            font-size: 15px;
+
+            line-height: 1.6;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* ================= LOGIN BUTTON ================= */
+
+        .login-btn {
+
+            display: inline-block;
+
+            padding: 14px 30px;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 12px;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00c6ff,
+                    #7c4dff,
+                    #d500f9
+                );
+
+            box-shadow:
+                0 10px 25px
+                rgba(0,198,255,0.18);
+
+            transition: 0.3s;
+        }
+
+
+        .login-btn:hover {
+
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 15px 35px
+                rgba(0,198,255,0.3);
+        }
+
+
+        /* ================= FOOTER TEXT ================= */
+
+        .footer-text {
+
+            margin-top: 25px;
+
+            color: #64748b !important;
+
+            font-size: 12px !important;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media(max-width: 500px) {
+
+            .logout-card {
+
+                padding: 30px 20px;
+            }
+
+
+            .logout-icon {
+
+                width: 80px;
+
+                height: 80px;
+
+                font-size: 38px;
+            }
+
+
+            .logout-card h2 {
+
+                font-size: 24px;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-<div class="login-box">
 
-<h2>Logout Successful</h2>
+    <div class="logout-card">
 
-<p>You have been logged out.</p>
 
-<br>
+        <!-- ICON -->
 
-<a href="login.html">
-<button>Login Again</button>
-</a>
+        <div class="logout-icon">
+            👋
+        </div>
 
-</div>
 
-<script>
+        <!-- TITLE -->
 
-localStorage.removeItem("isLoggedIn");
+        <h2>
+            Logout Successful
+        </h2>
 
-</script>
+
+        <p>
+            You have been successfully logged out
+            of DigiMarket.
+        </p>
+
+
+        <!-- LOGIN -->
+
+        <a
+            href="login.html"
+            class="login-btn"
+        >
+            🔐 Login Again
+        </a>
+
+
+        <p class="footer-text">
+            © 2026 DigiMarket |
+            Digital Marketing Campaign Management System
+        </p>
+
+
+    </div>
+
+
+    <script>
+
+        // Clear login status
+
+        localStorage.removeItem(
+            "isLoggedIn"
+        );
+
+    </script>
+
 
 </body>
 

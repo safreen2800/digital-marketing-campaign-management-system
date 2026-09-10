@@ -4,104 +4,623 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Campaign</title>
-    <link rel="stylesheet" href="style.css">
+
+    <title>View Campaigns | Digital Campaign Management</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            padding: 35px;
+            color: white;
+            background:
+                radial-gradient(circle at top left, #253b80 0%, transparent 35%),
+                radial-gradient(circle at bottom right, #6a1b9a 0%, transparent 35%),
+                linear-gradient(135deg, #07152f, #101c3d, #170d32);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: #00c6ff;
+            filter: blur(130px);
+            opacity: 0.15;
+            top: -100px;
+            left: -80px;
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 350px;
+            height: 350px;
+            background: #a855f7;
+            filter: blur(150px);
+            opacity: 0.15;
+            bottom: -120px;
+            right: -100px;
+            z-index: -1;
+        }
+
+        /* HEADER */
+
+        .top-section {
+            max-width: 1400px;
+            margin: auto;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .top-section h1 {
+            font-size: 34px;
+            margin-bottom: 8px;
+            background: linear-gradient(90deg, #00e5ff, #7c4dff, #d500f9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .top-section p {
+            color: #cbd5e1;
+            font-size: 15px;
+        }
+
+        /* SEARCH AREA */
+
+        .search-box {
+            max-width: 1400px;
+            margin: 0 auto 30px;
+            padding: 22px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 18px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .search-box input,
+        .search-box select {
+            height: 48px;
+            padding: 0 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            outline: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 14px;
+        }
+
+        .search-box input {
+            flex: 1;
+        }
+
+        .search-box select {
+            width: 210px;
+        }
+
+        .search-box input::placeholder {
+            color: #b8c3d6;
+        }
+
+        .search-box input:focus,
+        .search-box select:focus {
+            border-color: #00e5ff;
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.25);
+        }
+
+        .search-box select option {
+            color: #111827;
+            background: white;
+        }
+
+        /* TABLE CARD */
+
+        .table-card {
+            max-width: 1400px;
+            margin: auto;
+            padding: 20px;
+
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 20px;
+            backdrop-filter: blur(18px);
+
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1200px;
+        }
+
+        thead {
+            background: rgba(0, 229, 255, 0.12);
+        }
+
+        th {
+            padding: 16px 12px;
+            color: #67e8f9;
+            font-size: 13px;
+            white-space: nowrap;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        td {
+            padding: 14px 12px;
+            text-align: center;
+            color: #e2e8f0;
+            font-size: 13px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        tbody tr {
+            transition: 0.25s;
+        }
+
+        tbody tr:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: scale(1.002);
+        }
+
+        /* BUTTONS */
+
+        button {
+            border: none;
+            cursor: pointer;
+            border-radius: 9px;
+            padding: 9px 13px;
+            font-weight: 600;
+            transition: 0.25s;
+        }
+
+        .edit-btn {
+            background: linear-gradient(135deg, #2196f3, #3f51b5);
+            color: white;
+        }
+
+        .delete-btn {
+            background: linear-gradient(135deg, #ef4444, #be123c);
+            color: white;
+        }
+
+        .pay-btn {
+            background: linear-gradient(135deg, #00c853, #00a152);
+            color: white;
+        }
+
+        .launch-btn {
+            background: linear-gradient(135deg, #00c6ff, #7c4dff);
+            color: white;
+        }
+
+        .launch-btn:disabled {
+            background: #475569;
+            color: #94a3b8;
+            cursor: not-allowed;
+            opacity: 0.65;
+        }
+
+        button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 18px rgba(0, 0, 0, 0.3);
+        }
+
+        /* STATUS */
+
+        .status {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .status.active {
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+        }
+
+        .status.completed {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+        }
+
+        .status.pending {
+            background: rgba(234, 179, 8, 0.15);
+            color: #facc15;
+        }
+
+        .status.launched {
+            background: rgba(0, 229, 255, 0.15);
+            color: #22d3ee;
+        }
+
+        /* BOTTOM NAV */
+
+        .bottom-section {
+            max-width: 1400px;
+            margin: 30px auto 0;
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            color: white;
+            padding: 13px 20px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: 0.25s;
+        }
+
+        .nav-btn:hover {
+            background: rgba(0, 229, 255, 0.15);
+            border-color: #00e5ff;
+            transform: translateY(-2px);
+        }
+
+        .add-btn {
+            background: linear-gradient(135deg, #00c6ff, #7c4dff);
+            border: none;
+        }
+
+        /* POPUP */
+
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .popup {
+            width: 360px;
+            padding: 35px;
+            text-align: center;
+            border-radius: 22px;
+            background: white;
+            color: #172033;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5);
+            animation: popupIn 0.35s ease;
+        }
+
+        .popup-icon {
+            width: 70px;
+            height: 70px;
+            margin: auto auto 15px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 38px;
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        .popup h2 {
+            margin-bottom: 8px;
+        }
+
+        .popup p {
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+
+        .popup button {
+            background: linear-gradient(135deg, #00c6ff, #7c4dff);
+            color: white;
+            padding: 11px 25px;
+        }
+
+        @keyframes popupIn {
+            from {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width: 700px) {
+
+            body {
+                padding: 20px;
+            }
+
+            .top-section h1 {
+                font-size: 26px;
+            }
+
+            .search-box {
+                flex-direction: column;
+            }
+
+            .search-box input,
+            .search-box select {
+                width: 100%;
+            }
+
+            .bottom-section {
+                flex-direction: column;
+            }
+
+            .nav-btn {
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <h2>View Campaigns</h2>
+    <div class="top-section">
+
+        <h1>📊 Campaign Management</h1>
+
+        <p>View, manage, pay and launch your digital campaigns</p>
+
+    </div>
+
+
+    <!-- SEARCH -->
 
     <div class="search-box">
 
         <input
             type="text"
             id="searchInput"
-            placeholder="Search by Campaign Name or Platform..."
+            placeholder="🔍 Search by Campaign Name or Platform..."
         >
 
-        <br><br>
-
         <select id="platformFilter">
+
             <option value="All">All Platforms</option>
+
             <option value="Instagram">Instagram</option>
+
             <option value="Facebook">Facebook</option>
-            <option value="Google Ads">Google Ads</option>
+
+            <option value="LinkedIn">LinkedIn</option>
+
         </select>
 
     </div>
 
-    <br>
-    <div class="search-box">
 
-<input
-type="text"
-id="searchInput"
-placeholder="Search by Campaign Name or Platform..."
->
+    <!-- CAMPAIGN TABLE -->
 
-<br><br>
+    <div class="table-card">
 
-<select id="platformFilter">
+        <table>
 
-<option value="All">All Platforms</option>
+            <thead>
 
-<option value="Instagram">Instagram</option>
+                <tr>
 
-<option value="Facebook">Facebook</option>
+                    <th>ID</th>
 
-<option value="Google Ads">Google Ads</option>
+                    <th>Campaign Name</th>
 
-</select>
+                    <th>Platform</th>
 
-</div>
-   
+                    <th>Budget</th>
 
-    <table border="1">
+                    <th>Status</th>
 
-        <thead>
+                    <th>Ad Preview</th>
 
-            <tr>
-                <th>ID</th>
-                <th>Campaign Name</th>
-                <th>Platform</th>
-                <th>Budget</th>
-                <th>Status</th>
-                <th>Ad Preview</th>
-                <th>Progress</th>
-                <th>Impressions</th>
-                <th>Clicks</th>
-                <th>Views</th>
-                <th>Reach</th>
-                <th>Action</th>
-                <th>Payment</th>
-            </tr>
+                    <th>Progress</th>
 
-        </thead>
+                    <th>Impressions</th>
 
-        <tbody id="campaignTable">
-            <!-- JavaScript will insert rows here -->
-        </tbody>
+                    <th>Clicks</th>
 
-    </table>
+                    <th>Views</th>
 
-    <header>
-        <h1>Campaign List</h1>
-    </header>
+                    <th>Reach</th>
 
-    <div class="dashboard">
+                    <th>Action</th>
 
-        <h2>Available Campaigns</h2>
+                    <th>Payment</th>
 
-        <br>
+                    <th>Launch</th>
 
-        <a href="campaign.html">➕ Add New Campaign</a>
+                </tr>
 
-        <br><br>
+            </thead>
 
-        <a href="dashboard.html">⬅ Back to Dashboard</a>
+            <tbody id="campaignTable">
+
+                <!-- view-campaign.js will load campaigns -->
+
+            </tbody>
+
+        </table>
 
     </div>
+
+
+    <!-- BOTTOM BUTTONS -->
+
+    <div class="bottom-section">
+
+        <a href="dashboard.html" class="nav-btn">
+
+            ⬅ Back to Dashboard
+
+        </a>
+
+        <a href="campaign.html" class="nav-btn add-btn">
+
+            ➕ Add New Campaign
+
+        </a>
+
+    </div>
+
+
+    <!-- SUCCESS POPUP -->
+
+    <div class="popup-overlay" id="successPopup">
+
+        <div class="popup">
+
+            <div class="popup-icon">
+
+                ✓
+
+            </div>
+
+            <h2 id="popupTitle">
+
+                Success!
+
+            </h2>
+
+            <p id="popupMessage">
+
+                Operation completed successfully.
+
+            </p>
+
+            <button onclick="closePopup()">
+
+                OK
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        function showPopup(title, message) {
+
+            document.getElementById("popupTitle").innerText = title;
+
+            document.getElementById("popupMessage").innerText = message;
+
+            document.getElementById("successPopup").style.display = "flex";
+
+        }
+
+        function closePopup() {
+
+            document.getElementById("successPopup").style.display = "none";
+
+        }
+
+
+        /*
+            IMPORTANT:
+
+            Payment complete aana mattum Launch button enable aaganum.
+
+            Your view-campaign.js should create:
+
+            paymentStatus = "Paid"
+
+            or
+
+            paymentStatus = "Pending"
+
+            Example:
+
+            <button
+                class="launch-btn"
+                ${paymentStatus !== "Paid" ? "disabled" : ""}
+                onclick="launchCampaign(${campaign.id})">
+
+                ${paymentStatus === "Paid"
+                    ? "🚀 Launch"
+                    : "🔒 Pay First"}
+
+            </button>
+        */
+
+
+        async function launchCampaign(id) {
+
+            try {
+
+                const response = await fetch("/launch-campaign/" + id, {
+
+                    method: "PUT",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+
+                });
+
+                const result = await response.text();
+
+                if (response.ok) {
+
+                    showPopup(
+                        "🚀 Campaign Launched!",
+                        "Your campaign has been successfully launched."
+                    );
+
+                    setTimeout(() => {
+
+                        location.reload();
+
+                    }, 1500);
+
+                } else {
+
+                    showPopup(
+                        "❌ Launch Failed",
+                        result
+                    );
+
+                }
+
+            } catch (error) {
+
+                console.error(error);
+
+                showPopup(
+                    "❌ Error",
+                    "Unable to launch campaign."
+                );
+
+            }
+
+        }
+
+    </script>
+
 
     <script src="view-campaign.js"></script>
 

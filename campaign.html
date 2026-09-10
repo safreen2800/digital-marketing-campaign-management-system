@@ -2,192 +2,727 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create Campaign</title>
+    <title>Create Campaign | DigiMarket</title>
 
-<link rel="stylesheet" href="style.css">
+    <style>
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            padding: 30px 20px;
+
+            color: white;
+
+            background:
+                radial-gradient(circle at 10% 10%, #253b80 0%, transparent 32%),
+                radial-gradient(circle at 90% 90%, #6a1b9a 0%, transparent 32%),
+                linear-gradient(135deg, #07152f, #101c3d, #170d32);
+        }
+
+        /* HEADER */
+
+        header {
+            max-width: 850px;
+            margin: 0 auto 25px;
+
+            text-align: center;
+
+            padding: 20px;
+
+            background: rgba(255,255,255,0.07);
+
+            border: 1px solid rgba(255,255,255,0.14);
+
+            border-radius: 18px;
+
+            backdrop-filter: blur(18px);
+        }
+
+        header h1 {
+            font-size: 30px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #00e5ff,
+                    #7c4dff,
+                    #d500f9
+                );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* MAIN CARD */
+
+        .dashboard {
+            width: 100%;
+            max-width: 850px;
+
+            margin: auto;
+
+            padding: 35px;
+
+            background: rgba(255,255,255,0.08);
+
+            border: 1px solid rgba(255,255,255,0.15);
+
+            border-radius: 25px;
+
+            backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 25px 60px rgba(0,0,0,0.35);
+        }
+
+        .dashboard h2 {
+            text-align: center;
+
+            margin-bottom: 30px;
+
+            color: #e0f2fe;
+
+            font-size: 25px;
+        }
+
+        /* FORM */
+
+        form {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 20px;
+        }
+
+        /* FORM GROUP */
+
+        .form-group {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            color: #dbeafe;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+        /* INPUTS */
+
+        input,
+        select,
+        textarea {
+
+            width: 100%;
+
+            padding: 14px 15px;
+
+            border-radius: 12px;
+
+            border: 1px solid rgba(255,255,255,0.18);
+
+            outline: none;
+
+            color: white;
+
+            background: rgba(255,255,255,0.09);
+
+            font-size: 14px;
+
+            transition: 0.3s;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #b8c3d6;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+
+            border-color: #00e5ff;
+
+            box-shadow:
+                0 0 15px rgba(0,229,255,0.22);
+
+            background: rgba(255,255,255,0.12);
+        }
+
+        select option {
+            color: #111827;
+
+            background: white;
+        }
+
+        /* DATE */
+
+        input[type="date"] {
+            color-scheme: dark;
+        }
+
+        /* TEXTAREA */
+
+        textarea {
+
+            min-height: 140px;
+
+            resize: vertical;
+        }
+
+        /* FILE */
+
+        input[type="file"] {
+            padding: 11px;
+        }
+
+        input[type="file"]::file-selector-button {
+
+            border: none;
+
+            padding: 9px 14px;
+
+            margin-right: 10px;
+
+            border-radius: 8px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00c6ff,
+                    #7c4dff
+                );
+
+            cursor: pointer;
+        }
+
+        /* PREVIEW */
+
+        #preview {
+
+            text-align: center;
+
+            color: #67e8f9;
+
+            min-height: 10px;
+        }
+
+        #preview img,
+        #preview video {
+
+            max-width: 100%;
+
+            max-height: 280px;
+
+            margin-top: 10px;
+
+            border-radius: 15px;
+
+            border: 1px solid rgba(255,255,255,0.18);
+        }
+
+        /* SUBMIT */
+
+        .submit-btn {
+
+            grid-column: 1 / -1;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 13px;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00c6ff,
+                    #7c4dff,
+                    #d500f9
+                );
+
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 15px 30px rgba(0,198,255,0.25);
+        }
+
+        /* BACK BUTTON */
+
+        .back-btn {
+
+            display: block;
+
+            width: fit-content;
+
+            margin: 25px auto 0;
+
+            padding: 12px 20px;
+
+            text-decoration: none;
+
+            color: white;
+
+            border-radius: 12px;
+
+            background: rgba(255,255,255,0.08);
+
+            border: 1px solid rgba(255,255,255,0.15);
+
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+
+            border-color: #00e5ff;
+
+            background: rgba(0,229,255,0.12);
+
+            transform: translateY(-2px);
+        }
+
+        /* MOBILE */
+
+        @media(max-width: 650px) {
+
+            body {
+                padding: 20px 12px;
+            }
+
+            .dashboard {
+                padding: 22px 18px;
+            }
+
+            form {
+                grid-template-columns: 1fr;
+            }
+
+            .full,
+            .submit-btn {
+                grid-column: auto;
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+
+        }
+
+    </style>
 </head>
+
 
 <body>
 
-<header>
-    <h1>Campaign Management</h1>
-</header>
 
+    <!-- HEADER -->
 
-<div class="dashboard">
+    <header>
 
-<h2>Add New Campaign</h2>
+        <h1>
+            🚀 Campaign Management
+        </h1>
 
+    </header>
 
-<form action="/campaign"
-      method="POST"
-      enctype="multipart/form-data"
-      onsubmit="return validateCampaign()">
 
+    <!-- MAIN -->
 
-<input type="text" 
-id="campaign" 
-name="campaign" 
-placeholder="Campaign Name" 
-required>
+    <div class="dashboard">
 
+        <h2>
+            📢 Create New Campaign
+        </h2>
 
 
+        <form
+            action="/campaign"
+            method="POST"
+            enctype="multipart/form-data"
+            onsubmit="return validateCampaign()"
+        >
 
 
-<select id="platform" name="platform" required>
+            <!-- CAMPAIGN NAME -->
 
-<option value="">Select Platform</option>
+            <div class="form-group full">
 
-<option>Facebook</option>
+                <label for="campaign">
+                    📢 Campaign Name
+                </label>
 
-<option>Instagram</option>
+                <input
+                    type="text"
+                    id="campaign"
+                    name="campaign"
+                    placeholder="Enter campaign name"
+                    required
+                >
 
-<option>YouTube</option>
+            </div>
 
-<option>LinkedIn</option>
 
-</select>
+            <!-- PLATFORM -->
 
+            <div class="form-group">
 
-<br><br>
+                <label for="platform">
+                    📱 Platform
+                </label>
 
+                <select
+                    id="platform"
+                    name="platform"
+                    required
+                >
 
-<input type="number" 
-id="budget" 
-name="budget" 
-placeholder="Budget" 
-required>
+                    <option value="">
+                        Select Platform
+                    </option>
 
+                    <option value="Facebook">
+                        Facebook
+                    </option>
 
-<br><br>
+                    <option value="Instagram">
+                        Instagram
+                    </option>
 
+                    <option value="YouTube">
+                        YouTube
+                    </option>
 
-<label>Target Audience</label><br>
+                    <option value="LinkedIn">
+                        LinkedIn
+                    </option>
 
-<select id="targetAudience" name="targetAudience" required>
+                </select>
 
-<option value="">Select Target Audience</option>
+            </div>
 
-<option value="1000">1,000 People</option>
 
-<option value="5000">5,000 People</option>
+            <!-- BUDGET -->
 
-<option value="10000">10,000 People</option>
+            <div class="form-group">
 
-<option value="25000">25,000 People</option>
+                <label for="budget">
+                    💰 Campaign Budget
+                </label>
 
-<option value="50000">50,000 People</option>
+                <input
+                    type="number"
+                    id="budget"
+                    name="budget"
+                    placeholder="Enter budget amount"
+                    min="1"
+                    required
+                >
 
-<option value="100000">100,000 People</option>
+            </div>
 
-</select>
-<br><br>
 
-<label>Campaign Status</label><br>
+            <!-- TARGET AUDIENCE -->
 
-<select id="status" name="status" required>
+            <div class="form-group">
 
-    <option value="">Select Status</option>
+                <label for="targetAudience">
+                    👥 Target Audience
+                </label>
 
-    <option value="Active">🟢 Active</option>
+                <select
+                    id="targetAudience"
+                    name="targetAudience"
+                    required
+                >
 
-    <option value="Pending">🟡 Pending</option>
+                    <option value="">
+                        Select Target Audience
+                    </option>
 
-    <option value="Completed">🔵 Completed</option>
+                    <option value="1000">
+                        1,000 People
+                    </option>
 
-    <option value="Cancelled">🔴 Cancelled</option>
+                    <option value="5000">
+                        5,000 People
+                    </option>
 
-</select>
+                    <option value="10000">
+                        10,000 People
+                    </option>
 
+                    <option value="25000">
+                        25,000 People
+                    </option>
 
+                    <option value="50000">
+                        50,000 People
+                    </option>
 
-<br><br>
-<label>Campaign Progress (%)</label><br>
+                    <option value="100000">
+                        100,000 People
+                    </option>
 
-<input
-type="number"
-id="progress"
-name="progress"
-min="0"
-max="100"
-placeholder="Enter Progress (0-100)"
-required>
+                </select>
 
-<br><br>
+            </div>
 
 
-<label>Start Date</label><br>
+            <!-- STATUS -->
 
-<input type="date" 
-id="startDate" 
-name="startDate" 
-required>
+            <div class="form-group">
 
+                <label for="status">
+                    📌 Campaign Status
+                </label>
 
-<br><br>
+                <select
+                    id="status"
+                    name="status"
+                    required
+                >
 
+                    <option value="">
+                        Select Status
+                    </option>
 
-<label>End Date</label><br>
+                    <option value="Active">
+                        🟢 Active
+                    </option>
 
-<input type="date" 
-id="endDate" 
-name="endDate" 
-required>
+                    <option value="Pending">
+                        🟡 Pending
+                    </option>
 
+                    <option value="Completed">
+                        🔵 Completed
+                    </option>
 
-<br><br>
+                    <option value="Cancelled">
+                        🔴 Cancelled
+                    </option>
 
+                </select>
 
-<textarea 
-id="description" 
-name="description"
-placeholder="Campaign Description">
-</textarea>
+            </div>
 
 
-<br><br>
+            <!-- PROGRESS -->
 
+            <div class="form-group">
 
-<label>Upload Advertisement</label><br>
+                <label for="progress">
+                    📊 Campaign Progress (%)
+                </label>
 
-<input
-type="file"
-id="adFile"
-name="adFile"
-accept="image/*,video/*">
+                <input
+                    type="number"
+                    id="progress"
+                    name="progress"
+                    min="0"
+                    max="100"
+                    placeholder="0 - 100"
+                    required
+                >
 
-<br><br>
+            </div>
 
-<div id="preview"></div>
 
-<br>
+            <!-- START DATE -->
 
+            <div class="form-group">
 
-<button type="submit">
-Add Campaign
-</button>
+                <label for="startDate">
+                    📅 Start Date
+                </label>
 
+                <input
+                    type="date"
+                    id="startDate"
+                    name="startDate"
+                    required
+                >
 
-</form>
+            </div>
 
 
-<br>
+            <!-- END DATE -->
 
+            <div class="form-group">
 
-<a href="dashboard.html">
-⬅ Back to Dashboard
-</a>
+                <label for="endDate">
+                    📅 End Date
+                </label>
 
+                <input
+                    type="date"
+                    id="endDate"
+                    name="endDate"
+                    required
+                >
 
-</div>
+            </div>
 
 
-<script src="script.js"></script>
+            <!-- DESCRIPTION -->
+
+            <div class="form-group full">
+
+                <label for="description">
+                    📝 Campaign Description
+                </label>
+
+                <textarea
+                    id="description"
+                    name="description"
+                    placeholder="Enter campaign description..."
+                ></textarea>
+
+            </div>
+
+
+            <!-- FILE -->
+
+            <div class="form-group full">
+
+                <label for="adFile">
+                    🎬 Upload Advertisement
+                </label>
+
+                <input
+                    type="file"
+                    id="adFile"
+                    name="adFile"
+                    accept="image/*,video/*"
+                >
+
+            </div>
+
+
+            <!-- PREVIEW -->
+
+            <div
+                id="preview"
+                class="full"
+            ></div>
+
+
+            <!-- SUBMIT -->
+
+            <button
+                type="submit"
+                class="submit-btn"
+            >
+                🚀 Add Campaign
+            </button>
+
+
+        </form>
+
+
+        <!-- BACK -->
+
+        <a
+            href="dashboard.html"
+            class="back-btn"
+        >
+            ⬅ Back to Dashboard
+        </a>
+
+    </div>
+
+
+    <!-- EXISTING SCRIPT -->
+
+    <script src="script.js"></script>
+
+
+    <!-- FILE PREVIEW -->
+
+    <script>
+
+        const adFile =
+            document.getElementById("adFile");
+
+        const preview =
+            document.getElementById("preview");
+
+
+        adFile.addEventListener("change", function () {
+
+            preview.innerHTML = "";
+
+            const file = this.files[0];
+
+            if (!file) {
+                return;
+            }
+
+            const url =
+                URL.createObjectURL(file);
+
+
+            if (file.type.startsWith("image/")) {
+
+                const img =
+                    document.createElement("img");
+
+                img.src = url;
+
+                preview.appendChild(img);
+
+            }
+
+            else if (file.type.startsWith("video/")) {
+
+                const video =
+                    document.createElement("video");
+
+                video.src = url;
+
+                video.controls = true;
+
+                preview.appendChild(video);
+
+            }
+
+        });
+
+    </script>
 
 
 </body>

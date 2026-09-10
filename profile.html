@@ -3,13 +3,433 @@
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-<title>My Profile</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="style.css">
-<script src="script.js"></script>
+    <title>My Profile | DigiMarket</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+
+        /* ================= BODY ================= */
+
+        body {
+
+            min-height: 100vh;
+
+            padding: 30px 20px;
+
+            color: white;
+
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    #253b80 0%,
+                    transparent 32%
+                ),
+                radial-gradient(
+                    circle at 90% 90%,
+                    #6a1b9a 0%,
+                    transparent 32%
+                ),
+                linear-gradient(
+                    135deg,
+                    #07152f,
+                    #101c3d,
+                    #170d32
+                );
+        }
+
+
+        /* ================= HEADER ================= */
+
+        header {
+
+            max-width: 850px;
+
+            margin: 0 auto 25px;
+
+            padding: 25px;
+
+            text-align: center;
+
+            border-radius: 20px;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            border:
+                1px solid rgba(255,255,255,0.15);
+
+            backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 20px 45px rgba(0,0,0,0.25);
+        }
+
+
+        header h1 {
+
+            font-size: 32px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #00e5ff,
+                    #7c4dff,
+                    #d500f9
+                );
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+        }
+
+
+        /* ================= PROFILE ================= */
+
+        .profile-card {
+
+            max-width: 650px;
+
+            margin: 0 auto;
+
+            padding: 35px;
+
+            text-align: center;
+
+            border-radius: 25px;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            border:
+                1px solid rgba(255,255,255,0.15);
+
+            backdrop-filter: blur(22px);
+
+            box-shadow:
+                0 25px 60px rgba(0,0,0,0.35);
+
+            animation:
+                cardIn 0.8s ease;
+        }
+
+
+        @keyframes cardIn {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(25px)
+                    scale(0.97);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+
+            }
+
+        }
+
+
+        /* ================= PROFILE ICON ================= */
+
+        .profile-avatar {
+
+            width: 100px;
+
+            height: 100px;
+
+            margin: 0 auto 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            font-size: 45px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00c6ff,
+                    #7c4dff,
+                    #d500f9
+                );
+
+            box-shadow:
+                0 0 35px
+                rgba(0,198,255,0.3);
+        }
+
+
+        .profile-card h2 {
+
+            margin-bottom: 25px;
+
+            color: #e0f2fe;
+
+            font-size: 25px;
+        }
+
+
+        /* ================= INFO ================= */
+
+        .profile-info {
+
+            text-align: left;
+
+            margin-top: 15px;
+        }
+
+
+        .info-row {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 15px;
+
+            padding: 17px;
+
+            border-radius: 13px;
+
+            background:
+                rgba(255,255,255,0.06);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.10);
+
+            transition: 0.3s;
+        }
+
+
+        .info-row:hover {
+
+            transform: translateX(5px);
+
+            border-color:
+                rgba(0,229,255,0.35);
+
+            background:
+                rgba(0,229,255,0.06);
+        }
+
+
+        .info-icon {
+
+            width: 40px;
+
+            height: 40px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background:
+                rgba(0,229,255,0.1);
+
+            font-size: 20px;
+        }
+
+
+        .info-content {
+
+            flex: 1;
+        }
+
+
+        .info-content label {
+
+            display: block;
+
+            margin-bottom: 4px;
+
+            color: #94a3b8;
+
+            font-size: 12px;
+        }
+
+
+        .info-content span {
+
+            color: #f1f5f9;
+
+            font-size: 16px;
+
+            font-weight: 600;
+
+            word-break: break-word;
+        }
+
+
+        /* ================= EDIT BUTTON ================= */
+
+        .edit-btn {
+
+            width: 100%;
+
+            margin-top: 15px;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00c6ff,
+                    #7c4dff,
+                    #d500f9
+                );
+
+            transition: 0.3s;
+        }
+
+
+        .edit-btn:hover {
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 12px 30px
+                rgba(0,198,255,0.25);
+        }
+
+
+        /* ================= BACK BUTTON ================= */
+
+        .back-area {
+
+            margin-top: 25px;
+
+            text-align: center;
+        }
+
+
+        .back-btn {
+
+            display: inline-block;
+
+            padding: 12px 22px;
+
+            color: #dbeafe;
+
+            text-decoration: none;
+
+            border-radius: 11px;
+
+            background:
+                rgba(255,255,255,0.07);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.14);
+
+            transition: 0.3s;
+        }
+
+
+        .back-btn:hover {
+
+            transform: translateY(-3px);
+
+            border-color: #00e5ff;
+
+            background:
+                rgba(0,229,255,0.1);
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+
+            max-width: 850px;
+
+            margin: 30px auto 0;
+
+            text-align: center;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media(max-width: 600px) {
+
+            body {
+
+                padding: 18px 12px;
+            }
+
+
+            header h1 {
+
+                font-size: 25px;
+            }
+
+
+            .profile-card {
+
+                padding: 25px 18px;
+            }
+
+
+            .profile-avatar {
+
+                width: 85px;
+
+                height: 85px;
+
+                font-size: 38px;
+            }
+
+        }
+
+    </style>
 
 </head>
 
@@ -17,47 +437,213 @@
 <body>
 
 
-<header>
+    <!-- HEADER -->
 
-<h1>My Profile</h1>
+    <header>
 
-</header>
+        <h1>
+            👤 My Profile
+        </h1>
 
-
-
-<div class="dashboard">
-
-
-<h2>User Details</h2>
+    </header>
 
 
-<br>
+    <!-- PROFILE CARD -->
+
+    <div class="profile-card">
 
 
-<a href="dashboard.html">
-⬅ Back to Dashboard
-</a>
+        <div class="profile-avatar">
+            👤
+        </div>
 
 
+        <h2>
+            User Profile
+        </h2>
 
-</div>
-<div class="profile-card">
 
-    <h2>User Profile</h2>
+        <div class="profile-info">
 
-    <div class="profile-info">
 
-        <p><b>Name:</b> <span id="profileName">Safreen</span></p>
+            <!-- NAME -->
 
-        <p><b>Email:</b> <span id="profileEmail">safreen@gmail.com</span></p>
+            <div class="info-row">
 
-        <p><b>Phone:</b> <span id="profilePhone">9876543210</span></p>
+                <div class="info-icon">
+                    👤
+                </div>
+
+                <div class="info-content">
+
+                    <label>
+                        FULL NAME
+                    </label>
+
+                    <span id="profileName">
+                        Safreen
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="info-row">
+
+                <div class="info-icon">
+                    📧
+                </div>
+
+                <div class="info-content">
+
+                    <label>
+                        EMAIL ADDRESS
+                    </label>
+
+                    <span id="profileEmail">
+                        safreen@gmail.com
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- PHONE -->
+
+            <div class="info-row">
+
+                <div class="info-icon">
+                    📱
+                </div>
+
+                <div class="info-content">
+
+                    <label>
+                        PHONE NUMBER
+                    </label>
+
+                    <span id="profilePhone">
+                        9876543210
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- EDIT -->
+
+        <button
+            class="edit-btn"
+            onclick="editProfile()"
+        >
+            ✏️ Edit Profile
+        </button>
+
+
+        <!-- BACK -->
+
+        <div class="back-area">
+
+            <a
+                href="dashboard.html"
+                class="back-btn"
+            >
+                ⬅ Back to Dashboard
+            </a>
+
+        </div>
+
 
     </div>
 
-    <button onclick="editProfile()">Edit Profile</button>
-</div>
 
+    <!-- FOOTER -->
+
+    <footer>
+
+        © 2026 DigiMarket |
+        Digital Marketing Campaign Management System
+
+    </footer>
+
+
+    <script>
+
+        function editProfile() {
+
+            const name =
+                prompt(
+                    "Enter your name:",
+                    document.getElementById(
+                        "profileName"
+                    ).innerText
+                );
+
+
+            if (name !== null && name.trim() !== "") {
+
+                document.getElementById(
+                    "profileName"
+                ).innerText =
+                    name.trim();
+
+            }
+
+
+            const email =
+                prompt(
+                    "Enter your email:",
+                    document.getElementById(
+                        "profileEmail"
+                    ).innerText
+                );
+
+
+            if (
+                email !== null &&
+                email.trim() !== ""
+            ) {
+
+                document.getElementById(
+                    "profileEmail"
+                ).innerText =
+                    email.trim();
+
+            }
+
+
+            const phone =
+                prompt(
+                    "Enter your phone:",
+                    document.getElementById(
+                        "profilePhone"
+                    ).innerText
+                );
+
+
+            if (
+                phone !== null &&
+                phone.trim() !== ""
+            ) {
+
+                document.getElementById(
+                    "profilePhone"
+                ).innerText =
+                    phone.trim();
+
+            }
+
+        }
+
+    </script>
 
 
 </body>

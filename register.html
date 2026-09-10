@@ -2,47 +2,1366 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Register | Digital Campaign Management</title>
 
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+
+    <style>
+
+        /* =====================================
+           PAGE
+        ===================================== */
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-family: Arial, sans-serif;
+
+            background:
+                radial-gradient(circle at 10% 20%, #2563eb 0%, transparent 30%),
+                radial-gradient(circle at 90% 80%, #9333ea 0%, transparent 30%),
+                linear-gradient(135deg, #020617, #172554, #312e81);
+
+            overflow-x: hidden;
+        }
+
+
+        /* =====================================
+           BACKGROUND ANIMATION
+        ===================================== */
+
+        body::before {
+            content: "";
+
+            position: fixed;
+
+            width: 350px;
+            height: 350px;
+
+            border-radius: 50%;
+
+            background: #00c6ff;
+
+            filter: blur(120px);
+
+            opacity: 0.25;
+
+            top: -100px;
+            left: -100px;
+
+            animation: backgroundMove 7s infinite alternate;
+
+            z-index: -1;
+        }
+
+
+        body::after {
+            content: "";
+
+            position: fixed;
+
+            width: 350px;
+            height: 350px;
+
+            border-radius: 50%;
+
+            background: #a855f7;
+
+            filter: blur(120px);
+
+            opacity: 0.25;
+
+            right: -100px;
+            bottom: -100px;
+
+            animation: backgroundMove2 8s infinite alternate;
+
+            z-index: -1;
+        }
+
+
+        @keyframes backgroundMove {
+
+            from {
+                transform: translate(0, 0);
+            }
+
+            to {
+                transform: translate(100px, 80px);
+            }
+
+        }
+
+
+        @keyframes backgroundMove2 {
+
+            from {
+                transform: translate(0, 0);
+            }
+
+            to {
+                transform: translate(-100px, -80px);
+            }
+
+        }
+
+
+        /* =====================================
+           REGISTER BOX
+        ===================================== */
+
+        .login-box {
+
+            width: 380px;
+
+            padding: 35px;
+
+            border-radius: 25px;
+
+            background: rgba(255, 255, 255, 0.12);
+
+            backdrop-filter: blur(20px);
+
+            -webkit-backdrop-filter: blur(20px);
+
+            border: 1px solid rgba(255, 255, 255, 0.2);
+
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.45),
+                0 0 40px rgba(0, 198, 255, 0.15);
+
+            text-align: center;
+
+            color: white;
+
+            animation: boxAnimation 0.8s ease;
+
+        }
+
+
+        @keyframes boxAnimation {
+
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+        }
+
+
+        /* =====================================
+           HEADING
+        ===================================== */
+
+        .login-box h2 {
+
+            margin-top: 0;
+            margin-bottom: 25px;
+
+            font-size: 30px;
+
+            letter-spacing: 1px;
+
+            text-shadow:
+                0 0 15px rgba(0, 198, 255, 0.5);
+
+        }
+
+
+        /* =====================================
+           INPUT
+        ===================================== */
+
+        .login-box input {
+
+            width: 100%;
+
+            box-sizing: border-box;
+
+            padding: 14px;
+
+            margin: 8px 0;
+
+            border: 2px solid transparent;
+
+            outline: none;
+
+            border-radius: 12px;
+
+            background: rgba(255, 255, 255, 0.95);
+
+            color: #222;
+
+            font-size: 15px;
+
+            transition: 0.3s;
+
+        }
+
+
+        .login-box input::placeholder {
+
+            color: #777;
+
+        }
+
+
+        .login-box input:focus {
+
+            border-color: #00c6ff;
+
+            box-shadow:
+                0 0 15px rgba(0, 198, 255, 0.4);
+
+            transform: translateY(-2px);
+
+        }
+
+
+        /* =====================================
+           REGISTER BUTTON
+        ===================================== */
+
+        .register-btn {
+
+            width: 100%;
+
+            padding: 14px;
+
+            margin-top: 15px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00c6ff,
+                    #0072ff
+                );
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            box-shadow:
+                0 8px 20px rgba(0, 114, 255, 0.25);
+
+        }
+
+
+        .register-btn:hover {
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 12px 30px rgba(0, 114, 255, 0.45);
+
+        }
+
+
+        .register-btn:active {
+
+            transform: scale(0.97);
+
+        }
+
+
+        .register-btn.loading {
+
+            opacity: 0.7;
+
+            pointer-events: none;
+
+        }
+
+
+        /* =====================================
+           LINKS
+        ===================================== */
+
+        .login-box p {
+
+            color: #e2e8f0;
+
+        }
+
+
+        .login-box a {
+
+            color: #7ddcff;
+
+            text-decoration: none;
+
+            transition: 0.3s;
+
+        }
+
+
+        .login-box a:hover {
+
+            color: white;
+
+            text-decoration: underline;
+
+        }
+
+
+        /* =====================================
+           SUCCESS OVERLAY
+        ===================================== */
+
+        .success-overlay {
+
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(2, 6, 23, 0.78);
+
+            backdrop-filter: blur(8px);
+
+            -webkit-backdrop-filter: blur(8px);
+
+            justify-content: center;
+
+            align-items: center;
+
+            z-index: 9999;
+
+        }
+
+
+        .success-overlay.show {
+
+            display: flex;
+
+        }
+
+
+        /* =====================================
+           SUCCESS POPUP
+        ===================================== */
+
+        .success-popup {
+
+            width: 370px;
+
+            padding: 40px 28px;
+
+            background: white;
+
+            color: #222;
+
+            border-radius: 28px;
+
+            text-align: center;
+
+            box-shadow:
+                0 0 30px rgba(0, 198, 255, 0.5),
+                0 25px 80px rgba(0, 0, 0, 0.55);
+
+            animation:
+                popupAnimation 0.7s
+                cubic-bezier(.17,.89,.32,1.28);
+
+        }
+
+
+        @keyframes popupAnimation {
+
+            0% {
+
+                opacity: 0;
+
+                transform:
+                    scale(0.2)
+                    rotate(-10deg);
+
+            }
+
+            60% {
+
+                transform:
+                    scale(1.08)
+                    rotate(2deg);
+
+            }
+
+            100% {
+
+                opacity: 1;
+
+                transform:
+                    scale(1)
+                    rotate(0);
+
+            }
+
+        }
+
+
+        /* =====================================
+           SUCCESS ICON
+        ===================================== */
+
+        .success-icon {
+
+            width: 95px;
+
+            height: 95px;
+
+            margin: auto;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00c853,
+                    #00e676
+                );
+
+            color: white;
+
+            font-size: 52px;
+
+            font-weight: bold;
+
+            box-shadow:
+                0 0 0 10px
+                rgba(0, 200, 83, 0.1),
+
+                0 0 40px
+                rgba(0, 200, 83, 0.5);
+
+            animation:
+                iconPulse 1s
+                infinite alternate;
+
+        }
+
+
+        @keyframes iconPulse {
+
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.08);
+            }
+
+        }
+
+
+        /* =====================================
+           SUCCESS TITLE
+        ===================================== */
+
+        .success-popup h2 {
+
+            margin-top: 22px;
+
+            margin-bottom: 10px;
+
+            font-size: 26px;
+
+            color: #00a86b;
+
+        }
+
+
+        .success-popup p {
+
+            color: #666;
+
+            font-size: 15px;
+
+            line-height: 1.7;
+
+        }
+
+
+        /* =====================================
+           CONTINUE BUTTON
+        ===================================== */
+
+        .continue-btn {
+
+            margin-top: 20px;
+
+            padding: 13px 28px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00c6ff,
+                    #0072ff
+                );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+        }
+
+
+        .continue-btn:hover {
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(0, 114, 255, 0.4);
+
+        }
+
+
+        /* =====================================
+           GLITTER
+        ===================================== */
+
+        .glitter {
+
+            position: fixed;
+
+            pointer-events: none;
+
+            z-index: 10001;
+
+            animation:
+                glitterFall 3s linear forwards;
+
+        }
+
+
+        @keyframes glitterFall {
+
+            0% {
+
+                transform:
+                    translateY(-30px)
+                    rotate(0deg)
+                    scale(0);
+
+                opacity: 0;
+
+            }
+
+            15% {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    rotate(90deg)
+                    scale(1);
+
+            }
+
+            100% {
+
+                transform:
+                    translateY(100vh)
+                    rotate(720deg)
+                    scale(0.3);
+
+                opacity: 0;
+
+            }
+
+        }
+
+
+        /* =====================================
+           SPARKLE
+        ===================================== */
+
+        .sparkle {
+
+            position: fixed;
+
+            pointer-events: none;
+
+            z-index: 10002;
+
+            font-size: 24px;
+
+            animation:
+                sparkleAnimation 2.5s ease-out forwards;
+
+        }
+
+
+        @keyframes sparkleAnimation {
+
+            0% {
+
+                opacity: 0;
+
+                transform:
+                    scale(0)
+                    rotate(0deg);
+
+            }
+
+            30% {
+
+                opacity: 1;
+
+                transform:
+                    scale(1.5)
+                    rotate(180deg);
+
+            }
+
+            100% {
+
+                opacity: 0;
+
+                transform:
+                    scale(0)
+                    rotate(360deg);
+
+            }
+
+        }
+
+
+        /* =====================================
+           MOBILE
+        ===================================== */
+
+        @media (max-width: 500px) {
+
+            .login-box {
+
+                width: calc(100% - 50px);
+
+                padding: 28px 20px;
+
+            }
+
+
+            .success-popup {
+
+                width: calc(100% - 70px);
+
+                padding: 35px 20px;
+
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-<div class="login-box">
 
-    <h2>Create Account</h2>
+    <!-- =====================================
+         REGISTER BOX
+    ===================================== -->
 
-    <form action="/register" method="POST" onsubmit="return validateRegister()">
+    <div class="login-box">
 
-        <input type="text" id="name" name="name" placeholder="Full Name" required>
+        <h2>✨ Create Account</h2>
 
-        <input type="email" id="email" name="email" placeholder="Email Address" required>
 
-        <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+        <form id="registerForm">
 
-        <input type="password" id="password" name="password" placeholder="Password" required>
 
-        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+            <!-- NAME -->
 
-        <button type="submit">Register</button>
+            <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Full Name"
+                required
+            >
 
-    </form>
 
-    <br>
+            <!-- EMAIL -->
 
-    <p>Already have an account?</p>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Email Address"
+                required
+            >
 
-    <a href="login.html">Login Here</a>
 
-    <br><br>
+            <!-- MOBILE -->
 
-    <a href="index.html">⬅ Back to Home</a>
+            <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="Mobile Number"
+                pattern="[0-9]{10}"
+                maxlength="10"
+                required
+            >
 
-</div>
+
+            <!-- PASSWORD -->
+
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                required
+            >
+
+
+            <!-- CONFIRM PASSWORD -->
+
+            <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                placeholder="Confirm Password"
+                required
+            >
+
+
+            <!-- REGISTER -->
+
+            <button
+                type="submit"
+                class="register-btn"
+                id="registerBtn">
+
+                Create Account 🚀
+
+            </button>
+
+
+        </form>
+
+
+        <br>
+
+
+        <p>
+            Already have an account?
+        </p>
+
+
+        <a href="login.html">
+            Login Here
+        </a>
+
+
+        <br>
+        <br>
+
+
+        <a href="index.html">
+            ⬅ Back to Home
+        </a>
+
+
+    </div>
+
+
+
+    <!-- =====================================
+         SUCCESS POPUP
+    ===================================== -->
+
+    <div
+        class="success-overlay"
+        id="successOverlay">
+
+
+        <div class="success-popup">
+
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+
+            <h2>
+                Registration Successful!
+            </h2>
+
+
+            <p>
+
+                🎉 Your account has been
+                created successfully!
+
+                <br>
+
+                Welcome to Digital Campaign
+                Management System.
+
+            </p>
+
+
+            <button
+                class="continue-btn"
+                onclick="goToLogin()">
+
+                Continue to Login →
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================
+         JAVASCRIPT
+    ===================================== -->
+
+    <script>
+
+
+        const registerForm =
+            document.getElementById("registerForm");
+
+
+        const registerBtn =
+            document.getElementById("registerBtn");
+
+
+
+        /* =====================================
+           REGISTER
+        ===================================== */
+
+        registerForm.addEventListener(
+            "submit",
+            async function(event) {
+
+
+                event.preventDefault();
+
+
+                /* GET VALUES */
+
+                const name =
+                    document
+                    .getElementById("name")
+                    .value
+                    .trim();
+
+
+                const email =
+                    document
+                    .getElementById("email")
+                    .value
+                    .trim();
+
+
+                const phone =
+                    document
+                    .getElementById("phone")
+                    .value
+                    .trim();
+
+
+                const password =
+                    document
+                    .getElementById("password")
+                    .value;
+
+
+                const confirmPassword =
+                    document
+                    .getElementById("confirmPassword")
+                    .value;
+
+
+
+                /* =====================================
+                   PASSWORD CHECK
+                ===================================== */
+
+                if (
+                    password !==
+                    confirmPassword
+                ) {
+
+                    alert(
+                        "❌ Passwords do not match!"
+                    );
+
+                    return;
+
+                }
+
+
+
+                /* =====================================
+                   MOBILE CHECK
+                ===================================== */
+
+                if (
+                    !/^[0-9]{10}$/.test(phone)
+                ) {
+
+                    alert(
+                        "❌ Please enter a valid 10-digit mobile number."
+                    );
+
+                    return;
+
+                }
+
+
+
+                /* =====================================
+                   LOADING
+                ===================================== */
+
+                registerBtn.classList.add(
+                    "loading"
+                );
+
+
+                registerBtn.innerHTML =
+                    "Creating Account... ⏳";
+
+
+
+                try {
+
+
+                    /* =====================================
+                       SEND DATA TO SERVER
+                    ===================================== */
+
+                    const data =
+                        new URLSearchParams();
+
+
+                    data.append(
+                        "name",
+                        name
+                    );
+
+
+                    data.append(
+                        "email",
+                        email
+                    );
+
+
+                    data.append(
+                        "phone",
+                        phone
+                    );
+
+
+                    data.append(
+                        "password",
+                        password
+                    );
+
+
+                    data.append(
+                        "confirmPassword",
+                        confirmPassword
+                    );
+
+
+
+                    const response =
+                        await fetch(
+                            "/register",
+                            {
+
+                                method: "POST",
+
+                                headers: {
+
+                                    "Content-Type":
+                                        "application/x-www-form-urlencoded"
+
+                                },
+
+                                body:
+                                    data.toString()
+
+                            }
+                        );
+
+
+
+                    const result =
+                        await response.text();
+
+
+                    console.log(
+                        "Server Response:",
+                        result
+                    );
+
+
+
+                    /* =====================================
+                       SUCCESS
+                    ===================================== */
+
+                    if (
+                        response.ok &&
+                        result
+                        .toLowerCase()
+                        .includes(
+                            "registration successful"
+                        )
+                    ) {
+
+
+                        /* SHOW POPUP */
+
+                        showSuccessPopup();
+
+
+                        /* CLEAR FORM */
+
+                        registerForm.reset();
+
+
+                    }
+
+
+                    /* =====================================
+                       FAILED
+                    ===================================== */
+
+                    else {
+
+                        alert(
+                            "❌ Registration Failed!\n\n" +
+                            result
+                        );
+
+                    }
+
+
+                }
+
+
+                catch(error) {
+
+
+                    console.error(
+                        "Registration Error:",
+                        error
+                    );
+
+
+                    alert(
+                        "❌ Server connection error!\n\n" +
+                        "Please make sure your Node.js server is running."
+                    );
+
+                }
+
+
+
+                /* RESET BUTTON */
+
+                registerBtn.classList.remove(
+                    "loading"
+                );
+
+
+                registerBtn.innerHTML =
+                    "Create Account 🚀";
+
+
+            }
+
+        );
+
+
+
+        /* =====================================
+           SUCCESS POPUP
+        ===================================== */
+
+        function showSuccessPopup() {
+
+
+            const overlay =
+                document.getElementById(
+                    "successOverlay"
+                );
+
+
+            overlay.classList.add(
+                "show"
+            );
+
+
+            /* GLITTER */
+
+            createGlitter();
+
+
+            /* SPARKLES */
+
+            createSparkles();
+
+        }
+
+
+
+        /* =====================================
+           GLITTER EFFECT
+        ===================================== */
+
+        function createGlitter() {
+
+
+            for (
+                let i = 0;
+                i < 180;
+                i++
+            ) {
+
+
+                const glitter =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                glitter.className =
+                    "glitter";
+
+
+                /* POSITION */
+
+                glitter.style.left =
+                    Math.random() *
+                    100 +
+                    "vw";
+
+
+                glitter.style.top =
+                    Math.random() *
+                    -30 +
+                    "vh";
+
+
+                /* SIZE */
+
+                const size =
+                    Math.random() *
+                    8 +
+                    4;
+
+
+                glitter.style.width =
+                    size + "px";
+
+
+                glitter.style.height =
+                    size + "px";
+
+
+                /* COLOR */
+
+                glitter.style.background =
+                    `hsl(
+                        ${Math.random() * 360},
+                        100%,
+                        60%
+                    )`;
+
+
+                /* SHAPE */
+
+                glitter.style.borderRadius =
+                    Math.random() > 0.5
+                    ? "50%"
+                    : "2px";
+
+
+                /* DELAY */
+
+                glitter.style.animationDelay =
+                    Math.random() *
+                    1.5 +
+                    "s";
+
+
+                document.body.appendChild(
+                    glitter
+                );
+
+
+                setTimeout(
+                    function() {
+
+                        glitter.remove();
+
+                    },
+                    4500
+                );
+
+            }
+
+        }
+
+
+
+        /* =====================================
+           SPARKLE EFFECT
+        ===================================== */
+
+        function createSparkles() {
+
+
+            const symbols = [
+
+                "✨",
+                "⭐",
+                "💫",
+                "🌟",
+                "✦",
+                "🎉"
+
+            ];
+
+
+            for (
+                let i = 0;
+                i < 30;
+                i++
+            ) {
+
+
+                const sparkle =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                sparkle.className =
+                    "sparkle";
+
+
+                sparkle.innerHTML =
+                    symbols[
+                        Math.floor(
+                            Math.random() *
+                            symbols.length
+                        )
+                    ];
+
+
+                sparkle.style.left =
+                    Math.random() *
+                    100 +
+                    "vw";
+
+
+                sparkle.style.top =
+                    Math.random() *
+                    100 +
+                    "vh";
+
+
+                sparkle.style.animationDelay =
+                    Math.random() *
+                    1.5 +
+                    "s";
+
+
+                document.body.appendChild(
+                    sparkle
+                );
+
+
+                setTimeout(
+                    function() {
+
+                        sparkle.remove();
+
+                    },
+                    3500
+                );
+
+            }
+
+        }
+
+
+
+        /* =====================================
+           CONTINUE TO LOGIN
+        ===================================== */
+
+        function goToLogin() {
+
+            window.location.href =
+                "login.html";
+
+        }
+
+    </script>
+
 
 </body>
+
 </html>

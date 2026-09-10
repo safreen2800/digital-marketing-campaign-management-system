@@ -1,96 +1,866 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reports</title>
-<link rel="stylesheet" href="style.css">
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
 
-</head>
-<body>
-    
-<header>
-<h1>Campaign Reports</h1>
-</header>
- <div class="dashboard-box">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <h2>Campaign Report</h2>
+    <title>Reports | DigiMarket</title>
 
-    <canvas id="campaignChart"></canvas>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-</div>
+    <style>
 
-
-<div class="dashboard">
-
-<h2>Campaign Report</h2>
-
-
-<table id="reportTable">
-
-<tr>
-<th>Campaign</th>
-<th>Platform</th>
-<th>Budget</th>
-<th>Status</th>
-</tr>
-
-<tr>
-<td>Summer Sale</td>
-<td>Instagram</td>
-<td>₹20,000</td>
-<td class="active">Active</td>
-</tr>
-
-<tr>
-<td>Festival Offer</td>
-<td>Facebook</td>
-<td>₹15,000</td>
-<td class="completed">Completed</td>
-</tr>
-
-<tr>
-<td>New Product Launch</td>
-<td>YouTube</td>
-<td>₹30,000</td>
-<td class="active">Active</td>
-</tr>
-
-</table>
-
-<br>
-
-<a href="dashboard.html">⬅ Back to Dashboard</a>
-
-</div>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-fetch("/report-data")
-.then(response => response.json())
-.then(data => {
-
-    const labels = data.map(item => item.platform);
-    const totals = data.map(item => item.total);
-
-    new Chart(document.getElementById("campaignChart"),{
-
-        type: "bar",
-
-        data: {
-            labels: labels,
-            datasets: [{
-                label: "Campaign Count",
-                data: totals
-            }]
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
         }
 
-    });
 
-})
-.catch(error => console.log(error));
-</script>
+        /* ================= BODY ================= */
+
+        body {
+
+            min-height: 100vh;
+
+            padding: 30px 20px;
+
+            color: white;
+
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    #253b80 0%,
+                    transparent 32%
+                ),
+                radial-gradient(
+                    circle at 90% 90%,
+                    #6a1b9a 0%,
+                    transparent 32%
+                ),
+                linear-gradient(
+                    135deg,
+                    #07152f,
+                    #101c3d,
+                    #170d32
+                );
+        }
+
+
+        /* ================= HEADER ================= */
+
+        header {
+
+            max-width: 1150px;
+
+            margin: 0 auto 25px;
+
+            padding: 25px;
+
+            text-align: center;
+
+            border-radius: 20px;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            border:
+                1px solid rgba(255,255,255,0.15);
+
+            backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 20px 45px rgba(0,0,0,0.25);
+        }
+
+
+        header h1 {
+
+            font-size: 32px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #00e5ff,
+                    #7c4dff,
+                    #d500f9
+                );
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+        }
+
+
+        header p {
+
+            margin-top: 8px;
+
+            color: #94a3b8;
+
+            font-size: 14px;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .container {
+
+            max-width: 1150px;
+
+            margin: auto;
+        }
+
+
+        /* ================= ANALYTICS CARD ================= */
+
+        .analytics-box {
+
+            padding: 28px;
+
+            margin-bottom: 25px;
+
+            border-radius: 22px;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            border:
+                1px solid rgba(255,255,255,0.15);
+
+            backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,0.25);
+        }
+
+
+        .analytics-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-bottom: 22px;
+
+            color: #e0f2fe;
+
+            font-size: 22px;
+        }
+
+
+        .analytics-title span {
+
+            font-size: 25px;
+        }
+
+
+        .chart-wrapper {
+
+            position: relative;
+
+            width: 100%;
+
+            height: 400px;
+        }
+
+
+        /* ================= REPORT TABLE ================= */
+
+        .report-box {
+
+            padding: 28px;
+
+            border-radius: 22px;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            border:
+                1px solid rgba(255,255,255,0.15);
+
+            backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,0.25);
+        }
+
+
+        .report-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-bottom: 22px;
+
+            color: #e0f2fe;
+
+            font-size: 22px;
+        }
+
+
+        .table-container {
+
+            width: 100%;
+
+            overflow-x: auto;
+
+            border-radius: 15px;
+
+            border:
+                1px solid rgba(255,255,255,0.12);
+        }
+
+
+        table {
+
+            width: 100%;
+
+            min-width: 650px;
+
+            border-collapse: collapse;
+
+            background:
+                rgba(0,0,0,0.12);
+        }
+
+
+        th {
+
+            padding: 16px;
+
+            text-align: left;
+
+            color: #a5f3fc;
+
+            background:
+                rgba(0,229,255,0.08);
+
+            font-size: 14px;
+        }
+
+
+        td {
+
+            padding: 15px 16px;
+
+            color: #e2e8f0;
+
+            border-top:
+                1px solid rgba(255,255,255,0.08);
+
+            font-size: 14px;
+        }
+
+
+        tr {
+
+            transition: 0.25s;
+        }
+
+
+        tr:hover td {
+
+            background:
+                rgba(255,255,255,0.05);
+        }
+
+
+        /* ================= STATUS ================= */
+
+        .active {
+
+            color: #4ade80 !important;
+
+            font-weight: 700;
+        }
+
+
+        .pending {
+
+            color: #facc15 !important;
+
+            font-weight: 700;
+        }
+
+
+        .completed {
+
+            color: #60a5fa !important;
+
+            font-weight: 700;
+        }
+
+
+        .cancelled {
+
+            color: #f87171 !important;
+
+            font-weight: 700;
+        }
+
+
+        /* ================= BACK BUTTON ================= */
+
+        .back-area {
+
+            text-align: center;
+
+            margin-top: 28px;
+        }
+
+
+        .back-btn {
+
+            display: inline-block;
+
+            padding: 13px 25px;
+
+            color: #dbeafe;
+
+            text-decoration: none;
+
+            border-radius: 11px;
+
+            background:
+                rgba(255,255,255,0.07);
+
+            border:
+                1px solid rgba(255,255,255,0.14);
+
+            transition: 0.3s;
+        }
+
+
+        .back-btn:hover {
+
+            transform: translateY(-3px);
+
+            border-color: #00e5ff;
+
+            background:
+                rgba(0,229,255,0.1);
+
+            box-shadow:
+                0 10px 25px rgba(0,229,255,0.12);
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+
+            max-width: 1150px;
+
+            margin: 30px auto 0;
+
+            padding: 18px;
+
+            text-align: center;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media(max-width: 700px) {
+
+            body {
+
+                padding: 18px 12px;
+            }
+
+
+            header {
+
+                padding: 20px;
+            }
+
+
+            header h1 {
+
+                font-size: 25px;
+            }
+
+
+            .analytics-box,
+            .report-box {
+
+                padding: 20px;
+            }
+
+
+            .analytics-title,
+            .report-title {
+
+                font-size: 19px;
+            }
+
+
+            .chart-wrapper {
+
+                height: 300px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+
+        <h1>
+            📊 Campaign Reports
+        </h1>
+
+        <p>
+            Digital Marketing Campaign Management System
+        </p>
+
+    </header>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <div class="container">
+
+
+        <!-- ================= ANALYTICS ================= -->
+
+        <div class="analytics-box">
+
+            <h2 class="analytics-title">
+
+                <span>📈</span>
+
+                Campaign Analytics
+
+            </h2>
+
+
+            <div class="chart-wrapper">
+
+                <canvas id="campaignChart"></canvas>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= REPORT TABLE ================= -->
+
+        <div class="report-box">
+
+            <h2 class="report-title">
+
+                <span>📋</span>
+
+                Campaign Report
+
+            </h2>
+
+
+            <div class="table-container">
+
+                <table id="reportTable">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                📢 Campaign
+                            </th>
+
+                            <th>
+                                🌐 Platform
+                            </th>
+
+                            <th>
+                                💰 Budget
+                            </th>
+
+                            <th>
+                                📌 Status
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="reportBody">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- BACK BUTTON -->
+
+            <div class="back-area">
+
+                <a
+                    href="dashboard.html"
+                    class="back-btn"
+                >
+                    ⬅ Back to Dashboard
+                </a>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        © 2026 DigiMarket |
+        Digital Marketing Campaign Management System
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+
+    <script>
+
+        /* ==========================================
+           CAMPAIGN ANALYTICS CHART
+        ========================================== */
+
+
+        fetch("/report-data")
+
+        .then(response => {
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Failed to load report data"
+                );
+
+            }
+
+            return response.json();
+
+        })
+
+        .then(data => {
+
+
+            const labels =
+                data.map(
+                    item => item.platform
+                );
+
+
+            const totals =
+                data.map(
+                    item => item.total
+                );
+
+
+            new Chart(
+
+                document.getElementById(
+                    "campaignChart"
+                ),
+
+                {
+
+                    type: "bar",
+
+
+                    data: {
+
+                        labels: labels,
+
+
+                        datasets: [
+
+                            {
+
+                                label:
+                                    "Campaign Count",
+
+                                data:
+                                    totals,
+
+                                borderWidth: 2,
+
+                                borderRadius: 10,
+
+                                backgroundColor:
+                                    "rgba(0, 198, 255, 0.55)",
+
+                                borderColor:
+                                    "rgba(0, 229, 255, 0.9)"
+
+                            }
+
+                        ]
+
+                    },
+
+
+                    options: {
+
+                        responsive: true,
+
+                        maintainAspectRatio: false,
+
+
+                        plugins: {
+
+                            legend: {
+
+                                labels: {
+
+                                    color: "#cbd5e1",
+
+                                    font: {
+
+                                        size: 13
+
+                                    }
+
+                                }
+
+                            },
+
+
+                            title: {
+
+                                display: true,
+
+                                text:
+                                    "Campaign Count by Platform",
+
+                                color: "#e0f2fe",
+
+                                font: {
+
+                                    size: 18,
+
+                                    weight: "600"
+
+                                }
+
+                            }
+
+                        },
+
+
+                        scales: {
+
+                            x: {
+
+                                ticks: {
+
+                                    color: "#cbd5e1"
+
+                                },
+
+                                grid: {
+
+                                    color:
+                                        "rgba(255,255,255,0.08)"
+
+                                }
+
+                            },
+
+
+                            y: {
+
+                                beginAtZero: true,
+
+                                ticks: {
+
+                                    color: "#cbd5e1",
+
+                                    precision: 0
+
+                                },
+
+                                grid: {
+
+                                    color:
+                                        "rgba(255,255,255,0.08)"
+
+                                }
+
+                            }
+
+                        },
+
+
+                        animation: {
+
+                            duration: 1500,
+
+                            easing: "easeOutQuart"
+
+                        }
+
+                    }
+
+                }
+
+            );
+
+        })
+
+        .catch(error => {
+
+            console.log(error);
+
+        });
+
+
+        /* ==========================================
+           CAMPAIGN REPORT TABLE
+        ========================================== */
+
+
+        fetch("/campaigns")
+
+        .then(response => {
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Failed to load campaigns"
+                );
+
+            }
+
+            return response.json();
+
+        })
+
+        .then(data => {
+
+
+            const reportBody =
+                document.getElementById(
+                    "reportBody"
+                );
+
+
+            reportBody.innerHTML = "";
+
+
+            if (
+                !data ||
+                data.length === 0
+            ) {
+
+                reportBody.innerHTML = `
+
+                    <tr>
+
+                        <td
+                            colspan="4"
+                            style="
+                                text-align:center;
+                                padding:30px;
+                                color:#94a3b8;
+                            "
+                        >
+                            No campaigns found 📭
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+                return;
+
+            }
+
+
+            data.forEach(campaign => {
+
+
+                const status =
+                    campaign.status || "Pending";
+
+
+                const row =
+                    document.createElement("tr");
+
+
+                row.innerHTML = `
+
+                    <td>
+                        📢 ${campaign.campaign_name}
+                    </td>
+
+                    <td>
+                        ${campaign.platform}
+                    </td>
+
+                    <td
+                        style="
+                            color:#67e8f9;
+                            font-weight:700;
+                        "
+                    >
+                        ₹${campaign.budget}
+                    </td>
+
+                    <td class="${status.toLowerCase()}">
+                        ${status}
+                    </td>
+
+                `;
+
+
+                reportBody.appendChild(row);
+
+            });
+
+        })
+
+        .catch(error => {
+
+            console.log(error);
+
+        });
+
+    </script>
+
 
 </body>
+
 </html>

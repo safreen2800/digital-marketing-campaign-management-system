@@ -1,224 +1,749 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | DigiMark</title>
 
-<title>Admin Panel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
 
-<link rel="stylesheet" href="style.css">
+        body {
+            min-height: 100vh;
+            color: white;
 
+            background:
+                radial-gradient(circle at 10% 10%, #253b80 0%, transparent 32%),
+                radial-gradient(circle at 90% 90%, #6a1b9a 0%, transparent 32%),
+                linear-gradient(135deg, #07152f, #101c3d, #170d32);
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+
+            width: 245px;
+            height: 100vh;
+
+            padding: 28px 18px;
+
+            background: rgba(255, 255, 255, 0.07);
+            border-right: 1px solid rgba(255, 255, 255, 0.15);
+
+            backdrop-filter: blur(20px);
+
+            z-index: 1000;
+        }
+
+        .logo {
+            text-align: center;
+
+            font-size: 25px;
+            font-weight: bold;
+
+            margin-bottom: 35px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #00e5ff,
+                    #7c4dff,
+                    #d500f9
+                );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sidebar a {
+            display: block;
+
+            text-decoration: none;
+
+            color: #d8e8ff;
+
+            padding: 13px 15px;
+
+            margin: 8px 0;
+
+            border-radius: 12px;
+
+            transition: 0.3s;
+
+            font-size: 15px;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            color: white;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(0, 229, 255, 0.18),
+                    rgba(124, 77, 255, 0.18)
+                );
+
+            border: 1px solid rgba(0, 229, 255, 0.25);
+
+            transform: translateX(4px);
+        }
+
+        /* ================= MAIN ================= */
+
+        .main {
+            margin-left: 245px;
+
+            padding: 40px;
+
+            min-height: 100vh;
+        }
+
+        .page-title {
+            font-size: 32px;
+
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            color: #aebbd7;
+
+            margin-bottom: 30px;
+        }
+
+        /* ================= STAT CARDS ================= */
+
+        .dashboard-cards {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(180px, 1fr));
+
+            gap: 22px;
+
+            margin-bottom: 35px;
+        }
+
+        .card {
+            padding: 25px;
+
+            border-radius: 20px;
+
+            background: rgba(255, 255, 255, 0.08);
+
+            border: 1px solid rgba(255, 255, 255, 0.15);
+
+            backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.25);
+
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+
+            border-color:
+                rgba(0, 229, 255, 0.4);
+
+            box-shadow:
+                0 0 25px rgba(0, 229, 255, 0.15);
+        }
+
+        .card h3 {
+            color: #aebbd7;
+
+            font-size: 15px;
+
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            font-size: 30px;
+
+            font-weight: bold;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #00e5ff,
+                    #7c4dff,
+                    #d500f9
+                );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* ================= ADMIN CONTROL ================= */
+
+        .table-box {
+            padding: 28px;
+
+            background:
+                rgba(255, 255, 255, 0.08);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.15);
+
+            border-radius: 20px;
+
+            backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .table-title {
+            font-size: 22px;
+
+            margin-bottom: 8px;
+        }
+
+        .table-description {
+            color: #9faecc;
+
+            font-size: 14px;
+
+            margin-bottom: 22px;
+        }
+
+        /* ================= TABLE ================= */
+
+        .admin-table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            table-layout: fixed;
+        }
+
+        .admin-table th {
+            text-align: left;
+
+            padding: 16px;
+
+            color: #00e5ff;
+
+            font-size: 14px;
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .admin-table td {
+            padding: 18px 16px;
+
+            color: #e5ecff;
+
+            font-size: 15px;
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.10);
+        }
+
+        .admin-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .admin-table tbody tr {
+            transition: 0.3s;
+        }
+
+        .admin-table tbody tr:hover {
+            background:
+                rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-column {
+            width: 70%;
+        }
+
+        .action-column {
+            width: 30%;
+        }
+
+        /* ================= ACTION BUTTON ================= */
+
+        .action-btn {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            min-width: 105px;
+
+            padding: 9px 18px;
+
+            border-radius: 20px;
+
+            text-decoration: none;
+
+            color: #00e5ff;
+
+            background:
+                rgba(0, 229, 255, 0.10);
+
+            border:
+                1px solid rgba(0, 229, 255, 0.35);
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .action-btn:hover {
+            color: white;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #1976d2,
+                    #7c4dff
+                );
+
+            border-color: transparent;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 0 18px rgba(0, 229, 255, 0.3);
+        }
+
+        .action-btn:active {
+            transform: scale(0.96);
+        }
+
+        /* ================= STATUS ================= */
+
+        .status-badge {
+            display: inline-block;
+
+            padding: 7px 14px;
+
+            border-radius: 20px;
+
+            color: #7dffb2;
+
+            background:
+                rgba(0, 255, 120, 0.10);
+
+            border:
+                1px solid rgba(0, 255, 120, 0.25);
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 900px) {
+
+            .sidebar {
+                position: relative;
+
+                width: 100%;
+
+                height: auto;
+
+                padding: 15px;
+
+                display: flex;
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+            }
+
+            .logo {
+                width: 100%;
+
+                margin-bottom: 12px;
+            }
+
+            .sidebar a {
+                display: inline-block;
+
+                margin: 4px;
+
+                padding: 9px 12px;
+
+                font-size: 13px;
+            }
+
+            .main {
+                margin-left: 0;
+
+                padding: 25px 15px;
+            }
+
+            .dashboard-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .table-box {
+                padding: 18px;
+
+                overflow-x: auto;
+            }
+
+            .admin-table {
+                min-width: 600px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .page-title {
+                font-size: 26px;
+            }
+
+            .card p {
+                font-size: 25px;
+            }
+        }
+    </style>
 </head>
-
 
 <body>
 
+    <!-- ================= SIDEBAR ================= -->
 
-<div class="sidebar">
+    <div class="sidebar">
 
-<h2>🚀 DigiMark</h2>
+        <div class="logo">
+            🚀 DigiMark
+        </div>
 
+        <a href="dashboard.html">
+            🏠 Dashboard
+        </a>
 
-<a href="dashboard.html">
-🏠 Dashboard
-</a>
+        <a href="view-campaign.html">
+            📢 Campaigns
+        </a>
 
+        <a href="budget.html">
+            💰 Budget
+        </a>
 
-<a href="view-campaign.html">
-📢 Campaigns
-</a>
+        <a href="reports.html">
+            📊 Reports
+        </a>
 
+        <a href="payment-history.html">
+            💳 Payments
+        </a>
 
-<a href="reports.html">
-📊 Reports
-</a>
+        <a href="profile.html">
+            👤 Profile
+        </a>
 
+        <a href="admin.html" class="active">
+            ⚙️ Admin
+        </a>
 
-<a href="profile.html">
-👤 Profile
-</a>
+        <a href="logout.html">
+            🚪 Logout
+        </a>
 
+    </div>
 
-<a href="admin.html">
-⚙️ Admin
-</a>
 
+    <!-- ================= MAIN ================= -->
 
-<a href="logout.html">
-🚪 Logout
-</a>
+    <div class="main">
 
+        <h1 class="page-title">
+            ⚙️ Admin Panel
+        </h1>
 
-</div>
+        <p class="page-subtitle">
+            Manage and monitor your Digital Marketing Campaign System
+        </p>
 
 
+        <!-- ================= STAT CARDS ================= -->
 
-<div class="main">
+        <div class="dashboard-cards">
 
+            <div class="card">
 
-<h1>Admin Panel</h1>
+                <h3>
+                    👥 Total Users
+                </h3>
 
+                <p id="totalUsers">
+                    0
+                </p>
 
-<div class="dashboard-cards">
+            </div>
 
 
-<div class="card">
+            <div class="card">
 
-<h3>Total Users</h3>
+                <h3>
+                    📢 Total Campaigns
+                </h3>
 
-<p id="totalUsers">
-0
-</p>
+                <p id="totalCampaigns">
+                    0
+                </p>
 
-</div>
+            </div>
 
 
+            <div class="card">
 
-<div class="card">
+                <h3>
+                    💰 Total Budget
+                </h3>
 
-<h3>Total Campaigns</h3>
+                <p id="totalBudget">
+                    ₹0
+                </p>
 
-<p id="totalCampaigns">
-0
-</p>
+            </div>
 
-</div>
+        </div>
 
 
+        <!-- ================= ADMIN CONTROL ================= -->
 
-<div class="card">
+        <div class="table-box">
 
-<h3>Total Budget</h3>
+            <h2 class="table-title">
+                🛠️ Admin Control
+            </h2>
 
-<p id="totalBudget">
-₹0
-</p>
+            <p class="table-description">
+                Use the actions below to manage different sections.
+            </p>
 
-</div>
 
+            <table class="admin-table">
 
+                <colgroup>
 
-</div>
+                    <col class="feature-column">
 
+                    <col class="action-column">
 
+                </colgroup>
 
 
-<div class="table-box">
+                <thead>
 
+                    <tr>
 
-<h2>Admin Control</h2>
+                        <th>
+                            Feature
+                        </th>
 
+                        <th>
+                            Action
+                        </th>
 
-<table>
+                    </tr>
 
+                </thead>
 
-<tr>
 
-<th>Feature</th>
+                <tbody>
 
-<th>Status</th>
+                    <!-- USER MANAGEMENT -->
 
-</tr>
+                    <tr>
 
+                        <td>
+                            👥 User Management
+                        </td>
 
+                        <td>
 
-<tr>
+                            <a
+                                href="users.html"
+                                class="action-btn"
+                            >
+                                Manage →
+                            </a>
 
-<td>User Management</td>
+                        </td>
 
-<td>Active ✅</td>
+                    </tr>
 
-</tr>
 
+                    <!-- CAMPAIGN MANAGEMENT -->
 
+                    <tr>
 
-<tr>
+                        <td>
+                            📢 Campaign Management
+                        </td>
 
-<td>Campaign Management</td>
+                        <td>
 
-<td>Active ✅</td>
+                            <a
+                                href="view-campaign.html"
+                                class="action-btn"
+                            >
+                                Manage →
+                            </a>
 
-</tr>
+                        </td>
 
+                    </tr>
 
 
-<tr>
+                    <!-- PAYMENT MONITORING -->
 
-<td>Payment Monitoring</td>
+                    <tr>
 
-<td>Active ✅</td>
+                        <td>
+                            💳 Payment Monitoring
+                        </td>
 
-</tr>
+                        <td>
 
+                            <a
+                                href="payment-history.html"
+                                class="action-btn"
+                            >
+                                View →
+                            </a>
 
+                        </td>
 
-<tr>
+                    </tr>
 
-<td>Analytics Monitoring</td>
 
-<td>Active ✅</td>
+                    <!-- ANALYTICS MONITORING -->
 
-</tr>
+                    <tr>
 
+                        <td>
+                            📊 Analytics Monitoring
+                        </td>
 
-</table>
+                        <td>
 
+                            <a
+                                href="reports.html"
+                                class="action-btn"
+                            >
+                                View →
+                            </a>
 
-</div>
+                        </td>
 
+                    </tr>
 
+                </tbody>
 
-</div>
+            </table>
 
+        </div>
 
+    </div>
 
-<script>
 
+    <!-- ================= JAVASCRIPT ================= -->
 
-fetch("/dashboard")
+    <script>
 
-.then(response => response.json())
+        /* ================= DASHBOARD DATA ================= */
 
-.then(data => {
+        fetch("/dashboard")
 
+        .then(response => response.json())
 
-document.getElementById("totalCampaigns").innerHTML =
-data.totalCampaigns;
+        .then(data => {
 
+            document.getElementById("totalCampaigns").innerText =
+                data.totalCampaigns ?? 0;
 
-document.getElementById("totalBudget").innerHTML =
-"₹" + data.totalBudget;
+            document.getElementById("totalBudget").innerText =
+                "₹" +
+                Number(data.totalBudget ?? 0)
+                .toLocaleString("en-IN");
 
+        })
 
-});
+        .catch(error => {
 
+            console.log(
+                "Dashboard Error:",
+                error
+            );
 
+        });
 
-fetch("/users")
 
-.then(response => response.json())
+        /* ================= USERS DATA ================= */
 
-.then(data => {
+        fetch("/users")
 
+        .then(response => {
 
-document.getElementById("totalUsers").innerHTML =
-data.length;
+            if (!response.ok) {
 
+                throw new Error(
+                    "Users API not available"
+                );
 
-})
+            }
 
-.catch(error=>{
+            return response.json();
 
-console.log(error);
+        })
 
-});
+        .then(data => {
 
+            if (Array.isArray(data)) {
 
-</script>
+                document.getElementById("totalUsers")
+                    .innerText = data.length;
 
+            }
+
+            else {
+
+                document.getElementById("totalUsers")
+                    .innerText =
+                    data.totalUsers ?? 0;
+
+            }
+
+        })
+
+        .catch(error => {
+
+            console.log(
+                "Users Error:",
+                error
+            );
+
+            document.getElementById("totalUsers")
+                .innerText = "0";
+
+        });
+
+    </script>
 
 </body>
-
 </html>

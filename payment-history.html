@@ -1,127 +1,664 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment History</title>
-    <link rel="stylesheet" href="style.css">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Payment History | DigiMarket</title>
 
     <style>
-        body{
-            font-family: Arial, sans-serif;
-            background:#f4f4f4;
-            margin:0;
-            padding:20px;
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
         }
 
-        h2{
-            text-align:center;
-            color:#333;
+
+        /* ================= BODY ================= */
+
+        body {
+
+            min-height: 100vh;
+
+            padding: 30px 20px;
+
+            color: white;
+
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    #253b80 0%,
+                    transparent 32%
+                ),
+                radial-gradient(
+                    circle at 90% 90%,
+                    #6a1b9a 0%,
+                    transparent 32%
+                ),
+                linear-gradient(
+                    135deg,
+                    #07152f,
+                    #101c3d,
+                    #170d32
+                );
         }
 
-        table{
-            width:90%;
-            margin:auto;
-            border-collapse:collapse;
-            background:#fff;
-            box-shadow:0 0 10px rgba(0,0,0,0.1);
+
+        /* ================= HEADER ================= */
+
+        header {
+
+            max-width: 1150px;
+
+            margin: 0 auto 25px;
+
+            padding: 25px;
+
+            text-align: center;
+
+            border-radius: 20px;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            border:
+                1px solid rgba(255,255,255,0.15);
+
+            backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 20px 45px rgba(0,0,0,0.25);
         }
 
-        th{
-            background:#007bff;
-            color:white;
-            padding:12px;
+
+        header h1 {
+
+            font-size: 32px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #00e5ff,
+                    #7c4dff,
+                    #d500f9
+                );
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
         }
 
-        td{
-            padding:10px;
-            text-align:center;
-            border-bottom:1px solid #ddd;
+
+        header p {
+
+            margin-top: 8px;
+
+            color: #94a3b8;
+
+            font-size: 14px;
         }
 
-        tr:hover{
-            background:#f1f1f1;
+
+        /* ================= MAIN BOX ================= */
+
+        .payment-box {
+
+            max-width: 1150px;
+
+            margin: auto;
+
+            padding: 30px;
+
+            border-radius: 24px;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            border:
+                1px solid rgba(255,255,255,0.15);
+
+            backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 25px 60px rgba(0,0,0,0.3);
         }
 
-        .btn{
-            display:block;
-            width:200px;
-            margin:30px auto;
-            padding:12px;
-            background:#007bff;
-            color:white;
-            border:none;
-            border-radius:5px;
-            cursor:pointer;
-            font-size:16px;
+
+        .title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-bottom: 25px;
+
+            color: #e0f2fe;
+
+            font-size: 23px;
         }
 
-        .btn:hover{
-            background:#0056b3;
+
+        /* ================= TABLE ================= */
+
+        .table-container {
+
+            width: 100%;
+
+            overflow-x: auto;
+
+            border-radius: 16px;
+
+            border:
+                1px solid rgba(255,255,255,0.12);
         }
+
+
+        table {
+
+            width: 100%;
+
+            min-width: 850px;
+
+            border-collapse: collapse;
+
+            background:
+                rgba(0,0,0,0.12);
+        }
+
+
+        th {
+
+            padding: 16px;
+
+            color: #a5f3fc;
+
+            background:
+                rgba(0,229,255,0.08);
+
+            font-size: 14px;
+
+            text-align: center;
+
+            white-space: nowrap;
+        }
+
+
+        td {
+
+            padding: 15px;
+
+            color: #e2e8f0;
+
+            text-align: center;
+
+            border-top:
+                1px solid rgba(255,255,255,0.08);
+
+            font-size: 14px;
+        }
+
+
+        tr {
+
+            transition: 0.25s;
+        }
+
+
+        tr:hover td {
+
+            background:
+                rgba(255,255,255,0.05);
+        }
+
+
+        /* ================= PAYMENT STATUS ================= */
+
+        .paid {
+
+            display: inline-block;
+
+            padding: 6px 13px;
+
+            border-radius: 20px;
+
+            color: #4ade80;
+
+            background:
+                rgba(34,197,94,0.12);
+
+            border:
+                1px solid rgba(34,197,94,0.25);
+
+            font-weight: 700;
+        }
+
+
+        .pending {
+
+            display: inline-block;
+
+            padding: 6px 13px;
+
+            border-radius: 20px;
+
+            color: #facc15;
+
+            background:
+                rgba(250,204,21,0.12);
+
+            border:
+                1px solid rgba(250,204,21,0.25);
+
+            font-weight: 700;
+        }
+
+
+        .failed {
+
+            display: inline-block;
+
+            padding: 6px 13px;
+
+            border-radius: 20px;
+
+            color: #f87171;
+
+            background:
+                rgba(239,68,68,0.12);
+
+            border:
+                1px solid rgba(239,68,68,0.25);
+
+            font-weight: 700;
+        }
+
+
+        /* ================= AMOUNT ================= */
+
+        .amount {
+
+            color: #67e8f9;
+
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+
+        /* ================= EMPTY ================= */
+
+        .empty-message {
+
+            padding: 30px !important;
+
+            color: #94a3b8 !important;
+
+            text-align: center !important;
+        }
+
+
+        /* ================= BACK BUTTON ================= */
+
+        .back-area {
+
+            text-align: center;
+
+            margin-top: 30px;
+        }
+
+
+        .back-btn {
+
+            display: inline-block;
+
+            padding: 13px 25px;
+
+            color: #dbeafe;
+
+            text-decoration: none;
+
+            border-radius: 11px;
+
+            background:
+                rgba(255,255,255,0.07);
+
+            border:
+                1px solid rgba(255,255,255,0.14);
+
+            transition: 0.3s;
+        }
+
+
+        .back-btn:hover {
+
+            transform: translateY(-3px);
+
+            border-color: #00e5ff;
+
+            background:
+                rgba(0,229,255,0.1);
+
+            box-shadow:
+                0 10px 25px rgba(0,229,255,0.15);
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+
+            max-width: 1150px;
+
+            margin: 30px auto 0;
+
+            text-align: center;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media(max-width: 700px) {
+
+            body {
+
+                padding: 18px 12px;
+            }
+
+
+            header {
+
+                padding: 20px;
+            }
+
+
+            header h1 {
+
+                font-size: 25px;
+            }
+
+
+            .payment-box {
+
+                padding: 20px;
+            }
+
+
+            .title {
+
+                font-size: 19px;
+            }
+
+        }
+
     </style>
+
 </head>
+
+
 <body>
 
-<h2>Payment History</h2>
 
-<table id="paymentTable">
-    <thead>
-        <tr>
-            <th>Payment ID</th>
-            <th>Campaign Name</th>
-            <th>Amount (₹)</th>
-            <th>Payment Method</th>
-            <th>Status</th>
-            <th>Payment Date</th>
-        </tr>
-    </thead>
+    <!-- ================= HEADER ================= -->
 
-    <tbody>
+    <header>
 
-    </tbody>
-</table>
+        <h1>
+            💳 Payment History
+        </h1>
 
-<button class="btn" onclick="window.location.href='dashboard.html'">
-    Back to Dashboard
-</button>
+        <p>
+            DigiMarket Campaign Payment Records
+        </p>
 
-<script>
+    </header>
 
-fetch("/payments")
-.then(response => response.json())
-.then(data => {
 
-    const tableBody = document.querySelector("#paymentTable tbody");
+    <!-- ================= PAYMENT BOX ================= -->
 
-    tableBody.innerHTML = "";
+    <div class="payment-box">
 
-    data.forEach(payment => {
 
-        const paymentDate = new Date(payment.payment_date).toLocaleString();
+        <h2 class="title">
 
-        tableBody.innerHTML += `
-            <tr>
-                <td>${payment.id}</td>
-                <td>${payment.campaign_name}</td>
-                <td>₹${payment.amount}</td>
-                <td>${payment.payment_method}</td>
-                <td>${payment.payment_status}</td>
-                <td>${paymentDate}</td>
-            </tr>
-        `;
+            <span>📋</span>
 
-    });
+            Payment Transactions
 
-})
-.catch(error => {
+        </h2>
 
-    console.log(error);
-    alert("Unable to load payment history.");
 
-});
+        <div class="table-container">
 
-</script>
+            <table id="paymentTable">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            🆔 Payment ID
+                        </th>
+
+                        <th>
+                            📢 Campaign Name
+                        </th>
+
+                        <th>
+                            💰 Amount
+                        </th>
+
+                        <th>
+                            💳 Payment Method
+                        </th>
+
+                        <th>
+                            📌 Status
+                        </th>
+
+                        <th>
+                            📅 Payment Date
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- BACK BUTTON -->
+
+        <div class="back-area">
+
+            <a
+                href="dashboard.html"
+                class="back-btn"
+            >
+                ⬅ Back to Dashboard
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        © 2026 DigiMarket |
+        Digital Marketing Campaign Management System
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        fetch("/payments")
+
+        .then(response => {
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Failed to load payments"
+                );
+
+            }
+
+            return response.json();
+
+        })
+
+        .then(data => {
+
+
+            const tableBody =
+                document.querySelector(
+                    "#paymentTable tbody"
+                );
+
+
+            tableBody.innerHTML = "";
+
+
+            if (
+                !data ||
+                data.length === 0
+            ) {
+
+                tableBody.innerHTML = `
+
+                    <tr>
+
+                        <td
+                            colspan="6"
+                            class="empty-message"
+                        >
+                            💳 No payment records found
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+                return;
+
+            }
+
+
+            data.forEach(payment => {
+
+
+                const paymentDate =
+                    payment.payment_date
+                        ? new Date(
+                            payment.payment_date
+                          ).toLocaleString()
+                        : "-";
+
+
+                const status =
+                    payment.payment_status ||
+                    "Pending";
+
+
+                const statusClass =
+                    status
+                        .toLowerCase()
+                        .replace(/\s+/g, "-");
+
+
+                tableBody.innerHTML += `
+
+                    <tr>
+
+                        <td>
+                            #${payment.id}
+                        </td>
+
+
+                        <td>
+                            📢 ${payment.campaign_name}
+                        </td>
+
+
+                        <td class="amount">
+                            ₹${payment.amount}
+                        </td>
+
+
+                        <td>
+                            💳 ${payment.payment_method}
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="${statusClass}"
+                            >
+                                ${
+                                    status === "Paid"
+                                        ? "✅ "
+                                        : ""
+                                }
+
+                                ${status}
+
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            ${paymentDate}
+                        </td>
+
+                    </tr>
+
+                `;
+
+            });
+
+        })
+
+        .catch(error => {
+
+            console.log(error);
+
+            alert(
+                "Unable to load payment history."
+            );
+
+        });
+
+    </script>
+
 
 </body>
+
 </html>

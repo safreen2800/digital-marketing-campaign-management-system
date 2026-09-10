@@ -5,378 +5,1058 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Dashboard</title>
+    <title>DigitalMarket | Dashboard</title>
 
-    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            color: #fff;
+
+            background:
+                radial-gradient(circle at 10% 10%, #243b80 0%, transparent 30%),
+                radial-gradient(circle at 90% 90%, #641b8d 0%, transparent 30%),
+                linear-gradient(135deg, #07152f, #101c3d, #170d32);
+
+            overflow-x: hidden;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+
+            width: 245px;
+            height: 100vh;
+
+            padding: 30px 18px;
+
+            background: rgba(5, 15, 40, 0.78);
+            backdrop-filter: blur(20px);
+
+            border-right: 1px solid rgba(255,255,255,0.12);
+
+            box-shadow: 10px 0 35px rgba(0,0,0,0.25);
+
+            z-index: 1000;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+
+            margin-bottom: 35px;
+
+            font-size: 28px;
+
+            background: linear-gradient(
+                90deg,
+                #00e5ff,
+                #7c4dff,
+                #d500f9
+            );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sidebar a {
+            display: block;
+
+            text-decoration: none;
+            color: #dbeafe;
+
+            padding: 14px 16px;
+
+            margin-bottom: 8px;
+
+            border-radius: 12px;
+
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            color: white;
+
+            background: rgba(0,229,255,0.12);
+
+            border-left: 3px solid #00e5ff;
+
+            transform: translateX(4px);
+        }
+
+        /* ================= MAIN ================= */
+
+        .main-content {
+            margin-left: 245px;
+
+            min-height: 100vh;
+
+            padding: 25px 35px 0;
+        }
+
+        /* ================= TOP BAR ================= */
+
+        .topbar {
+            display: flex;
+
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 18px 24px;
+
+            margin-bottom: 25px;
+
+            background: rgba(255,255,255,0.07);
+
+            border: 1px solid rgba(255,255,255,0.13);
+
+            border-radius: 18px;
+
+            backdrop-filter: blur(15px);
+        }
+
+        .topbar h2 {
+            font-size: 22px;
+
+            background: linear-gradient(
+                90deg,
+                #fff,
+                #67e8f9
+            );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .admin-btn {
+            text-decoration: none;
+
+            color: white;
+
+            padding: 10px 17px;
+
+            border-radius: 10px;
+
+            background: linear-gradient(
+                135deg,
+                #7c4dff,
+                #00c6ff
+            );
+
+            transition: 0.3s;
+        }
+
+        .admin-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow: 0 8px 20px rgba(0,198,255,0.25);
+        }
+
+        /* ================= WELCOME ================= */
+
+        .dashboard-box {
+            margin-bottom: 30px;
+
+            padding: 30px;
+
+            text-align: center;
+
+            border-radius: 22px;
+
+            background: rgba(255,255,255,0.07);
+
+            border: 1px solid rgba(255,255,255,0.13);
+
+            backdrop-filter: blur(18px);
+
+            box-shadow: 0 20px 45px rgba(0,0,0,0.25);
+        }
+
+        .dashboard-box h1 {
+            font-size: 30px;
+
+            margin-bottom: 10px;
+
+            background: linear-gradient(
+                90deg,
+                #00e5ff,
+                #7c4dff,
+                #d500f9
+            );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .dashboard-box > p {
+            color: #cbd5e1;
+
+            font-size: 15px;
+        }
+
+        /* ================= CARDS ================= */
+
+        .cards {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(190px, 1fr));
+
+            gap: 18px;
+
+            margin-top: 30px;
+        }
+
+        .card {
+            padding: 22px 18px;
+
+            min-height: 155px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            align-items: center;
+
+            text-align: center;
+
+            border-radius: 18px;
+
+            background: rgba(255,255,255,0.08);
+
+            border: 1px solid rgba(255,255,255,0.13);
+
+            backdrop-filter: blur(15px);
+
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+
+            border-color: rgba(0,229,255,0.5);
+
+            box-shadow:
+                0 15px 30px rgba(0,0,0,0.25),
+                0 0 20px rgba(0,229,255,0.08);
+        }
+
+        .card-icon {
+            font-size: 30px;
+
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            color: #cbd5e1;
+
+            font-size: 14px;
+
+            margin-bottom: 10px;
+        }
+
+        .card p,
+        .card h2 {
+            font-size: 25px;
+
+            color: #67e8f9;
+
+            font-weight: 700;
+        }
+
+        /* ================= CHARTS ================= */
+
+        .charts-wrapper {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(350px, 1fr));
+
+            gap: 25px;
+
+            margin-top: 25px;
+        }
+
+        .chart-container {
+            padding: 25px;
+
+            min-height: 400px;
+
+            background: rgba(255,255,255,0.07);
+
+            border: 1px solid rgba(255,255,255,0.13);
+
+            border-radius: 20px;
+
+            backdrop-filter: blur(18px);
+
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+        }
+
+        .chart-container h2 {
+            text-align: center;
+
+            margin-bottom: 25px;
+
+            font-size: 19px;
+
+            color: #e0f2fe;
+        }
+
+        .chart-container canvas {
+            max-height: 310px;
+        }
+
+        /* ================= MENU ================= */
+
+        .menu {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(160px, 1fr));
+
+            gap: 15px;
+
+            margin: 30px 0;
+        }
+
+        .menu a {
+            text-decoration: none;
+        }
+
+        .menu button {
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            background: rgba(255,255,255,0.09);
+
+            border: 1px solid rgba(255,255,255,0.13);
+
+            transition: 0.3s;
+        }
+
+        .menu button:hover {
+            transform: translateY(-4px);
+
+            background: linear-gradient(
+                135deg,
+                #00c6ff,
+                #7c4dff
+            );
+
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            margin-left: 245px;
+
+            padding: 22px;
+
+            text-align: center;
+
+            color: #94a3b8;
+
+            border-top: 1px solid rgba(255,255,255,0.1);
+
+            background: rgba(0,0,0,0.15);
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width: 850px) {
+
+            .sidebar {
+                position: relative;
+
+                width: 100%;
+
+                height: auto;
+
+                padding: 20px;
+            }
+
+            .sidebar h2 {
+                margin-bottom: 15px;
+            }
+
+            .sidebar a {
+                display: inline-block;
+
+                margin: 4px;
+
+                padding: 10px 12px;
+            }
+
+            .main-content {
+                margin-left: 0;
+
+                padding: 20px;
+            }
+
+            footer {
+                margin-left: 0;
+            }
+
+            .topbar {
+                flex-direction: column;
+
+                gap: 15px;
+
+                text-align: center;
+            }
+        }
+
+        @media(max-width: 500px) {
+
+            .dashboard-box {
+                padding: 20px 12px;
+            }
+
+            .dashboard-box h1 {
+                font-size: 23px;
+            }
+
+            .charts-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-container {
+                min-height: 350px;
+                padding: 15px;
+            }
+        }
+    </style>
 </head>
+
+
 <body>
 
-<div class="sidebar">
+    <!-- ================= SIDEBAR ================= -->
 
-    <h2>DigiMarket</h2>
+    <div class="sidebar">
 
-    <a href="dashboard.html">🏠 Dashboard</a>
-    <a href="campaign.html">📢 Create Campaign</a>
-    <a href="view-campaign.html">📋 View Campaign</a>
-    <a href="budget.html">💰 Budget</a>
-    <a href="reports.html">📊 Reports</a>
-    <a href="payment-history.html">💳 Payments</a>
-    <a href="profile.html">👤 Profile</a>
-    <a href="logout.html">🚪 Logout</a>
+        <h2>🚀 DigitalMarket</h2>
 
-</div>
+        <a href="dashboard.html">🏠 Dashboard</a>
 
-<div class="main-content">
+        <a href="campaign.html">📢 Create Campaign</a>
 
-    <div class="topbar">
+        <a href="view-campaign.html">📋 View Campaign</a>
 
-        <h2>DigiMarket Dashboard</h2>
+        <a href="budget.html">💰 Budget</a>
 
-        <a href="admin.html">
-    👤 Admin
-</a>
+        <a href="reports.html">📊 Reports</a>
+
+        <a href="payment-history.html">💳 Payments</a>
+
+        <a href="profile.html">👤 Profile</a>
+
+        <a href="logout.html">🚪 Logout</a>
 
     </div>
 
 
+    <!-- ================= MAIN CONTENT ================= -->
 
-<div class="dashboard-box">
+    <div class="main-content">
 
-    <h1>📢 Welcome to DigiMarket Dashboard</h1>
 
-    <p>Digital Marketing Campaign Management System</p>
-    <div class="cards">
+        <!-- TOP BAR -->
 
-    <div class="card">
-    <div class="card-icon">📢</div>
-    <h3>Total Campaigns</h3>
-    <p id="totalCampaigns">0</p>
-</div>
-
-<div class="card">
-    <div class="card-icon">💰</div>
-    <h3>Total Budget</h3>
-    <p id="totalBudget">0</p>
-</div>
+        <div class="topbar">
 
-<div class="card">
-    <div class="card-icon">🚀</div>
-    <h3>Active Campaigns</h3>
-    <p id="activeCampaigns">0</p>
-</div>
+            <h2>📊 DigitalMarket Dashboard</h2>
 
-<div class="card">
-    <div class="card-icon">✅</div>
-    <h3>Completed Campaigns</h3>
-    <p id="completedCampaigns">0</p>
-</div>
+            <a href="admin.html" class="admin-btn">
 
-    
-<div class="card">
-    <h3>Amount Paid</h3>
-    <h2 id="amountPaid">₹0</h2>
-</div>
-<div class="card">
-    <div class="card-icon">📊</div>
-    <h3>Total Impressions</h3>
-    <p id="totalImpressions">0</p>
-</div>
-
-<div class="card">
-    <div class="card-icon">🖱️</div>
-    <h3>Total Clicks</h3>
-    <p id="totalClicks">0</p>
-</div>
-
-<div class="card">
-    <div class="card-icon">▶️</div>
-    <h3>Total Views</h3>
-    <p id="totalViews">0</p>
-</div>
-
-<div class="card">
-    <div class="card-icon">👥</div>
-    <h3>Total Reach</h3>
-    <p id="totalReach">0</p>
-</div>
-
-<div class="card">
-    <h3>Remaining Budget</h3>
-    <h2 id="remainingBudget">₹0</h2>
-</div>
-
-</div>
-
-    <hr>
-    <div class="chart-container">
-
-    <h2>Campaign Analytics</h2>
+                👤 Admin
 
-    <canvas id="dashboardChart"></canvas>
-
-</div>
-    <div class="chart-container">
-
-    <h2>Performance Analytics</h2>
-
-    <canvas id="performanceChart"></canvas>
-
-</div>
-
-<div class="menu">
-
-    <a href="campaign.html">
-        <button>Create Campaign</button>
-    </a>
-
-    <a href="budget.html">
-        <button>Budget</button>
-    </a>
-
-    <a href="reports.html">
-        <button>Reports</button>
-    </a>
-
-    <a href="view-campaign.html">
-        <button>View Campaign</button>
-    </a>
-
-    <a href="payment-history.html">
-        <button>Payment History</button>
-    </a>
-
-    <a href="profile.html">
-        <button>My Profile</button>
-    </a>
-
-    <a href="logout.html">
-        <button>Logout</button>
-    </a>
+            </a>
 
-</div>
+        </div>
 
-    
 
-       
+        <!-- WELCOME -->
 
-</div>
-<script>
-fetch("/dashboard")
-    .then(response => {
-        if (!response.ok) {
-            throw new Error("Failed to fetch dashboard data");
-        }
-        return response.json();
-    })
-    .then(data => {
+        <div class="dashboard-box">
 
-        console.log(data); // Debug
+            <h1>
+                📢 Welcome to DigitalMarket
+            </h1>
 
-        document.getElementById("totalCampaigns").innerText = data.totalCampaigns;
-        document.getElementById("totalBudget").innerText = "₹" + data.totalBudget;
-        document.getElementById("activeCampaigns").innerText = data.activeCampaigns;
-        document.getElementById("completedCampaigns").innerText = data.completedCampaigns;
-        document.getElementById("amountPaid").innerText = "₹" + data.amountPaid;
-        document.getElementById("remainingBudget").innerText = "₹" + data.remainingBudget;
-        document.getElementById("totalImpressions").innerText = data.totalImpressions;
-document.getElementById("totalClicks").innerText = data.totalClicks;
-document.getElementById("totalViews").innerText = data.totalViews;
-document.getElementById("totalReach").innerText = data.totalReach;
+            <p>
+                Digital Marketing Campaign Management System
+            </p>
 
-    })
-    .catch(error => {
-        console.error(error);
-        alert("Failed to load dashboard data.");
-    });
-</script>
-<footer>
 
-    <p>
-        © 2026 DigiMarket | Digital Marketing Campaign Management System
-    </p>
+            <!-- ================= CARDS ================= -->
 
-</footer>
-<script>
+            <div class="cards">
 
-fetch("/dashboard")
-.then(response => response.json())
-.then(data => {
 
-    const ctx = document.getElementById("dashboardChart");
+                <div class="card">
 
-    new Chart(ctx, {
+                    <div class="card-icon">
+                        📢
+                    </div>
 
-        type: "doughnut",
+                    <h3>
+                        Total Campaigns
+                    </h3>
 
-        data: {
+                    <p id="totalCampaigns">
+                        0
+                    </p>
 
-            labels: [
-                "Total Campaigns",
-                "Active Campaigns",
-                "Completed Campaigns",
-                "Amount Paid"
-            ],
+                </div>
 
-            datasets: [
-{
-    label: "Campaign Analytics",
 
-    data: [
-        data.totalCampaigns,
-        data.activeCampaigns,
-        data.completedCampaigns,
-        data.amountPaid
-    ],
+                <div class="card">
 
-    borderWidth: 2,
+                    <div class="card-icon">
+                        💰
+                    </div>
 
-    backgroundColor: [
-        "rgba(54, 162, 235, 0.7)",
-        "rgba(75, 192, 192, 0.7)",
-        "rgba(255, 99, 132, 0.7)",
-        "rgba(255, 206, 86, 0.7)"
-    ]
-}
-]
+                    <h3>
+                        Total Budget
+                    </h3>
 
-        },
+                    <p id="totalBudget">
+                        ₹0
+                    </p>
 
-       options: {
+                </div>
 
-    responsive: true,
 
-    plugins: {
+                <div class="card">
 
-        legend: {
+                    <div class="card-icon">
+                        🚀
+                    </div>
 
-            position: "bottom"
+                    <h3>
+                        Active Campaigns
+                    </h3>
 
-        },
+                    <p id="activeCampaigns">
+                        0
+                    </p>
 
-        title: {
+                </div>
 
-            display: true,
 
-            text: "Campaign Overview",
+                <div class="card">
 
-            font: {
+                    <div class="card-icon">
+                        ✅
+                    </div>
 
-                size: 18
+                    <h3>
+                        Completed Campaigns
+                    </h3>
 
-            }
+                    <p id="completedCampaigns">
+                        0
+                    </p>
 
-        }
+                </div>
 
-    },
 
-    animation: {
+                <div class="card">
 
-        animateRotate: true,
+                    <div class="card-icon">
+                        💳
+                    </div>
 
-        duration: 1500
+                    <h3>
+                        Amount Paid
+                    </h3>
 
-    }
+                    <h2 id="amountPaid">
+                        ₹0
+                    </h2>
 
-}
+                </div>
 
-    });
 
-});
+                <div class="card">
 
-</script>
-<script>
+                    <div class="card-icon">
+                        📊
+                    </div>
 
-fetch("/dashboard")
-.then(response => response.json())
-.then(data => {
+                    <h3>
+                        Total Impressions
+                    </h3>
 
-    const performance = document.getElementById("performanceChart");
+                    <p id="totalImpressions">
+                        0
+                    </p>
 
-    new Chart(performance, {
+                </div>
 
-        type: "bar",
 
-        data: {
+                <div class="card">
 
-            labels: [
-                "Impressions",
-                "Clicks",
-                "Views",
-                "Reach"
-            ],
+                    <div class="card-icon">
+                        🖱️
+                    </div>
 
-            datasets: [
-                {
-                    label: "Campaign Performance",
+                    <h3>
+                        Total Clicks
+                    </h3>
 
-                    data: [
-                        data.totalImpressions,
-                        data.totalClicks,
-                        data.totalViews,
-                        data.totalReach
-                    ],
+                    <p id="totalClicks">
+                        0
+                    </p>
 
-                    borderWidth: 2,
-                    backgroundColor: [
-    "rgba(54, 162, 235, 0.7)",
-    "rgba(255, 99, 132, 0.7)",
-    "rgba(255, 206, 86, 0.7)",
-    "rgba(75, 192, 192, 0.7)"
-],
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-icon">
+                        ▶️
+                    </div>
+
+                    <h3>
+                        Total Views
+                    </h3>
+
+                    <p id="totalViews">
+                        0
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-icon">
+                        👥
+                    </div>
+
+                    <h3>
+                        Total Reach
+                    </h3>
+
+                    <p id="totalReach">
+                        0
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-icon">
+                        💵
+                    </div>
+
+                    <h3>
+                        Remaining Budget
+                    </h3>
+
+                    <h2 id="remainingBudget">
+                        ₹0
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= CHARTS ================= -->
+
+        <div class="charts-wrapper">
+
+
+            <div class="chart-container">
+
+                <h2>
+                    📊 Campaign Overview
+                </h2>
+
+                <canvas id="dashboardChart"></canvas>
+
+            </div>
+
+
+            <div class="chart-container">
+
+                <h2>
+                    📈 Performance Analytics
+                </h2>
+
+                <canvas id="performanceChart"></canvas>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= QUICK MENU ================= -->
+
+        <div class="menu">
+
+            <a href="campaign.html">
+                <button>➕ Create Campaign</button>
+            </a>
+
+            <a href="view-campaign.html">
+                <button>📋 View Campaign</button>
+            </a>
+
+            <a href="budget.html">
+                <button>💰 Budget</button>
+            </a>
+
+            <a href="reports.html">
+                <button>📊 Reports</button>
+            </a>
+
+            <a href="payment-history.html">
+                <button>💳 Payment History</button>
+            </a>
+
+            <a href="profile.html">
+                <button>👤 My Profile</button>
+            </a>
+
+            <a href="logout.html">
+                <button>🚪 Logout</button>
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        © 2026 DigitalMarket | Digital Marketing Campaign Management System
+
+    </footer>
+
+
+    <!-- ================= DASHBOARD SCRIPT ================= -->
+
+    <script>
+
+        fetch("/dashboard")
+
+            .then(response => {
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Failed to fetch dashboard data"
+                    );
+
                 }
-            ]
 
-        },
+                return response.json();
 
-       options: {
+            })
 
-    responsive: true,
+            .then(data => {
 
-    plugins: {
-
-        legend: {
-            display: true,
-            position: "top"
-        },
-
-        title: {
-
-            display: true,
-
-            text: "Campaign Performance Analytics",
-
-            font: {
-                size: 18
-            }
-
-        }
-
-    },
-
-    animation: {
-
-        duration: 1500
-
-    },
-
-    scales: {
-
-        y: {
-
-            beginAtZero: true
-        }
-    }
+                console.log("Dashboard Data:", data);
 
 
-               }
+                /* CARDS */
 
-    });
+                document.getElementById("totalCampaigns").innerText =
+                    data.totalCampaigns ?? 0;
 
-});
 
-</script>
+                document.getElementById("totalBudget").innerText =
+                    "₹" + (data.totalBudget ?? 0);
+
+
+                document.getElementById("activeCampaigns").innerText =
+                    data.activeCampaigns ?? 0;
+
+
+                document.getElementById("completedCampaigns").innerText =
+                    data.completedCampaigns ?? 0;
+
+
+                document.getElementById("amountPaid").innerText =
+                    "₹" + (data.amountPaid ?? 0);
+
+
+                document.getElementById("remainingBudget").innerText =
+                    "₹" + (data.remainingBudget ?? 0);
+
+
+                document.getElementById("totalImpressions").innerText =
+                    data.totalImpressions ?? 0;
+
+
+                document.getElementById("totalClicks").innerText =
+                    data.totalClicks ?? 0;
+
+
+                document.getElementById("totalViews").innerText =
+                    data.totalViews ?? 0;
+
+
+                document.getElementById("totalReach").innerText =
+                    data.totalReach ?? 0;
+
+
+                /* ================= DOUGHNUT CHART ================= */
+
+                const ctx =
+                    document.getElementById("dashboardChart");
+
+
+                new Chart(ctx, {
+
+                    type: "doughnut",
+
+                    data: {
+
+                        labels: [
+
+                            "Total Campaigns",
+
+                            "Active Campaigns",
+
+                            "Completed Campaigns",
+
+                            "Amount Paid"
+
+                        ],
+
+                        datasets: [{
+
+                            data: [
+
+                                Number(data.totalCampaigns) || 0,
+
+                                Number(data.activeCampaigns) || 0,
+
+                                Number(data.completedCampaigns) || 0,
+
+                                Number(data.amountPaid) || 0
+
+                            ],
+
+                            borderWidth: 2,
+
+                            backgroundColor: [
+
+                                "rgba(0, 229, 255, 0.75)",
+
+                                "rgba(124, 77, 255, 0.75)",
+
+                                "rgba(0, 200, 83, 0.75)",
+
+                                "rgba(213, 0, 249, 0.75)"
+
+                            ]
+
+                        }]
+
+                    },
+
+                    options: {
+
+                        responsive: true,
+
+                        plugins: {
+
+                            legend: {
+
+                                position: "bottom",
+
+                                labels: {
+
+                                    color: "#e2e8f0"
+
+                                }
+
+                            }
+
+                        },
+
+                        animation: {
+
+                            animateRotate: true,
+
+                            duration: 1500
+
+                        }
+
+                    }
+
+                });
+
+
+                /* ================= PERFORMANCE CHART ================= */
+
+                const performance =
+                    document.getElementById("performanceChart");
+
+
+                new Chart(performance, {
+
+                    type: "bar",
+
+                    data: {
+
+                        labels: [
+
+                            "Impressions",
+
+                            "Clicks",
+
+                            "Views",
+
+                            "Reach"
+
+                        ],
+
+                        datasets: [{
+
+                            label: "Campaign Performance",
+
+                            data: [
+
+                                Number(data.totalImpressions) || 0,
+
+                                Number(data.totalClicks) || 0,
+
+                                Number(data.totalViews) || 0,
+
+                                Number(data.totalReach) || 0
+
+                            ],
+
+                            borderWidth: 2,
+
+                            backgroundColor: [
+
+                                "rgba(0, 229, 255, 0.7)",
+
+                                "rgba(124, 77, 255, 0.7)",
+
+                                "rgba(213, 0, 249, 0.7)",
+
+                                "rgba(0, 200, 83, 0.7)"
+
+                            ]
+
+                        }]
+
+                    },
+
+                    options: {
+
+                        responsive: true,
+
+                        plugins: {
+
+                            legend: {
+
+                                display: true,
+
+                                position: "top",
+
+                                labels: {
+
+                                    color: "#e2e8f0"
+
+                                }
+
+                            }
+
+                        },
+
+                        animation: {
+
+                            duration: 1500
+
+                        },
+
+                        scales: {
+
+                            x: {
+
+                                ticks: {
+
+                                    color: "#cbd5e1"
+
+                                }
+
+                            },
+
+                            y: {
+
+                                beginAtZero: true,
+
+                                ticks: {
+
+                                    color: "#cbd5e1"
+
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                });
+
+            })
+
+
+            .catch(error => {
+
+                console.error(error);
+
+                alert(
+                    "Failed to load dashboard data."
+                );
+
+            });
+
+    </script>
+
 </body>
 
 </html>

@@ -1237,3 +1237,179 @@ footer{
     border-color:#2563eb;
 
 }
+/* ================= ADMIN CONTROL FIX ================= */
+
+.table-box {
+    width: 100%;
+    margin-top: 30px;
+    padding: 30px;
+
+    background: rgba(255, 255, 255, 0.07) !important;
+
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+
+    border-radius: 22px !important;
+
+    backdrop-filter: blur(20px);
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+
+    overflow: hidden;
+}
+
+
+/* Heading */
+
+.table-box h2 {
+    margin-bottom: 25px;
+
+    color: #ffffff !important;
+
+    font-size: 24px;
+}
+
+
+/* Table */
+
+.table-box table {
+    width: 100%;
+
+    border-collapse: collapse !important;
+
+    border-spacing: 0;
+
+    background: transparent !important;
+}
+
+
+/* Header */
+
+.table-box thead tr {
+    background: linear-gradient(
+        90deg,
+        #1976d2,
+        #4527a0
+    ) !important;
+}
+
+.table-box th {
+    background: transparent !important;
+
+    color: #ffffff !important;
+
+    padding: 18px 20px !important;
+
+    text-align: left;
+
+    border: none !important;
+
+    font-size: 15px;
+}
+
+
+/* ALL ROWS SAME DARK */
+
+.table-box tbody tr,
+.table-box tbody tr:nth-child(even),
+.table-box tbody tr:nth-child(odd) {
+    background: rgba(255, 255, 255, 0.04) !important;
+}
+
+
+/* ALL CELLS SAME DARK */
+
+.table-box tbody td,
+.table-box tbody tr:nth-child(even) td,
+.table-box tbody tr:nth-child(odd) td {
+    background: transparent !important;
+
+    color: #eaf2ff !important;
+
+    padding: 18px 20px !important;
+
+    border-bottom: 1px solid
+        rgba(255, 255, 255, 0.08) !important;
+}
+
+
+/* Hover */
+
+.table-box tbody tr:hover {
+    background: rgba(0, 229, 255, 0.08) !important;
+}
+
+.table-box tbody tr:hover td {
+    background: transparent !important;
+
+    color: #ffffff !important;
+}
+
+
+/* Status */
+
+.table-box td:last-child {
+    color: #69f0ae !important;
+
+    font-weight: 600;
+}
+
+
+/* Last row */
+
+.table-box tbody tr:last-child td {
+    border-bottom: none !important;
+}
+
+
+/* Rounded top corners */
+
+.table-box thead th:first-child {
+    border-top-left-radius: 12px;
+}
+
+.table-box thead th:last-child {
+    border-top-right-radius: 12px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 650px) {
+
+    .table-box {
+        padding: 20px 15px;
+        overflow-x: auto;
+    }
+
+    .table-box table {
+        min-width: 550px;
+    }
+
+}
+/* ===== STATUS COLUMN FIX ===== */
+
+.table-box table {
+    width: 100% !important;
+    table-layout: fixed !important;
+}
+
+.table-box th:first-child,
+.table-box td:first-child {
+    width: 75% !important;
+}
+
+.table-box th:last-child,
+.table-box td:last-child {
+    width: 25% !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    color: #69f0ae !important;
+    font-weight: 700 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Status text clearly visible */
+.table-box td:last-child {
+    font-size: 15px !important;
+}

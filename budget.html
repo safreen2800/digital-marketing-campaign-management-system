@@ -1,232 +1,1080 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Budget Management</title>
-    <link rel="stylesheet" href="style.css">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Budget Management | DigiMarket</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+
+            min-height: 100vh;
+
+            padding: 30px 20px;
+
+            color: white;
+
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    #253b80 0%,
+                    transparent 32%
+                ),
+                radial-gradient(
+                    circle at 90% 90%,
+                    #6a1b9a 0%,
+                    transparent 32%
+                ),
+                linear-gradient(
+                    135deg,
+                    #07152f,
+                    #101c3d,
+                    #170d32
+                );
+        }
+
+
+        /* ================= HEADER ================= */
+
+        header {
+
+            max-width: 1100px;
+
+            margin: 0 auto 25px;
+
+            padding: 20px;
+
+            text-align: center;
+
+            border-radius: 18px;
+
+            background:
+                rgba(255,255,255,0.07);
+
+            border:
+                1px solid rgba(255,255,255,0.14);
+
+            backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.2);
+        }
+
+
+        header h1 {
+
+            font-size: 30px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #00e5ff,
+                    #7c4dff,
+                    #d500f9
+                );
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .dashboard {
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 30px;
+
+            border-radius: 25px;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            border:
+                1px solid rgba(255,255,255,0.15);
+
+            backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 25px 60px rgba(0,0,0,0.35);
+        }
+
+
+        .section-title {
+
+            margin-bottom: 20px;
+
+            color: #e0f2fe;
+
+            font-size: 23px;
+        }
+
+
+        /* ================= BUDGET CARDS ================= */
+
+        .cards {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 35px;
+        }
+
+
+        .card {
+
+            padding: 25px;
+
+            border-radius: 18px;
+
+            text-align: center;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            border:
+                1px solid rgba(255,255,255,0.13);
+
+            transition: 0.3s;
+        }
+
+
+        .card:hover {
+
+            transform: translateY(-5px);
+
+            border-color:
+                rgba(0,229,255,0.45);
+
+            box-shadow:
+                0 15px 30px rgba(0,0,0,0.25);
+        }
+
+
+        .card-icon {
+
+            font-size: 30px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .card h3 {
+
+            color: #cbd5e1;
+
+            font-size: 15px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .card p {
+
+            font-size: 25px;
+
+            font-weight: 700;
+
+            color: #67e8f9;
+        }
+
+
+        /* ================= AVERAGE BUDGET ================= */
+
+        .average-box {
+
+            margin-bottom: 35px;
+
+            padding: 25px;
+
+            text-align: center;
+
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(0,198,255,0.10),
+                    rgba(124,77,255,0.12)
+                );
+
+            border:
+                1px solid rgba(255,255,255,0.13);
+        }
+
+
+        .average-box h3 {
+
+            color: #cbd5e1;
+
+            margin-bottom: 10px;
+        }
+
+
+        .average-box p {
+
+            color: #a5f3fc;
+
+            font-size: 30px;
+
+            font-weight: 700;
+        }
+
+
+        /* ================= FORM ================= */
+
+        .expense-form {
+
+            padding: 25px;
+
+            margin-bottom: 35px;
+
+            border-radius: 18px;
+
+            background:
+                rgba(0,0,0,0.13);
+
+            border:
+                1px solid rgba(255,255,255,0.1);
+        }
+
+
+        .form-grid {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr auto;
+
+            gap: 15px;
+
+            align-items: end;
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #dbeafe;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+
+        input {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border-radius: 11px;
+
+            border:
+                1px solid rgba(255,255,255,0.18);
+
+            outline: none;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            color: white;
+
+            font-size: 14px;
+
+            transition: 0.3s;
+        }
+
+
+        input::placeholder {
+
+            color: #94a3b8;
+        }
+
+
+        input:focus {
+
+            border-color: #00e5ff;
+
+            box-shadow:
+                0 0 15px rgba(0,229,255,0.2);
+
+            background:
+                rgba(255,255,255,0.12);
+        }
+
+
+        /* ================= ADD BUTTON ================= */
+
+        .add-btn {
+
+            padding: 14px 22px;
+
+            border: none;
+
+            border-radius: 11px;
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00c6ff,
+                    #7c4dff,
+                    #d500f9
+                );
+
+            transition: 0.3s;
+        }
+
+
+        .add-btn:hover {
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 10px 25px rgba(0,198,255,0.25);
+        }
+
+
+        /* ================= TABLE ================= */
+
+        .table-container {
+
+            overflow-x: auto;
+
+            border-radius: 16px;
+
+            border:
+                1px solid rgba(255,255,255,0.12);
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 650px;
+
+            background:
+                rgba(0,0,0,0.12);
+        }
+
+
+        th {
+
+            padding: 15px;
+
+            text-align: left;
+
+            color: #a5f3fc;
+
+            background:
+                rgba(0,229,255,0.08);
+
+            font-size: 14px;
+        }
+
+
+        td {
+
+            padding: 14px 15px;
+
+            color: #e2e8f0;
+
+            border-top:
+                1px solid rgba(255,255,255,0.08);
+
+            font-size: 14px;
+        }
+
+
+        tr:hover td {
+
+            background:
+                rgba(255,255,255,0.04);
+        }
+
+
+        /* ================= DELETE ================= */
+
+        .delete-btn {
+
+            padding: 8px 13px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            color: white;
+
+            background:
+                rgba(239,68,68,0.2);
+
+            border:
+                1px solid rgba(239,68,68,0.25);
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+
+        .delete-btn:hover {
+
+            background:
+                rgba(239,68,68,0.5);
+
+            transform: translateY(-2px);
+        }
+
+
+        /* ================= BACK BUTTON ================= */
+
+        .back-btn {
+
+            display: block;
+
+            width: fit-content;
+
+            margin: 30px auto 0;
+
+            padding: 12px 20px;
+
+            color: #dbeafe;
+
+            text-decoration: none;
+
+            border-radius: 11px;
+
+            background:
+                rgba(255,255,255,0.07);
+
+            border:
+                1px solid rgba(255,255,255,0.14);
+
+            transition: 0.3s;
+        }
+
+
+        .back-btn:hover {
+
+            border-color: #00e5ff;
+
+            background:
+                rgba(0,229,255,0.1);
+
+            transform: translateY(-2px);
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media(max-width: 800px) {
+
+            .cards {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .form-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .dashboard {
+
+                padding: 22px 17px;
+            }
+
+
+            header h1 {
+
+                font-size: 24px;
+            }
+
+        }
+
+    </style>
+
 </head>
+
+
 <body>
 
-<header>
-    <h1>Budget Management</h1>
-</header>
 
-<div class="dashboard">
+    <!-- HEADER -->
 
-    <h2>Budget Details</h2>
+    <header>
 
-    <div class="cards">
+        <h1>
+            💰 Budget Management
+        </h1>
 
-        <div class="card">
-    <h3>Total Budget</h3>
-    <p id="totalBudget">₹0</p>
-</div>
+    </header>
 
-<div class="card">
-    <h3>Used Budget</h3>
-    <p id="usedBudget">₹0</p>
-</div>
 
-<div class="card">
-    <h3>Remaining Budget</h3>
-    <p id="remainingBudget">₹0</p>
-</div>
+    <!-- MAIN -->
+
+    <div class="dashboard">
+
+
+        <!-- BUDGET OVERVIEW -->
+
+        <h2 class="section-title">
+            📊 Budget Overview
+        </h2>
+
+
+        <div class="cards">
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    💰
+                </div>
+
+                <h3>
+                    Total Budget
+                </h3>
+
+                <p id="totalBudget">
+                    ₹0
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    💸
+                </div>
+
+                <h3>
+                    Used Budget
+                </h3>
+
+                <p id="usedBudget">
+                    ₹0
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    💵
+                </div>
+
+                <h3>
+                    Remaining Budget
+                </h3>
+
+                <p id="remainingBudget">
+                    ₹0
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- AVERAGE -->
+
+        <div class="average-box">
+
+            <h3>
+                📈 Average Campaign Budget
+            </h3>
+
+            <p id="avgBudget">
+                ₹0
+            </p>
+
+        </div>
+
+
+        <!-- ADD EXPENSE -->
+
+        <h2 class="section-title">
+            ➕ Add New Expense
+        </h2>
+
+
+        <div class="expense-form">
+
+            <form
+                onsubmit="addExpense(event)"
+            >
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label for="expenseName">
+                            📝 Expense Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="expenseName"
+                            name="expenseName"
+                            placeholder="Enter expense name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="expenseAmount">
+                            💰 Expense Amount
+                        </label>
+
+                        <input
+                            type="number"
+                            id="expenseAmount"
+                            name="expenseAmount"
+                            placeholder="Enter amount"
+                            min="1"
+                            required
+                        >
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="add-btn"
+                    >
+                        ➕ Add Expense
+                    </button>
+
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <!-- EXPENSE LIST -->
+
+        <h2 class="section-title">
+            📋 Expense List
+        </h2>
+
+
+        <div class="table-container">
+
+            <table id="expenseTable">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            ID
+                        </th>
+
+                        <th>
+                            Expense Name
+                        </th>
+
+                        <th>
+                            Amount
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="expenseBody">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- BACK -->
+
+        <a
+            href="dashboard.html"
+            class="back-btn"
+        >
+            ⬅ Back to Dashboard
+        </a>
+
+
     </div>
 
-    <h2>Add New Expense</h2>
 
-    <form onsubmit="addExpense(event)">
+    <!-- ================= SCRIPTS ================= -->
 
 
-        <input type="text"  id="expenseName" name="expenseName" placeholder="Expense Name" required>
+    <!-- AVERAGE BUDGET -->
 
-        <br><br>
+    <script>
 
-        <input type="number"  id="expenseAmount" name="expenseAmount" placeholder="Expense Amount" required>
+        fetch("/budget-data")
 
-        <br><br>
+        .then(response => response.json())
 
-        <button type="submit">Add Expense</button>
-
-    </form>
-
-    <br>
-    <h2>Expense List</h2>
-
-<table id="expenseTable" border="1">
-    <tr>
-    <th>ID</th>
-    <th>Expense Name</th>
-    <th>Amount</th>
-    <th>Action</th>
-</tr>
-</table>
-
-<br>
-
-    <a href="dashboard.html">⬅ Back to Dashboard</a>
-
-</div>
-<div class="budget-box">
-
-    <h2>Budget Overview</h2>
-
-
-    <div class="budget-card">
-        <h3>Average Campaign Budget</h3>
-        <p id="avgBudget">₹0</p>
-    </div>
-
-</div>
-
-
-
-<script>
-
-fetch("/budget-data")
-
-.then(response => response.json())
-
-.then(data => {
-
-    document.getElementById("avgBudget").innerHTML =
-    "₹" + Math.round(data.avgBudget);
-
-})
-
-.catch(error => console.log(error));
-
-</script>
-<script>
-
-function addExpense(event){
-
-    event.preventDefault();
-        alert("Function Working");
-
-
-    let expenseName = document.getElementById("expenseName").value;
-    let expenseAmount = document.getElementById("expenseAmount").value;
-
-
-    fetch("/expense", {
-
-        method:"POST",
-
-        headers:{
-            "Content-Type":"application/json"
-        },
-
-        body: JSON.stringify({
-
-            expenseName: expenseName,
-            expenseAmount: expenseAmount
-
-        })
-
-    })
-
-
-    .then(response => response.text())
-
-    .then(data => {
-
-        alert(data);
-
-        document.getElementById("expenseName").value="";
-        document.getElementById("expenseAmount").value="";
-        location.reload();
-
-    })
-
-
-    .catch(error => {
-
-        console.log(error);
-
-    });
-
-}
-</script>
-
-
-
-
-<script>
-
-window.onload = function () {
-
-    fetch("/remaining-budget")
-    .then(response => response.json())
-    .then(data => {
-
-        
-
-        document.getElementById("totalBudget").textContent =
-            "₹" + data.totalBudget;
-
-        document.getElementById("usedBudget").textContent =
-            "₹" + data.totalExpense;
-
-        document.getElementById("remainingBudget").textContent =
-            "₹" + data.remainingBudget;
-
-    })
-    .catch(error => {
-        alert(error);
-        console.log(error);
-    });
-
-};
-
-</script>
-
-
-
-
-
-<!-- <script src="script.js"></script> -->
- <script>
-fetch("/expenses")
-.then(response => response.json())
-.then(data => {
-console.log(data);
-    let table = document.getElementById("expenseTable");
-
-    data.forEach(expense => {
-
-       let row = table.insertRow();
-
-row.insertCell(0).innerHTML = expense.id;
-row.insertCell(1).innerHTML = expense.expense_name;
-row.insertCell(2).innerHTML = "₹" + expense.amount;
-row.insertCell(3).innerHTML =
-    `<button onclick="deleteExpense(${expense.id})">Delete</button>`;
-
-    });
-
-})
-.catch(error => console.log(error));
-</script>
-<script>
-function deleteExpense(id) {
-
-    if (confirm("Are you sure you want to delete this expense?")) {
-
-        fetch("/expense/" + id, {
-            method: "DELETE"
-        })
-        .then(response => response.text())
         .then(data => {
-            alert(data);
-            location.reload();
+
+            document.getElementById(
+                "avgBudget"
+            ).innerText =
+                "₹" +
+                Math.round(
+                    data.avgBudget || 0
+                );
+
         })
-        .catch(error => console.log(error));
 
-    }
+        .catch(error =>
+            console.log(error)
+        );
 
-}
-</script>
+    </script>
+
+
+    <!-- ADD EXPENSE -->
+
+    <script>
+
+        function addExpense(event) {
+
+            event.preventDefault();
+
+
+            const expenseName =
+                document.getElementById(
+                    "expenseName"
+                ).value;
+
+
+            const expenseAmount =
+                document.getElementById(
+                    "expenseAmount"
+                ).value;
+
+
+            fetch("/expense", {
+
+                method: "POST",
+
+                headers: {
+
+                    "Content-Type":
+                        "application/json"
+
+                },
+
+                body: JSON.stringify({
+
+                    expenseName:
+                        expenseName,
+
+                    expenseAmount:
+                        expenseAmount
+
+                })
+
+            })
+
+            .then(response =>
+                response.text()
+            )
+
+            .then(data => {
+
+                alert(data);
+
+                document.getElementById(
+                    "expenseName"
+                ).value = "";
+
+                document.getElementById(
+                    "expenseAmount"
+                ).value = "";
+
+                location.reload();
+
+            })
+
+            .catch(error => {
+
+                console.log(error);
+
+                alert(
+                    "Failed to add expense!"
+                );
+
+            });
+
+        }
+
+    </script>
+
+
+    <!-- BUDGET DATA -->
+
+    <script>
+
+        window.onload = function () {
+
+            fetch("/remaining-budget")
+
+            .then(response =>
+                response.json()
+            )
+
+            .then(data => {
+
+                document.getElementById(
+                    "totalBudget"
+                ).innerText =
+                    "₹" +
+                    (data.totalBudget || 0);
+
+
+                document.getElementById(
+                    "usedBudget"
+                ).innerText =
+                    "₹" +
+                    (data.totalExpense || 0);
+
+
+                document.getElementById(
+                    "remainingBudget"
+                ).innerText =
+                    "₹" +
+                    (data.remainingBudget || 0);
+
+            })
+
+            .catch(error => {
+
+                console.log(error);
+
+                alert(
+                    "Failed to load budget data."
+                );
+
+            });
+
+        };
+
+    </script>
+
+
+    <!-- EXPENSE LIST -->
+
+    <script>
+
+        fetch("/expenses")
+
+        .then(response =>
+            response.json()
+        )
+
+        .then(data => {
+
+            console.log(data);
+
+
+            const tableBody =
+                document.getElementById(
+                    "expenseBody"
+                );
+
+
+            if (
+                !data ||
+                data.length === 0
+            ) {
+
+                tableBody.innerHTML = `
+
+                    <tr>
+
+                        <td
+                            colspan="4"
+                            style="
+                                text-align:center;
+                                color:#94a3b8;
+                                padding:25px;
+                            "
+                        >
+                            No expenses found
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+                return;
+            }
+
+
+            data.forEach(expense => {
+
+
+                const row =
+                    document.createElement("tr");
+
+
+                row.innerHTML = `
+
+                    <td>
+                        ${expense.id}
+                    </td>
+
+                    <td>
+                        ${expense.expense_name}
+                    </td>
+
+                    <td
+                        style="
+                            color:#67e8f9;
+                            font-weight:600;
+                        "
+                    >
+                        ₹${expense.amount}
+                    </td>
+
+                    <td>
+
+                        <button
+                            class="delete-btn"
+                            onclick="
+                                deleteExpense(
+                                    ${expense.id}
+                                )
+                            "
+                        >
+                            🗑️ Delete
+                        </button>
+
+                    </td>
+
+                `;
+
+
+                tableBody.appendChild(row);
+
+            });
+
+        })
+
+        .catch(error =>
+            console.log(error)
+        );
+
+    </script>
+
+
+    <!-- DELETE -->
+
+    <script>
+
+        function deleteExpense(id) {
+
+
+            if (
+                confirm(
+                    "Are you sure you want to delete this expense?"
+                )
+            ) {
+
+
+                fetch(
+                    "/expense/" + id,
+                    {
+                        method: "DELETE"
+                    }
+                )
+
+                .then(response =>
+                    response.text()
+                )
+
+                .then(data => {
+
+                    alert(data);
+
+                    location.reload();
+
+                })
+
+                .catch(error => {
+
+                    console.log(error);
+
+                    alert(
+                        "Failed to delete expense!"
+                    );
+
+                });
+
+            }
+
+        }
+
+    </script>
+
+
 </body>
+
 </html>
