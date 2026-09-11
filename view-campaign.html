@@ -6,8 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>View Campaigns | Digital Campaign Management</title>
+    <script src="auth.js"></script>
+
+<script>
+    protectPage();
+</script>
 
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -19,10 +25,12 @@
             min-height: 100vh;
             padding: 35px;
             color: white;
+
             background:
                 radial-gradient(circle at top left, #253b80 0%, transparent 35%),
                 radial-gradient(circle at bottom right, #6a1b9a 0%, transparent 35%),
                 linear-gradient(135deg, #07152f, #101c3d, #170d32);
+
             overflow-x: hidden;
         }
 
@@ -31,11 +39,14 @@
             position: fixed;
             width: 300px;
             height: 300px;
+
             background: #00c6ff;
             filter: blur(130px);
             opacity: 0.15;
+
             top: -100px;
             left: -80px;
+
             z-index: -1;
         }
 
@@ -44,11 +55,14 @@
             position: fixed;
             width: 350px;
             height: 350px;
+
             background: #a855f7;
             filter: blur(150px);
             opacity: 0.15;
+
             bottom: -120px;
             right: -100px;
+
             z-index: -1;
         }
 
@@ -56,15 +70,22 @@
 
         .top-section {
             max-width: 1400px;
-            margin: auto;
+            margin: 0 auto 30px;
             text-align: center;
-            margin-bottom: 30px;
         }
 
         .top-section h1 {
             font-size: 34px;
             margin-bottom: 8px;
-            background: linear-gradient(90deg, #00e5ff, #7c4dff, #d500f9);
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #00e5ff,
+                    #7c4dff,
+                    #d500f9
+                );
+
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -74,32 +95,49 @@
             font-size: 15px;
         }
 
-        /* SEARCH AREA */
+        /* SEARCH */
 
         .search-box {
             max-width: 1400px;
             margin: 0 auto 30px;
+
             padding: 22px;
+
             display: flex;
             gap: 15px;
             align-items: center;
 
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255,255,255,0.08);
+
+            border: 1px solid rgba(255,255,255,0.15);
+
             border-radius: 18px;
+
             backdrop-filter: blur(15px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.25);
         }
 
         .search-box input,
         .search-box select {
+
             height: 48px;
+
             padding: 0 16px;
+
             border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+
+            border:
+                1px solid rgba(255,255,255,0.2);
+
             outline: none;
-            background: rgba(255, 255, 255, 0.1);
+
+            background:
+                rgba(255,255,255,0.1);
+
             color: white;
+
             font-size: 14px;
         }
 
@@ -117,8 +155,11 @@
 
         .search-box input:focus,
         .search-box select:focus {
+
             border-color: #00e5ff;
-            box-shadow: 0 0 15px rgba(0, 229, 255, 0.25);
+
+            box-shadow:
+                0 0 15px rgba(0,229,255,0.25);
         }
 
         .search-box select option {
@@ -126,19 +167,28 @@
             background: white;
         }
 
-        /* TABLE CARD */
+        /* TABLE */
 
         .table-card {
+
             max-width: 1400px;
+
             margin: auto;
+
             padding: 20px;
 
-            background: rgba(255, 255, 255, 0.07);
-            border: 1px solid rgba(255, 255, 255, 0.14);
+            background:
+                rgba(255,255,255,0.07);
+
+            border:
+                1px solid rgba(255,255,255,0.14);
+
             border-radius: 20px;
+
             backdrop-filter: blur(18px);
 
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            box-shadow:
+                0 20px 50px rgba(0,0,0,0.3);
 
             overflow-x: auto;
         }
@@ -150,23 +200,36 @@
         }
 
         thead {
-            background: rgba(0, 229, 255, 0.12);
+            background:
+                rgba(0,229,255,0.12);
         }
 
         th {
+
             padding: 16px 12px;
+
             color: #67e8f9;
+
             font-size: 13px;
+
             white-space: nowrap;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.15);
         }
 
         td {
+
             padding: 14px 12px;
+
             text-align: center;
+
             color: #e2e8f0;
+
             font-size: 13px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.08);
         }
 
         tbody tr {
@@ -174,181 +237,334 @@
         }
 
         tbody tr:hover {
-            background: rgba(255, 255, 255, 0.08);
+
+            background:
+                rgba(255,255,255,0.08);
+
             transform: scale(1.002);
         }
 
         /* BUTTONS */
 
         button {
+
             border: none;
+
             cursor: pointer;
+
             border-radius: 9px;
+
             padding: 9px 13px;
+
             font-weight: 600;
+
             transition: 0.25s;
         }
 
         .edit-btn {
-            background: linear-gradient(135deg, #2196f3, #3f51b5);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2196f3,
+                    #3f51b5
+                );
+
             color: white;
         }
 
         .delete-btn {
-            background: linear-gradient(135deg, #ef4444, #be123c);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ef4444,
+                    #be123c
+                );
+
             color: white;
         }
 
         .pay-btn {
-            background: linear-gradient(135deg, #00c853, #00a152);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00c853,
+                    #00a152
+                );
+
             color: white;
         }
 
         .launch-btn {
-            background: linear-gradient(135deg, #00c6ff, #7c4dff);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00c6ff,
+                    #7c4dff
+                );
+
             color: white;
         }
 
         .launch-btn:disabled {
+
             background: #475569;
+
             color: #94a3b8;
+
             cursor: not-allowed;
+
             opacity: 0.65;
         }
 
         button:hover:not(:disabled) {
+
             transform: translateY(-2px);
-            box-shadow: 0 7px 18px rgba(0, 0, 0, 0.3);
+
+            box-shadow:
+                0 7px 18px rgba(0,0,0,0.3);
         }
 
         /* STATUS */
 
         .status {
+
             display: inline-block;
+
             padding: 6px 10px;
+
             border-radius: 20px;
+
             font-size: 11px;
+
             font-weight: 700;
         }
 
         .status.active {
-            background: rgba(34, 197, 94, 0.15);
+
+            background:
+                rgba(34,197,94,0.15);
+
             color: #4ade80;
         }
 
         .status.completed {
-            background: rgba(59, 130, 246, 0.15);
+
+            background:
+                rgba(59,130,246,0.15);
+
             color: #60a5fa;
         }
 
         .status.pending {
-            background: rgba(234, 179, 8, 0.15);
+
+            background:
+                rgba(234,179,8,0.15);
+
             color: #facc15;
         }
 
         .status.launched {
-            background: rgba(0, 229, 255, 0.15);
+
+            background:
+                rgba(0,229,255,0.15);
+
             color: #22d3ee;
         }
 
-        /* BOTTOM NAV */
+        /* BOTTOM */
 
         .bottom-section {
+
             max-width: 1400px;
+
             margin: 30px auto 0;
+
             display: flex;
+
             justify-content: space-between;
+
             gap: 15px;
         }
 
         .nav-btn {
+
             text-decoration: none;
+
             color: white;
+
             padding: 13px 20px;
+
             border-radius: 12px;
-            background: rgba(255, 255, 255, 0.09);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+
+            background:
+                rgba(255,255,255,0.09);
+
+            border:
+                1px solid rgba(255,255,255,0.15);
+
             transition: 0.25s;
         }
 
         .nav-btn:hover {
-            background: rgba(0, 229, 255, 0.15);
+
+            background:
+                rgba(0,229,255,0.15);
+
             border-color: #00e5ff;
+
             transform: translateY(-2px);
         }
 
         .add-btn {
-            background: linear-gradient(135deg, #00c6ff, #7c4dff);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00c6ff,
+                    #7c4dff
+                );
+
             border: none;
         }
 
         /* POPUP */
 
         .popup-overlay {
+
             display: none;
+
             position: fixed;
+
             inset: 0;
-            background: rgba(0, 0, 0, 0.65);
+
+            background:
+                rgba(0,0,0,0.70);
+
             backdrop-filter: blur(8px);
+
             align-items: center;
+
             justify-content: center;
+
             z-index: 9999;
+
+            padding: 20px;
         }
 
         .popup {
-            width: 360px;
+
+            width: 380px;
+
+            max-width: 100%;
+
             padding: 35px;
+
             text-align: center;
+
             border-radius: 22px;
+
             background: white;
+
             color: #172033;
-            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5);
-            animation: popupIn 0.35s ease;
+
+            box-shadow:
+                0 25px 70px rgba(0,0,0,0.5);
+
+            animation:
+                popupIn 0.35s ease;
         }
 
         .popup-icon {
-            width: 70px;
-            height: 70px;
+
+            width: 75px;
+
+            height: 75px;
+
             margin: auto auto 15px;
+
             border-radius: 50%;
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
             font-size: 38px;
+
             background: #dcfce7;
+
             color: #16a34a;
         }
 
+        .popup.warning .popup-icon {
+
+            background: #fef3c7;
+
+            color: #d97706;
+        }
+
+        .popup.error .popup-icon {
+
+            background: #fee2e2;
+
+            color: #dc2626;
+        }
+
         .popup h2 {
-            margin-bottom: 8px;
+
+            margin-bottom: 10px;
+
+            font-size: 22px;
         }
 
         .popup p {
+
             color: #64748b;
-            margin-bottom: 20px;
+
+            margin-bottom: 22px;
+
+            line-height: 1.6;
         }
 
         .popup button {
-            background: linear-gradient(135deg, #00c6ff, #7c4dff);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00c6ff,
+                    #7c4dff
+                );
+
             color: white;
-            padding: 11px 25px;
+
+            padding: 11px 28px;
         }
 
         @keyframes popupIn {
+
             from {
+
                 transform: scale(0.7);
+
                 opacity: 0;
             }
 
             to {
+
                 transform: scale(1);
+
                 opacity: 1;
             }
         }
 
         /* RESPONSIVE */
 
-        @media(max-width: 700px) {
+        @media(max-width:700px) {
 
             body {
                 padding: 20px;
@@ -375,16 +591,24 @@
                 text-align: center;
             }
         }
+
     </style>
+
 </head>
 
+
 <body>
+
+
+    <!-- HEADER -->
 
     <div class="top-section">
 
         <h1>📊 Campaign Management</h1>
 
-        <p>View, manage, pay and launch your digital campaigns</p>
+        <p>
+            View, manage, pay and launch your digital campaigns
+        </p>
 
     </div>
 
@@ -401,13 +625,25 @@
 
         <select id="platformFilter">
 
-            <option value="All">All Platforms</option>
+            <option value="All">
+                All Platforms
+            </option>
 
-            <option value="Instagram">Instagram</option>
+            <option value="Instagram">
+                Instagram
+            </option>
 
-            <option value="Facebook">Facebook</option>
+            <option value="Facebook">
+                Facebook
+            </option>
 
-            <option value="LinkedIn">LinkedIn</option>
+            <option value="YouTube">
+                YouTube
+            </option>
+
+            <option value="LinkedIn">
+                LinkedIn
+            </option>
 
         </select>
 
@@ -456,9 +692,8 @@
 
             </thead>
 
-            <tbody id="campaignTable">
 
-                <!-- view-campaign.js will load campaigns -->
+            <tbody id="campaignTable">
 
             </tbody>
 
@@ -471,49 +706,56 @@
 
     <div class="bottom-section">
 
-        <a href="dashboard.html" class="nav-btn">
-
+        <a
+            href="dashboard.html"
+            class="nav-btn"
+        >
             ⬅ Back to Dashboard
-
         </a>
 
-        <a href="campaign.html" class="nav-btn add-btn">
 
+        <a
+            href="campaign.html"
+            class="nav-btn add-btn"
+        >
             ➕ Add New Campaign
-
         </a>
 
     </div>
 
 
-    <!-- SUCCESS POPUP -->
+    <!-- POPUP -->
 
-    <div class="popup-overlay" id="successPopup">
+    <div
+        class="popup-overlay"
+        id="successPopup"
+    >
 
-        <div class="popup">
+        <div
+            class="popup"
+            id="popupBox"
+        >
 
-            <div class="popup-icon">
-
+            <div
+                class="popup-icon"
+                id="popupIcon"
+            >
                 ✓
-
             </div>
 
+
             <h2 id="popupTitle">
-
                 Success!
-
             </h2>
 
+
             <p id="popupMessage">
-
                 Operation completed successfully.
-
             </p>
 
+
             <button onclick="closePopup()">
-
                 OK
-
             </button>
 
         </div>
@@ -523,106 +765,359 @@
 
     <script>
 
-        function showPopup(title, message) {
+        /* =====================================
+           POPUP
+        ===================================== */
 
-            document.getElementById("popupTitle").innerText = title;
+        function showPopup(
+            title,
+            message,
+            type = "success",
+            icon = "✓"
+        ) {
 
-            document.getElementById("popupMessage").innerText = message;
+            const overlay =
+                document.getElementById("successPopup");
 
-            document.getElementById("successPopup").style.display = "flex";
+            const box =
+                document.getElementById("popupBox");
 
+            const popupTitle =
+                document.getElementById("popupTitle");
+
+            const popupMessage =
+                document.getElementById("popupMessage");
+
+            const popupIcon =
+                document.getElementById("popupIcon");
+
+
+            popupTitle.innerText = title;
+
+            popupMessage.innerText = message;
+
+            popupIcon.innerText = icon;
+
+
+            box.className = "popup";
+
+
+            if (type === "warning") {
+
+                box.classList.add("warning");
+
+            }
+
+            if (type === "error") {
+
+                box.classList.add("error");
+
+            }
+
+
+            overlay.style.display = "flex";
         }
+
 
         function closePopup() {
 
-            document.getElementById("successPopup").style.display = "none";
-
+            document.getElementById(
+                "successPopup"
+            ).style.display = "none";
         }
 
 
-        /*
-            IMPORTANT:
+        /* =====================================
+           MONEY FORMAT
+        ===================================== */
 
-            Payment complete aana mattum Launch button enable aaganum.
+        function formatMoney(amount) {
 
-            Your view-campaign.js should create:
+            const value =
+                Number(amount) || 0;
 
-            paymentStatus = "Paid"
-
-            or
-
-            paymentStatus = "Pending"
-
-            Example:
-
-            <button
-                class="launch-btn"
-                ${paymentStatus !== "Paid" ? "disabled" : ""}
-                onclick="launchCampaign(${campaign.id})">
-
-                ${paymentStatus === "Paid"
-                    ? "🚀 Launch"
-                    : "🔒 Pay First"}
-
-            </button>
-        */
+            return "₹" + value.toLocaleString(
+                "en-IN",
+                {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }
+            );
+        }
 
 
-        async function launchCampaign(id) {
+        /* =====================================
+           PAYMENT STATUS CHECK
+        ===================================== */
+
+        async function checkPaymentBeforeLaunch(id) {
 
             try {
 
-                const response = await fetch("/launch-campaign/" + id, {
+                /*
+                 * This endpoint should return:
+                 *
+                 * {
+                 *   totalAmount: 8000,
+                 *   totalPaid: 5000,
+                 *   remainingAmount: 3000
+                 * }
+                 *
+                 * If your backend uses another endpoint,
+                 * change only this URL.
+                 */
 
-                    method: "PUT",
+                const response = await fetch(
+                    "/campaign-payment/" + id
+                );
 
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
 
-                });
+                if (!response.ok) {
 
-                const result = await response.text();
+                    throw new Error(
+                        "Payment information unavailable"
+                    );
+                }
 
-                if (response.ok) {
 
-                    showPopup(
-                        "🚀 Campaign Launched!",
-                        "Your campaign has been successfully launched."
+                const payment =
+                    await response.json();
+
+
+                const totalAmount =
+                    Number(
+                        payment.totalAmount ??
+                        payment.total ??
+                        payment.budget ??
+                        0
                     );
 
-                    setTimeout(() => {
 
-                        location.reload();
+                const totalPaid =
+                    Number(
+                        payment.totalPaid ??
+                        payment.paid ??
+                        0
+                    );
 
-                    }, 1500);
 
-                } else {
+                const remainingAmount =
+                    Math.max(
+                        totalAmount - totalPaid,
+                        0
+                    );
+
+
+                /* =================================
+                   PAYMENT NOT COMPLETE
+                ================================= */
+
+                if (remainingAmount > 0) {
 
                     showPopup(
-                        "❌ Launch Failed",
-                        result
+
+                        "⚠️ Payment Required",
+
+                        "Please pay the remaining " +
+                        formatMoney(remainingAmount) +
+                        " before launching this campaign.",
+
+                        "warning",
+
+                        "⚠️"
+                    );
+
+                    return false;
+                }
+
+
+                /* =================================
+                   PAYMENT COMPLETE
+                ================================= */
+
+                showPopup(
+
+                    "✅ Payment Completed",
+
+                    "The complete campaign amount has been paid. Your campaign can now be launched.",
+
+                    "success",
+
+                    "✓"
+                );
+
+
+                /*
+                 * Wait for user to close popup,
+                 * then launch.
+                 */
+
+                return true;
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Payment check error:",
+                    error
+                );
+
+
+                showPopup(
+
+                    "❌ Payment Check Failed",
+
+                    "Unable to verify payment. Please try again.",
+
+                    "error",
+
+                    "!"
+                );
+
+
+                return false;
+            }
+        }
+
+
+        /* =====================================
+           LAUNCH CAMPAIGN
+        ===================================== */
+
+        async function launchCampaign(id) {
+
+            /*
+             * FIRST:
+             * Check payment
+             */
+
+            const paymentComplete =
+                await checkPaymentBeforeLaunch(id);
+
+
+            if (!paymentComplete) {
+
+                return;
+            }
+
+
+            /*
+             * Wait briefly so user can see
+             * payment completed popup.
+             */
+
+            setTimeout(async () => {
+
+                try {
+
+                    const response =
+                        await fetch(
+                            "/launch-campaign/" + id,
+                            {
+                                method: "PUT",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                }
+                            }
+                        );
+
+
+                    const result =
+                        await response.text();
+
+
+                    if (response.ok) {
+
+                        showPopup(
+
+                            "🚀 Campaign Launched!",
+
+                            "Your campaign has been successfully launched.",
+
+                            "success",
+
+                            "🚀"
+                        );
+
+
+                        setTimeout(() => {
+
+                            location.reload();
+
+                        }, 1500);
+
+                    }
+                    else {
+
+                        showPopup(
+
+                            "❌ Launch Failed",
+
+                            result ||
+                            "Campaign could not be launched.",
+
+                            "error",
+
+                            "!"
+                        );
+
+                    }
+
+                }
+                catch (error) {
+
+                    console.error(
+                        "Launch error:",
+                        error
+                    );
+
+
+                    showPopup(
+
+                        "❌ Error",
+
+                        "Unable to launch campaign. Please try again.",
+
+                        "error",
+
+                        "!"
                     );
 
                 }
 
-            } catch (error) {
-
-                console.error(error);
-
-                showPopup(
-                    "❌ Error",
-                    "Unable to launch campaign."
-                );
-
-            }
+            }, 1200);
 
         }
+
+
+        /* =====================================
+           CLOSE POPUP WHEN CLICK OUTSIDE
+        ===================================== */
+
+        document
+            .getElementById("successPopup")
+            .addEventListener(
+                "click",
+                function(event) {
+
+                    if (event.target === this) {
+
+                        closePopup();
+
+                    }
+
+                }
+            );
 
     </script>
 
 
+    <!-- YOUR EXISTING CAMPAIGN JAVASCRIPT -->
+
     <script src="view-campaign.js"></script>
+
 
 </body>
 

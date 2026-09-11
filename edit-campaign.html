@@ -1,58 +1,894 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Campaign</title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Campaign | DigiMarket</title>
+
     <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* ==============================
+           RESET
+        ============================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+
+        /* ==============================
+           BODY
+        ============================== */
+
+        body {
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(0, 212, 255, 0.15),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom right,
+                    rgba(139, 92, 246, 0.18),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #050816,
+                    #111827,
+                    #1e1b4b
+                );
+
+            color: #ffffff;
+
+            padding: 40px 20px;
+
+        }
+
+
+        /* ==============================
+           MAIN DASHBOARD
+        ============================== */
+
+        .dashboard {
+
+            width: 100%;
+
+            max-width: 850px;
+
+            margin: auto;
+
+            padding: 40px;
+
+            background:
+                rgba(255, 255, 255, 0.07);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.15);
+
+            border-radius: 25px;
+
+            backdrop-filter: blur(20px);
+
+            -webkit-backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.45);
+
+        }
+
+
+        /* ==============================
+           HEADER
+        ============================== */
+
+        .page-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 35px;
+
+            gap: 20px;
+
+        }
+
+
+        .title-section {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+        }
+
+
+        .title-icon {
+
+            width: 55px;
+
+            height: 55px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            border-radius: 15px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00b4db,
+                    #6366f1
+                );
+
+            font-size: 26px;
+
+            box-shadow:
+                0 10px 25px
+                rgba(99, 102, 241, 0.3);
+
+        }
+
+
+        h2 {
+
+            font-size: 30px;
+
+            margin-bottom: 5px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #00d4ff,
+                    #8b5cf6,
+                    #ec4899
+                );
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+
+        }
+
+
+        .subtitle {
+
+            color: #94a3b8;
+
+            font-size: 14px;
+
+        }
+
+
+        /* ==============================
+           BACK BUTTON
+        ============================== */
+
+        .back-btn {
+
+            text-decoration: none;
+
+            color: #e2e8f0;
+
+            padding: 10px 18px;
+
+            border-radius: 10px;
+
+            background:
+                rgba(255, 255, 255, 0.08);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.12);
+
+            transition: 0.3s;
+
+            white-space: nowrap;
+
+        }
+
+
+        .back-btn:hover {
+
+            background:
+                rgba(255, 255, 255, 0.15);
+
+            transform: translateY(-2px);
+
+        }
+
+
+        /* ==============================
+           FORM
+        ============================== */
+
+        #editForm {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 22px;
+
+        }
+
+
+        /* ==============================
+           FORM GROUP
+        ============================== */
+
+        .form-group {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+
+        }
+
+
+        .full-width {
+
+            grid-column: 1 / -1;
+
+        }
+
+
+        label {
+
+            color: #e2e8f0;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+        }
+
+
+        /* ==============================
+           INPUTS
+        ============================== */
+
+        input,
+        select,
+        textarea {
+
+            width: 100%;
+
+            padding: 14px 15px;
+
+            border-radius: 12px;
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.14);
+
+            background:
+                rgba(255, 255, 255, 0.07);
+
+            color: white;
+
+            outline: none;
+
+            font-size: 15px;
+
+            transition: 0.3s;
+
+        }
+
+
+        input::placeholder,
+        textarea::placeholder {
+
+            color: #94a3b8;
+
+        }
+
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+
+            border-color: #00d4ff;
+
+            background:
+                rgba(255, 255, 255, 0.10);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(0, 212, 255, 0.10);
+
+        }
+
+
+        /* ==============================
+           SELECT
+        ============================== */
+
+        select {
+
+            cursor: pointer;
+
+        }
+
+
+        select option {
+
+            background: #111827;
+
+            color: white;
+
+        }
+
+
+        /* ==============================
+           DATE INPUT
+        ============================== */
+
+        input[type="date"] {
+
+            color-scheme: dark;
+
+        }
+
+
+        /* ==============================
+           TEXTAREA
+        ============================== */
+
+        textarea {
+
+            min-height: 130px;
+
+            resize: vertical;
+
+            line-height: 1.6;
+
+        }
+
+
+        /* ==============================
+           HIDDEN ID
+        ============================== */
+
+        #id {
+
+            display: none;
+
+        }
+
+
+        /* ==============================
+           FORM ACTIONS
+        ============================== */
+
+        .form-actions {
+
+            grid-column: 1 / -1;
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 15px;
+
+            margin-top: 10px;
+
+            padding-top: 25px;
+
+            border-top:
+                1px solid
+                rgba(255, 255, 255, 0.10);
+
+        }
+
+
+        /* ==============================
+           CANCEL BUTTON
+        ============================== */
+
+        .cancel-btn {
+
+            padding: 13px 25px;
+
+            border-radius: 11px;
+
+            text-decoration: none;
+
+            color: #cbd5e1;
+
+            background:
+                rgba(255, 255, 255, 0.07);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.12);
+
+            transition: 0.3s;
+
+        }
+
+
+        .cancel-btn:hover {
+
+            background:
+                rgba(255, 255, 255, 0.13);
+
+            color: white;
+
+        }
+
+
+        /* ==============================
+           UPDATE BUTTON
+        ============================== */
+
+        #updateBtn {
+
+            border: none;
+
+            padding: 13px 28px;
+
+            border-radius: 11px;
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00b4db,
+                    #5865f2,
+                    #8e44ad
+                );
+
+            box-shadow:
+                0 8px 25px
+                rgba(88, 101, 242, 0.30);
+
+            transition: 0.3s;
+
+        }
+
+
+        #updateBtn:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 12px 30px
+                rgba(88, 101, 242, 0.45);
+
+        }
+
+
+        #updateBtn:active {
+
+            transform: scale(0.98);
+
+        }
+
+
+        /* ==============================
+           MESSAGE
+        ============================== */
+
+        .message {
+
+            display: none;
+
+            grid-column: 1 / -1;
+
+            padding: 13px;
+
+            border-radius: 10px;
+
+            text-align: center;
+
+            font-size: 14px;
+
+        }
+
+
+        .message.success {
+
+            display: block;
+
+            color: #86efac;
+
+            background:
+                rgba(34, 197, 94, 0.12);
+
+            border:
+                1px solid
+                rgba(34, 197, 94, 0.25);
+
+        }
+
+
+        .message.error {
+
+            display: block;
+
+            color: #fca5a5;
+
+            background:
+                rgba(239, 68, 68, 0.12);
+
+            border:
+                1px solid
+                rgba(239, 68, 68, 0.25);
+
+        }
+
+
+        /* ==============================
+           MOBILE
+        ============================== */
+
+        @media (max-width: 700px) {
+
+            body {
+
+                padding: 20px 12px;
+
+            }
+
+
+            .dashboard {
+
+                padding: 25px 18px;
+
+                border-radius: 20px;
+
+            }
+
+
+            .page-header {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+            }
+
+
+            h2 {
+
+                font-size: 25px;
+
+            }
+
+
+            #editForm {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .full-width {
+
+                grid-column: auto;
+
+            }
+
+
+            .form-actions {
+
+                grid-column: auto;
+
+                flex-direction: column;
+
+            }
+
+
+            .cancel-btn,
+            #updateBtn {
+
+                width: 100%;
+
+                text-align: center;
+
+            }
+
+        }
+
+
+        /* ==============================
+           SMALL MOBILE
+        ============================== */
+
+        @media (max-width: 400px) {
+
+            .dashboard {
+
+                padding: 20px 14px;
+
+            }
+
+
+            .title-icon {
+
+                width: 48px;
+
+                height: 48px;
+
+                font-size: 22px;
+
+            }
+
+
+            h2 {
+
+                font-size: 22px;
+
+            }
+
+
+            input,
+            select,
+            textarea {
+
+                padding: 12px;
+
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
+
 <div class="dashboard">
 
-<h2>Edit Campaign</h2>
 
-<form id="editForm">
+    <!-- HEADER -->
 
-<input type="hidden" id="id">
+    <div class="page-header">
 
-<input type="text" id="campaign" placeholder="Campaign Name" required>
+        <div class="title-section">
 
-<br><br>
+            <div class="title-icon">
+                ✏️
+            </div>
 
-<select id="platform" required>
-    <option value="Facebook">Facebook</option>
-    <option value="Instagram">Instagram</option>
-    <option value="YouTube">YouTube</option>
-    <option value="LinkedIn">LinkedIn</option>
-</select>
+            <div>
 
-<br><br>
+                <h2>
+                    Edit Campaign
+                </h2>
 
-<input type="number" id="budget" placeholder="Budget" required>
+                <p class="subtitle">
+                    Update your campaign details
+                </p>
 
-<br><br>
+            </div>
 
-<input type="date" id="startDate" required>
+        </div>
 
-<br><br>
 
-<input type="date" id="endDate" required>
+        <a
+            href="view-campaign.html"
+            class="back-btn"
+        >
+            ← Back
+        </a>
 
-<br><br>
+    </div>
 
-<textarea id="description" placeholder="Description"></textarea>
 
-<br><br>
 
-<button type="submit">Update Campaign</button>
+    <!-- FORM -->
 
-</form>
+    <form id="editForm">
+
+
+        <!-- Hidden ID -->
+
+        <input
+            type="hidden"
+            id="id"
+        >
+
+
+        <!-- Campaign Name -->
+
+        <div class="form-group">
+
+            <label for="campaign">
+                📢 Campaign Name
+            </label>
+
+            <input
+                type="text"
+                id="campaign"
+                placeholder="Enter campaign name"
+                required
+            >
+
+        </div>
+
+
+        <!-- Platform -->
+
+        <div class="form-group">
+
+            <label for="platform">
+                🌐 Platform
+            </label>
+
+            <select
+                id="platform"
+                required
+            >
+
+                <option value="">
+                    Select Platform
+                </option>
+
+                <option value="Facebook">
+                    Facebook
+                </option>
+
+                <option value="Instagram">
+                    Instagram
+                </option>
+
+                <option value="YouTube">
+                    YouTube
+                </option>
+
+                <option value="LinkedIn">
+                    LinkedIn
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- Budget -->
+
+        <div class="form-group">
+
+            <label for="budget">
+                💰 Budget
+            </label>
+
+            <input
+                type="number"
+                id="budget"
+                placeholder="Enter campaign budget"
+                min="0"
+                step="0.01"
+                required
+            >
+
+        </div>
+
+
+        <!-- Start Date -->
+
+        <div class="form-group">
+
+            <label for="startDate">
+                📅 Start Date
+            </label>
+
+            <input
+                type="date"
+                id="startDate"
+                required
+            >
+
+        </div>
+
+
+        <!-- End Date -->
+
+        <div class="form-group">
+
+            <label for="endDate">
+                📅 End Date
+            </label>
+
+            <input
+                type="date"
+                id="endDate"
+                required
+            >
+
+        </div>
+
+
+        <!-- Description -->
+
+        <div class="form-group full-width">
+
+            <label for="description">
+                📝 Campaign Description
+            </label>
+
+            <textarea
+                id="description"
+                placeholder="Enter campaign description..."
+            ></textarea>
+
+        </div>
+
+
+        <!-- Message -->
+
+        <div
+            id="message"
+            class="message"
+        ></div>
+
+
+        <!-- ACTIONS -->
+
+        <div class="form-actions">
+
+            <a
+                href="view-campaign.html"
+                class="cancel-btn"
+            >
+                Cancel
+            </a>
+
+
+            <button
+                type="submit"
+                id="updateBtn"
+            >
+                💾 Update Campaign
+            </button>
+
+        </div>
+
+
+    </form>
 
 </div>
 
+
+
+<!-- EXISTING JS -->
+
 <script src="edit-campaign.js"></script>
 
+
 </body>
+
 </html>

@@ -12,6 +12,10 @@
 
     <style>
 
+        /* ==========================================
+           GLOBAL
+        ========================================== */
+
         * {
             margin: 0;
             padding: 0;
@@ -19,6 +23,10 @@
             font-family: "Segoe UI", Arial, sans-serif;
         }
 
+
+        /* ==========================================
+           BODY
+        ========================================== */
 
         body {
 
@@ -35,16 +43,19 @@
             color: white;
 
             background:
+
                 radial-gradient(
                     circle at 10% 10%,
                     #253b80 0%,
                     transparent 32%
                 ),
+
                 radial-gradient(
                     circle at 90% 90%,
                     #6a1b9a 0%,
                     transparent 32%
                 ),
+
                 linear-gradient(
                     135deg,
                     #07152f,
@@ -54,13 +65,15 @@
         }
 
 
-        /* ================= RECEIPT CARD ================= */
+        /* ==========================================
+           RECEIPT CARD
+        ========================================== */
 
         .receipt-card {
 
             width: 100%;
 
-            max-width: 560px;
+            max-width: 650px;
 
             padding: 35px;
 
@@ -79,21 +92,23 @@
         }
 
 
-        /* ================= HEADER ================= */
+        /* ==========================================
+           HEADER
+        ========================================== */
 
         .receipt-header {
 
             text-align: center;
 
-            margin-bottom: 28px;
+            margin-bottom: 25px;
         }
 
 
         .success-icon {
 
-            width: 78px;
+            width: 70px;
 
-            height: 78px;
+            height: 70px;
 
             margin: 0 auto 15px;
 
@@ -105,19 +120,16 @@
 
             border-radius: 50%;
 
-            font-size: 40px;
-
             background:
                 linear-gradient(
                     135deg,
-                    #00c853,
-                    #00a152
+                    #00c6ff,
+                    #7c4dff
                 );
 
-            box-shadow:
-                0 10px 30px rgba(0,200,83,0.25);
+            font-size: 35px;
 
-            animation: successPop 0.6s ease;
+            font-weight: bold;
         }
 
 
@@ -149,21 +161,53 @@
         }
 
 
-        /* ================= RECEIPT BODY ================= */
+        /* ==========================================
+           PAYMENT SUCCESS
+        ========================================== */
+
+        .payment-success {
+
+            text-align: center;
+
+            padding: 12px;
+
+            margin-bottom: 20px;
+
+            border-radius: 12px;
+
+            background:
+                rgba(34,197,94,0.10);
+
+            border:
+                1px solid rgba(34,197,94,0.25);
+
+            color: #4ade80;
+
+            font-weight: 700;
+        }
+
+
+        /* ==========================================
+           RECEIPT BODY
+        ========================================== */
 
         .receipt-body {
 
-            padding: 22px;
+            padding: 20px;
 
             border-radius: 18px;
 
             background:
-                rgba(0,0,0,0.18);
+                rgba(255,255,255,0.06);
 
             border:
-                1px solid rgba(255,255,255,0.1);
+                1px solid rgba(255,255,255,0.12);
         }
 
+
+        /* ==========================================
+           RECEIPT ROW
+        ========================================== */
 
         .receipt-row {
 
@@ -173,12 +217,13 @@
 
             align-items: center;
 
-            gap: 15px;
+            gap: 20px;
 
-            padding: 15px 5px;
+            padding: 16px 5px;
 
             border-bottom:
-                1px solid rgba(255,255,255,0.1);
+                1px solid
+                rgba(255,255,255,0.10);
         }
 
 
@@ -190,100 +235,159 @@
 
         .receipt-label {
 
-            color: #94a3b8;
+            color: #cbd5e1;
 
             font-size: 14px;
+
+            font-weight: 600;
         }
 
 
         .receipt-value {
 
-            color: #e0f2fe;
+            color: white;
 
-            font-size: 14px;
-
-            font-weight: 600;
-
-            text-align: right;
-
-            word-break: break-word;
-        }
-
-
-        /* AMOUNT */
-
-        .amount-value {
-
-            color: #67e8f9;
-
-            font-size: 20px;
+            font-size: 15px;
 
             font-weight: 700;
+
+            text-align: right;
         }
 
 
-        /* STATUS */
+        /* ==========================================
+           COLORS
+        ========================================== */
 
-        .paid-status {
+        .green {
 
-            display: inline-block;
+            color: #4ade80;
+        }
 
-            padding: 6px 12px;
 
-            border-radius: 20px;
+        .yellow {
+
+            color: #facc15;
+        }
+
+
+        .blue {
+
+            color: #67e8f9;
+        }
+
+
+        .red {
+
+            color: #f87171;
+        }
+
+
+        .current-payment {
 
             color: #4ade80;
 
+            font-size: 19px;
+        }
+
+
+        .remaining {
+
+            color: #facc15;
+
+            font-size: 19px;
+        }
+
+
+        .remaining-zero {
+
+            color: #4ade80;
+
+            font-size: 19px;
+        }
+
+
+        /* ==========================================
+           CAMPAIGN STATUS
+        ========================================== */
+
+        .campaign-status {
+
+            margin-top: 10px;
+
+            padding: 15px;
+
+            border-radius: 13px;
+
+            text-align: center;
+
             background:
-                rgba(34,197,94,0.12);
+                rgba(124,77,255,0.10);
 
             border:
-                1px solid rgba(74,222,128,0.2);
-
-            font-size: 12px;
-
-            font-weight: 700;
+                1px solid
+                rgba(124,77,255,0.25);
         }
 
 
-        /* TRANSACTION ID */
+        .campaign-status span {
 
-        .transaction-id {
+            display: block;
 
-            color: #c4b5fd;
+            color: #cbd5e1;
 
-            font-size: 12px;
+            font-size: 13px;
 
+            margin-bottom: 6px;
         }
 
 
-        /* ================= THANK YOU ================= */
+        .campaign-status strong {
+
+            font-size: 18px;
+
+            color: #67e8f9;
+        }
+
+
+        /* ==========================================
+           THANK YOU MESSAGE
+        ========================================== */
 
         .thank-you {
 
-            margin-top: 25px;
+            margin-top: 20px;
 
             padding: 15px;
 
             text-align: center;
 
-            border-radius: 12px;
+            border-radius: 13px;
 
             color: #bae6fd;
 
             background:
-                rgba(0,229,255,0.07);
+                rgba(0,198,255,0.08);
 
             border:
-                1px solid rgba(0,229,255,0.12);
+                1px solid
+                rgba(0,198,255,0.18);
+
+            font-size: 14px;
+
+            line-height: 1.5;
         }
 
 
-        /* ================= BUTTONS ================= */
+        /* ==========================================
+           BUTTONS
+        ========================================== */
 
         .buttons {
 
             display: flex;
+
+            justify-content: center;
 
             gap: 12px;
 
@@ -291,20 +395,14 @@
         }
 
 
-        .buttons a,
-        .buttons button {
+        .buttons button,
+        .buttons a {
 
-            flex: 1;
-
-            padding: 13px;
-
-            text-align: center;
-
-            text-decoration: none;
+            padding: 12px 22px;
 
             border: none;
 
-            border-radius: 11px;
+            border-radius: 10px;
 
             color: white;
 
@@ -314,21 +412,13 @@
 
             cursor: pointer;
 
+            text-decoration: none;
+
             transition: 0.3s;
         }
 
 
-        .dashboard-btn {
-
-            background:
-                rgba(255,255,255,0.08);
-
-            border:
-                1px solid rgba(255,255,255,0.15) !important;
-        }
-
-
-        .campaign-btn {
+        .print-btn {
 
             background:
                 linear-gradient(
@@ -339,172 +429,403 @@
         }
 
 
-        .print-btn {
-
-            width: 100%;
-
-            margin-top: 12px;
-
-            padding: 12px;
-
-            border: none;
-
-            border-radius: 11px;
-
-            color: white;
+        .back-btn {
 
             background:
-                rgba(255,255,255,0.07);
+                rgba(255,255,255,0.08);
 
             border:
-                1px solid rgba(255,255,255,0.12);
-
-            cursor: pointer;
-
-            transition: 0.3s;
+                1px solid rgba(255,255,255,0.15);
         }
 
 
-        .buttons a:hover,
         .buttons button:hover,
-        .print-btn:hover {
+        .buttons a:hover {
 
             transform: translateY(-2px);
 
             box-shadow:
-                0 8px 20px rgba(0,0,0,0.25);
+                0 10px 25px
+                rgba(0,0,0,0.25);
         }
 
 
-        /* ================= ANIMATION ================= */
+        /* ==========================================
+           MOBILE
+        ========================================== */
 
-        @keyframes successPop {
-
-            0% {
-
-                transform: scale(0);
-
-                opacity: 0;
-            }
-
-            70% {
-
-                transform: scale(1.15);
-            }
-
-            100% {
-
-                transform: scale(1);
-
-                opacity: 1;
-            }
-        }
-
-
-        /* ================= PRINT ================= */
-
-        @media print {
-
-            body {
-
-                background: white;
-
-                color: black;
-
-                padding: 0;
-            }
-
-            .receipt-card {
-
-                max-width: 700px;
-
-                color: black;
-
-                background: white;
-
-                border: 1px solid #ddd;
-
-                box-shadow: none;
-            }
-
-            .receipt-header h1 {
-
-                color: #111;
-
-                -webkit-text-fill-color: #111;
-            }
-
-            .receipt-body {
-
-                background: white;
-
-                border: 1px solid #ddd;
-            }
-
-            .receipt-label {
-
-                color: #555;
-            }
-
-            .receipt-value {
-
-                color: #111;
-            }
-
-            .buttons,
-            .print-btn {
-
-                display: none;
-            }
-
-            .thank-you {
-
-                color: #166534;
-
-                background: #f0fdf4;
-
-                border: 1px solid #bbf7d0;
-            }
-        }
-
-
-        /* ================= MOBILE ================= */
-
-        @media(max-width: 550px) {
+        @media(max-width:550px) {
 
             body {
 
                 padding: 15px;
             }
 
+
             .receipt-card {
 
                 padding: 22px 18px;
             }
 
-            .receipt-header h1 {
-
-                font-size: 24px;
-            }
 
             .receipt-row {
 
-                align-items: flex-start;
-
                 flex-direction: column;
 
-                gap: 5px;
+                align-items: flex-start;
+
+                gap: 6px;
             }
+
 
             .receipt-value {
 
                 text-align: left;
             }
 
+
             .buttons {
 
                 flex-direction: column;
             }
+
+
+            .buttons button,
+            .buttons a {
+
+                width: 100%;
+
+                text-align: center;
+            }
+
+        }
+
+
+        /* ==========================================
+           PRINT - FORCE ONE PAGE
+        ========================================== */
+
+        @media print {
+
+            @page {
+
+                size: A4 portrait;
+
+                margin: 5mm;
+            }
+
+
+            html {
+
+                width: 100% !important;
+
+                height: auto !important;
+
+                margin: 0 !important;
+
+                padding: 0 !important;
+            }
+
+
+            body {
+
+                width: 100% !important;
+
+                min-height: 0 !important;
+
+                height: auto !important;
+
+                margin: 0 !important;
+
+                padding: 0 !important;
+
+                display: block !important;
+
+                background: white !important;
+
+                color: black !important;
+
+                overflow: visible !important;
+            }
+
+
+            .receipt-card {
+
+                width: 100% !important;
+
+                max-width: 190mm !important;
+
+                margin: 0 auto !important;
+
+                padding: 8mm !important;
+
+                background: white !important;
+
+                color: black !important;
+
+                border: 1px solid #cccccc !important;
+
+                border-radius: 6px !important;
+
+                box-shadow: none !important;
+
+                backdrop-filter: none !important;
+
+                page-break-inside: avoid !important;
+
+                break-inside: avoid !important;
+            }
+
+
+            /* HEADER */
+
+            .receipt-header {
+
+                margin-bottom: 8px !important;
+
+                page-break-inside: avoid !important;
+
+                break-inside: avoid !important;
+            }
+
+
+            .success-icon {
+
+                width: 40px !important;
+
+                height: 40px !important;
+
+                margin: 0 auto 5px !important;
+
+                font-size: 21px !important;
+            }
+
+
+            .receipt-header h1 {
+
+                font-size: 19px !important;
+
+                margin-bottom: 2px !important;
+
+                color: #111 !important;
+
+                background: none !important;
+
+                -webkit-text-fill-color: #111 !important;
+            }
+
+
+            .receipt-header p {
+
+                font-size: 9px !important;
+
+                color: #555 !important;
+            }
+
+
+            /* SUCCESS */
+
+            .payment-success {
+
+                padding: 5px !important;
+
+                margin-bottom: 7px !important;
+
+                font-size: 9px !important;
+
+                color: #15803d !important;
+
+                background: #f0fdf4 !important;
+
+                border: 1px solid #86efac !important;
+
+                page-break-inside: avoid !important;
+
+                break-inside: avoid !important;
+            }
+
+
+            /* BODY */
+
+            .receipt-body {
+
+                padding: 4px 10px !important;
+
+                background: white !important;
+
+                border: 1px solid #dddddd !important;
+
+                border-radius: 5px !important;
+
+                page-break-inside: avoid !important;
+
+                break-inside: avoid !important;
+            }
+
+
+            /* ROW */
+
+            .receipt-row {
+
+                display: flex !important;
+
+                flex-direction: row !important;
+
+                justify-content: space-between !important;
+
+                align-items: center !important;
+
+                min-height: 0 !important;
+
+                padding: 5px 3px !important;
+
+                gap: 8px !important;
+
+                border-bottom: 1px solid #dddddd !important;
+
+                page-break-inside: avoid !important;
+
+                break-inside: avoid !important;
+            }
+
+
+            .receipt-row:last-child {
+
+                border-bottom: none !important;
+            }
+
+
+            .receipt-label {
+
+                font-size: 9px !important;
+
+                color: #333 !important;
+
+                font-weight: 600 !important;
+            }
+
+
+            .receipt-value {
+
+                font-size: 9px !important;
+
+                color: #111 !important;
+
+                font-weight: 700 !important;
+
+                text-align: right !important;
+            }
+
+
+            .current-payment,
+            .remaining,
+            .remaining-zero {
+
+                font-size: 11px !important;
+            }
+
+
+            .green {
+
+                color: #15803d !important;
+            }
+
+
+            .blue {
+
+                color: #0369a1 !important;
+            }
+
+
+            .yellow {
+
+                color: #b45309 !important;
+            }
+
+
+            /* CAMPAIGN STATUS */
+
+            .campaign-status {
+
+                margin-top: 7px !important;
+
+                padding: 6px !important;
+
+                background: #f8fafc !important;
+
+                border: 1px solid #dddddd !important;
+
+                page-break-inside: avoid !important;
+
+                break-inside: avoid !important;
+            }
+
+
+            .campaign-status span {
+
+                font-size: 8px !important;
+
+                color: #555 !important;
+
+                margin-bottom: 1px !important;
+            }
+
+
+            .campaign-status strong {
+
+                font-size: 11px !important;
+
+                color: #0369a1 !important;
+            }
+
+
+            /* THANK YOU */
+
+            .thank-you {
+
+                margin-top: 7px !important;
+
+                padding: 6px !important;
+
+                font-size: 8px !important;
+
+                line-height: 1.25 !important;
+
+                color: #333 !important;
+
+                background: #f8fafc !important;
+
+                border: 1px solid #dddddd !important;
+
+                page-break-inside: avoid !important;
+
+                break-inside: avoid !important;
+            }
+
+
+            /* HIDE BUTTONS */
+
+            .buttons {
+
+                display: none !important;
+            }
+
+
+            /* PREVENT PAGE BREAK */
+
+            .receipt-card,
+            .receipt-header,
+            .payment-success,
+            .receipt-body,
+            .receipt-row,
+            .campaign-status,
+            .thank-you {
+
+                page-break-before: auto !important;
+
+                page-break-after: auto !important;
+            }
+
         }
 
     </style>
@@ -515,7 +836,9 @@
 <body>
 
 
-    <!-- RECEIPT -->
+    <!-- ==========================================
+         RECEIPT CARD
+    ========================================== -->
 
     <div class="receipt-card">
 
@@ -524,17 +847,29 @@
 
         <div class="receipt-header">
 
+
             <div class="success-icon">
                 ✓
             </div>
+
 
             <h1>
                 Payment Receipt
             </h1>
 
+
             <p>
                 DigiMarket Campaign Management System
             </p>
+
+        </div>
+
+
+        <!-- PAYMENT SUCCESS -->
+
+        <div class="payment-success">
+
+            ✓ PAYMENT SUCCESSFUL
 
         </div>
 
@@ -544,7 +879,7 @@
         <div class="receipt-body">
 
 
-            <!-- CAMPAIGN -->
+            <!-- CAMPAIGN ID -->
 
             <div class="receipt-row">
 
@@ -554,33 +889,111 @@
 
                 <span
                     class="receipt-value"
-                    id="campaignId"
-                >
+                    id="campaignId">
+
                     -
+
                 </span>
 
             </div>
 
 
-            <!-- AMOUNT -->
+            <!-- TOTAL CAMPAIGN AMOUNT -->
 
             <div class="receipt-row">
 
                 <span class="receipt-label">
-                    💰 Amount
+                    💵 Total Campaign Amount
                 </span>
 
                 <span
-                    class="receipt-value amount-value"
-                    id="amount"
-                >
-                    ₹0
+                    class="receipt-value blue"
+                    id="totalAmount">
+
+                    ₹0.00
+
                 </span>
 
             </div>
 
 
-            <!-- METHOD -->
+            <!-- PREVIOUSLY PAID -->
+
+            <div class="receipt-row">
+
+                <span class="receipt-label">
+                    💳 Previously Paid
+                </span>
+
+                <span
+                    class="receipt-value"
+                    id="previousPaid">
+
+                    ₹0.00
+
+                </span>
+
+            </div>
+
+
+            <!-- CURRENT PAYMENT -->
+
+            <div class="receipt-row">
+
+                <span class="receipt-label">
+                    💰 Current Payment
+                </span>
+
+                <span
+                    class="receipt-value current-payment"
+                    id="currentPayment">
+
+                    ₹0.00
+
+                </span>
+
+            </div>
+
+
+            <!-- TOTAL PAID -->
+
+            <div class="receipt-row">
+
+                <span class="receipt-label">
+                    ✅ Total Paid
+                </span>
+
+                <span
+                    class="receipt-value green"
+                    id="totalPaid">
+
+                    ₹0.00
+
+                </span>
+
+            </div>
+
+
+            <!-- REMAINING -->
+
+            <div class="receipt-row">
+
+                <span class="receipt-label">
+                    ⚠️ Remaining Amount
+                </span>
+
+                <span
+                    class="receipt-value remaining"
+                    id="remainingAmount">
+
+                    ₹0.00
+
+                </span>
+
+            </div>
+
+
+            <!-- PAYMENT METHOD -->
 
             <div class="receipt-row">
 
@@ -590,30 +1003,16 @@
 
                 <span
                     class="receipt-value"
-                    id="paymentMethod"
-                >
+                    id="paymentMethod">
+
                     -
+
                 </span>
 
             </div>
 
 
-            <!-- STATUS -->
-
-            <div class="receipt-row">
-
-                <span class="receipt-label">
-                    🔐 Payment Status
-                </span>
-
-                <span class="paid-status">
-                    PAID ✓
-                </span>
-
-            </div>
-
-
-            <!-- DATE -->
+            <!-- PAYMENT DATE -->
 
             <div class="receipt-row">
 
@@ -623,27 +1022,10 @@
 
                 <span
                     class="receipt-value"
-                    id="paymentDate"
-                >
+                    id="paymentDate">
+
                     -
-                </span>
 
-            </div>
-
-
-            <!-- TRANSACTION -->
-
-            <div class="receipt-row">
-
-                <span class="receipt-label">
-                    🔖 Transaction ID
-                </span>
-
-                <span
-                    class="receipt-value transaction-id"
-                    id="transactionId"
-                >
-                    -
                 </span>
 
             </div>
@@ -652,15 +1034,28 @@
         </div>
 
 
-        <!-- THANK YOU -->
+        <!-- CAMPAIGN STATUS -->
 
-        <div class="thank-you">
+        <div class="campaign-status">
 
-            🎉 Thank you for your payment!
+            <span>
+                📊 Campaign Status
+            </span>
 
-            <br>
+            <strong id="campaignStatus">
+                Active
+            </strong>
 
-            Your campaign payment has been completed successfully.
+        </div>
+
+
+        <!-- MESSAGE -->
+
+        <div
+            class="thank-you"
+            id="thankYouMessage">
+
+            Thank you for your payment.
 
         </div>
 
@@ -669,40 +1064,43 @@
 
         <div class="buttons">
 
-            <a
-                href="dashboard.html"
-                class="dashboard-btn"
-            >
-                🏠 Dashboard
-            </a>
+
+            <button
+                type="button"
+                class="print-btn"
+                onclick="printReceipt()">
+
+                🖨 Print Receipt
+
+            </button>
 
 
             <a
                 href="view-campaign.html"
-                class="campaign-btn"
-            >
-                📋 View Campaign
+                class="back-btn">
+
+                ← Back to Campaigns
+
             </a>
 
+
         </div>
-
-
-        <!-- PRINT -->
-
-        <button
-            class="print-btn"
-            onclick="window.print()"
-        >
-            🖨️ Print Receipt
-        </button>
 
 
     </div>
 
 
-    <!-- SCRIPT -->
+
+    <!-- ==========================================
+         JAVASCRIPT
+    ========================================== -->
 
     <script>
+
+
+        /* ==========================================
+           GET URL PARAMETERS
+        ========================================== */
 
         const params =
             new URLSearchParams(
@@ -710,62 +1108,253 @@
             );
 
 
-        /* CAMPAIGN ID */
-
         const campaignId =
-            params.get("campaignId");
+            params.get("campaignId") || "-";
+
+
+        const currentPayment =
+            Number(
+                params.get("amount") || 0
+            );
+
+
+        const paymentMethod =
+            params.get("method") || "-";
+
+
+        const totalAmount =
+            Number(
+                params.get("total") || 0
+            );
+
+
+        const totalPaid =
+            Number(
+                params.get("paid") || 0
+            );
+
+
+        /* ==========================================
+           PREVIOUSLY PAID
+        ========================================== */
+
+        const previousPaid =
+            Math.max(
+                totalPaid - currentPayment,
+                0
+            );
+
+
+        /* ==========================================
+           REMAINING AFTER PAYMENT
+        ========================================== */
+
+        const remainingAmount =
+            Math.max(
+                totalAmount - totalPaid,
+                0
+            );
+
+
+        /* ==========================================
+           CAMPAIGN STATUS
+        ========================================== */
+
+        const campaignStatus =
+            params.get("status") || "Active";
+
+
+        /* ==========================================
+           MONEY FORMAT
+        ========================================== */
+
+        function formatMoney(value) {
+
+            return "₹" +
+                Number(value || 0)
+                .toLocaleString(
+                    "en-IN",
+                    {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    }
+                );
+        }
+
+
+        /* ==========================================
+           DISPLAY CAMPAIGN ID
+        ========================================== */
 
         document.getElementById(
             "campaignId"
         ).innerText =
-            campaignId || "-";
+            campaignId;
 
 
-        /* AMOUNT */
-
-        const amount =
-            params.get("amount");
+        /* ==========================================
+           DISPLAY TOTAL AMOUNT
+        ========================================== */
 
         document.getElementById(
-            "amount"
+            "totalAmount"
         ).innerText =
-            amount
-                ? "₹" + amount
-                : "₹0";
+            formatMoney(
+                totalAmount
+            );
 
 
-        /* PAYMENT METHOD */
+        /* ==========================================
+           DISPLAY PREVIOUSLY PAID
+        ========================================== */
 
-        const method =
-            params.get("method");
+        document.getElementById(
+            "previousPaid"
+        ).innerText =
+            formatMoney(
+                previousPaid
+            );
+
+
+        /* ==========================================
+           DISPLAY CURRENT PAYMENT
+        ========================================== */
+
+        document.getElementById(
+            "currentPayment"
+        ).innerText =
+            formatMoney(
+                currentPayment
+            );
+
+
+        /* ==========================================
+           DISPLAY TOTAL PAID
+        ========================================== */
+
+        document.getElementById(
+            "totalPaid"
+        ).innerText =
+            formatMoney(
+                totalPaid
+            );
+
+
+        /* ==========================================
+           DISPLAY REMAINING
+        ========================================== */
+
+        const remainingElement =
+            document.getElementById(
+                "remainingAmount"
+            );
+
+
+        remainingElement.innerText =
+            formatMoney(
+                remainingAmount
+            );
+
+
+        /* ==========================================
+           DISPLAY PAYMENT METHOD
+        ========================================== */
 
         document.getElementById(
             "paymentMethod"
         ).innerText =
-            method || "-";
+            paymentMethod;
 
 
-        /* DATE */
+        /* ==========================================
+           PAYMENT DATE
+        ========================================== */
 
         document.getElementById(
             "paymentDate"
         ).innerText =
-            new Date().toLocaleDateString(
-                "en-IN",
-                {
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "numeric"
-                }
+            new Date().toLocaleString(
+                "en-IN"
             );
 
 
-        /* TRANSACTION ID */
+        /* ==========================================
+           CAMPAIGN STATUS
+        ========================================== */
 
         document.getElementById(
-            "transactionId"
+            "campaignStatus"
         ).innerText =
-            "TXN" + Date.now();
+            campaignStatus;
+
+
+        /* ==========================================
+           REMAINING COLOR
+        ========================================== */
+
+        if (remainingAmount === 0) {
+
+            remainingElement.className =
+                "receipt-value remaining-zero";
+
+        }
+
+        else {
+
+            remainingElement.className =
+                "receipt-value remaining";
+
+        }
+
+
+        /* ==========================================
+           MESSAGE
+        ========================================== */
+
+        const message =
+            document.getElementById(
+                "thankYouMessage"
+            );
+
+
+        if (remainingAmount > 0) {
+
+            message.innerText =
+
+                "Thank you for your payment. " +
+
+                formatMoney(
+                    remainingAmount
+                ) +
+
+                " is still remaining. " +
+
+                "Please complete the remaining payment before launching the campaign.";
+
+        }
+
+        else {
+
+            message.innerText =
+
+                "Thank you for your payment. " +
+
+                "The complete campaign amount has been paid successfully. " +
+
+                "The campaign can now be launched.";
+
+        }
+
+
+        /* ==========================================
+           PRINT FUNCTION
+        ========================================== */
+
+        function printReceipt() {
+
+            window.print();
+
+        }
 
     </script>
 

@@ -1413,3 +1413,146 @@ footer{
 .table-box td:last-child {
     font-size: 15px !important;
 }
+/* ==============================
+   PRINT RECEIPT - ONE PAGE
+============================== */
+
+@media print {
+
+    @page {
+        size: A4;
+        margin: 10mm;
+    }
+
+    html,
+    body {
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 0;
+        background: white !important;
+    }
+
+    .receipt-card {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 18px;
+        background: white !important;
+        color: black !important;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: none !important;
+        backdrop-filter: none;
+    }
+
+    .receipt-header {
+        margin-bottom: 15px;
+    }
+
+    .success-icon {
+        width: 55px;
+        height: 55px;
+        font-size: 28px;
+        margin-bottom: 8px;
+    }
+
+    .receipt-header h1 {
+        font-size: 22px;
+        color: #111 !important;
+        -webkit-text-fill-color: #111 !important;
+        margin-bottom: 5px;
+    }
+
+    .receipt-header p {
+        color: #555 !important;
+        font-size: 11px;
+    }
+
+    .payment-success {
+        padding: 8px;
+        margin-bottom: 12px;
+        color: #15803d !important;
+        background: white !important;
+        border: 1px solid #86efac;
+        font-size: 12px;
+    }
+
+    .receipt-body {
+        padding: 12px;
+        background: white !important;
+        border: 1px solid #ddd;
+    }
+
+    .receipt-row {
+        padding: 9px 4px;
+        border-bottom: 1px solid #ddd;
+        page-break-inside: avoid;
+    }
+
+    .receipt-label {
+        color: #333 !important;
+        font-size: 12px;
+    }
+
+    .receipt-value {
+        color: #111 !important;
+        font-size: 12px;
+    }
+
+    .current-payment {
+        color: #15803d !important;
+        font-size: 14px;
+    }
+
+    .remaining {
+        color: #b45309 !important;
+        font-size: 14px;
+    }
+
+    .remaining-zero {
+        color: #15803d !important;
+        font-size: 14px;
+    }
+
+    .green {
+        color: #15803d !important;
+    }
+
+    .blue {
+        color: #0369a1 !important;
+    }
+
+    .campaign-status {
+        margin-top: 12px;
+        padding: 10px;
+        background: white !important;
+        border: 1px solid #ddd;
+        page-break-inside: avoid;
+    }
+
+    .campaign-status span {
+        color: #555 !important;
+        font-size: 11px;
+    }
+
+    .campaign-status strong {
+        color: #0369a1 !important;
+        font-size: 14px;
+    }
+
+    .thank-you {
+        margin-top: 12px;
+        padding: 10px;
+        color: #333 !important;
+        background: white !important;
+        border: 1px solid #ddd;
+        font-size: 11px;
+        page-break-inside: avoid;
+    }
+
+    .buttons {
+        display: none !important;
+    }
+
+}
