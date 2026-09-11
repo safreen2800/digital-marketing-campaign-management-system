@@ -1,4 +1,11 @@
 {
+  "name": "digital-marketing-campaign-management-system",
+  "version": "1.0.0",
+  "description": "Digital Marketing Campaign Management System using Node.js, Express and MySQL",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "axios": "^1.18.1",
     "bcrypt": "^6.0.0",

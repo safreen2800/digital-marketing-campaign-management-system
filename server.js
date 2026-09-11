@@ -5,8 +5,7 @@ const bcrypt = require("bcrypt");
 const multer = require("multer");
 
 const app = express();
-const PORT = 3000;
-
+const PORT = process.env.PORT || 3000;
 
 /* =========================================================
    MULTER - AD FILE UPLOAD
